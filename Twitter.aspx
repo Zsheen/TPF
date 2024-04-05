@@ -1,4 +1,5 @@
-﻿    <!DOCTYPE html>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Twitter.aspx.cs" Inherits="IDS348_FinalProject.Twitter" %>
+    <!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
