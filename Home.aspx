@@ -1266,7 +1266,8 @@ body {
     right: 5%;
   }
 }
-        </style>
+
+  </style>
   </head>
   <body class="home">
 
@@ -1419,7 +1420,6 @@ body {
         </div>
       </div>
     </div>
-
     <div class="columna der">
         
         <div class="der__search">
