@@ -1,0 +1,2 @@
+﻿INSERT INTO Users (UserName, Names, Passwords, ProfilePhoto, Email, Phone, Birthday, Biography, PlaceWhereLives, Sex)
+    VALUES ('Chen', 'Carlos Marte', 'Password', 'Chen_ProfilePhoto.png', 'chenderamirez@gmail.com', '+18294850993', '2004-11-1', 'Soy estudiante y el amor de tu vida', 'Santo Domingo Este', 'M')

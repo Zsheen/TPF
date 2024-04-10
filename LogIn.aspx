@@ -5,15 +5,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Entrar no Twitter / Twitter</title>
-  <link rel="stylesheet" href="./styles/style.css" />
+  <title>Entrar Twitter / Twitter</title>
 
   <style>
-    /* Aquí pega todos los estilos CSS proporcionados */
 
     @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap");
 
-    /* Variables */
     :root {
       --background-color: rgb(255, 255, 255);
       --h1-input-color: rgb(0, 0, 0);
@@ -147,7 +144,7 @@
       background: none;
     }
 
-    #entrar {
+    #btnEntrar {
       background-color: var(--entrar-background-color);
       color: var(--entrar-color);
       font-weight: bold;
@@ -189,61 +186,67 @@
       color: var(--dot-color);
       font-weight: 400;
     }
+
+#btnEntrar:enabled:hover,
+#mobbtnEntrar:enabled:hover {
+    background-color: #1A91DA; /* Oscurecer ligeramente el botón al pasar el mouse */
+    
+}
   </style>
 </head>
-
 <body>
-  <section id="login">
+  <form id="form1" runat="server">
+      <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+      <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+          <ContentTemplate>
+            <section id="login">
+                <div class="header">
+                    <div class="logo">
+                        <img id="img-logo" src="DatosDeLaApp\twitter-logo.png" />
+                    </div>
+                </div>
+                <h1>Log In Twitter</h1>
+                <div class="username">
+                    <label for="user">Usuario o e-mail</label> <br />
+                    <div class="input-box input-user">
+                        <asp:TextBox oninput="userInputChanged()" type="username" name="user" id="user" runat="server" AutoPostBack="True" />
+                    </div>
+                </div>
+                <div class="password">
+                    <label for="password">Contraseña</label> <br />
+                    <div class="input-box input-password">
+                        <asp:TextBox oninput="userInputChanged()" type="password" name="password" runat="server" id="password" AutoPostBack="True" />
+                    </div>
+                </div>
+                <div class="entrar">
+                    <asp:Button id="btnEntrar" Text="Entrar" runat="server" Enabled="False" OnClick="btnEntrar_Click"/>
+                </div>
+                <footer class="signup">
+                    <a href="#">¿Olvidaste tu contraseña?</a>
+                    <span class="dot"></span>
+                    <a href="#">Regístrate</a>
+                </footer>
+            </section>
+          </ContentTemplate>
+      </asp:UpdatePanel>
+      <script>
+          function userInputChanged()
+          {
+              var UserText = document.getElementById('<%= user.ClientID %>').value;
+              var PasswordText = document.getElementById('<%= password.ClientID %>').value;
 
-    <!-- Header -->
-    <div class="header">
+              if (UserText.trim() !== '' && PasswordText.trim() !== '')
+              {
+                  btnEntrar.disabled = false;
+              }
 
-      <!-- Logo -->
-      <div class="logo">
-        <img id="img-logo" src="DatosDeLaApp\twitter-logo.png" />
-      </div>
+              else
+              {
+                  btnEntrar.disabled = true;
+              }
+          }
+      </script>
 
-    </div>
-
-    <h1>Log In Twitter</h1>
-
-    <form>
-
-      <!-- Login -->
-
-      <!-- User -->
-      <div class="username">
-        <label for="user">Usuario o e-mail</label>
-        <br />
-        <div class="input-box input-user">
-          <input type="textarea" name="user" id="user" />
-        </div>
-    </div>
-
-    <!-- Password -->
-    <div class="password">
-      <label for="password">Contraseña</label>
-      <br />
-      <div class="input-box input-password">
-        <input type="password" name="password" id="password" />
-      </div>
-    </div>
-
-    <!-- Login button -->
-    <div class="entrar">
-      <input type="button" name="entrar" id="entrar" value="Entrar" />
-    </div>
   </form>
-
-  <!-- Footer -->
-  <footer class="signup">
-    <a href="#">¿Olvidaste tu contraseña?</a>
-    <span class="dot"></span>
-    <a href="#">Regístrate</a>
-  </footer>
-</section>
-
-<script src="./js/script.js"></script>
 </body>
-
 </html>

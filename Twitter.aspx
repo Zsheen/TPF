@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Twitter.aspx.cs" Inherits="IDS348_FinalProject.Twitter" %>
+
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -6,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Twitter. It's what happening / Twitter</title>
         <style>
-            body {
+    body {
         margin: 0;
         font-family: Segoe UI;
     }
@@ -57,9 +58,11 @@
         float:right;
         width: 50%;
         height: auto;
-        align-content: left;
         text-align: center;
-        margin-top: 122.5px;
+        justify-content: center;
+        margin-left: 1200px;
+        margin-top: 200px;
+        align-items: center;
     }
 
     .container2 img {
@@ -87,6 +90,8 @@
 
     .logsign {
         list-style: none;
+        padding-bottom: 3px;
+        text-align: center;
     }
 
     .logsign li:first-child {
@@ -97,7 +102,7 @@
         font-weight: bold;
         color: white;
         width: 380px;
-        height: 30px;
+        height: 34px;
         padding-top: 7px;
         font-size: 15px;
         
@@ -112,7 +117,7 @@
         text-align: center;
         margin-left: 115px;
         width: 380px;
-        height: 30px;
+        height: 34px;
         padding-top: 7px;
         font-size: 15px;
     }
@@ -123,15 +128,18 @@
 
     #hove li:hover {
         background-color: #1A91DA;
+        
     }
 
     #hove2 li {
         background-color: white;
         color: #1DA1F2;
+        
     }
 
     #hove2 li:hover {
         background-color: #E8F5FE;
+        
     }
 
     footer a {
@@ -140,147 +148,17 @@
         font-size: 13px;
         padding: 0;
         margin-right: 12px;
-
+        
     }
 
     footer a:hover {
         text-decoration: underline;
+        
     }
 
     #copy {
         text-decoration: none;
-    }
-
-
-    @media (max-width:800px) {
-
-        body {
-            margin: 0;
-            font-family: Segoe UI;
-        }
-
-        .container1 {
-            float: none;
-            width: 100%;
-            margin: 0;
-            padding: 0;
-            height: 220px;
-            background-image: url(img/thumb.png);
-            background-size: cover;
-            
-        }
-
-        .container1 ul {
-            margin: 0;
-            list-style: none;
-            margin-top: 18px;
-            margin-left: 67px;
-
-        }
         
-        .container1 li {
-            font-size: 18px;
-            font-weight: bold;
-            color: white;
-            padding-bottom: 40px;
-            text-align: justify;
-            padding-left: 5px;
-        }
-
-        .container2 img {
-            height: 30px;
-            width: 35px;
-            margin-right: 360px;
-            margin-top: 19px;
-        }
-        
-        .container2 p {
-            font-size: 28px;
-            font-weight: 680;
-            text-align: left;
-            margin-left: 50px;
-            margin-top: 19px;
-            line-height: 36px
-        }
-        
-        .tinybold {
-            font-size: 14px;
-            font-family: Segoe UI;
-            font-weight: bold;
-            margin-right: 275px;
-            margin-top: 53px;
-        }
-        
-        .logsign {
-            list-style: none;
-            padding-bottom: 3px;
-            
-        }
-        
-        .logsign li:first-child {
-            border-radius: 20px;
-            margin-bottom: 15px;
-            background-color: #1DA1F2;
-            text-align: center;
-            font-weight: bold;
-            color: white;
-            width: 380px;
-            height: 27px;
-            padding-top: 7px;
-            font-size: 15px;
-            
-        }
-        
-        .logsign li {
-            font-weight: bold;
-            font-size: 14px;
-            color: #1DA1F2;
-            border: solid #1DA1F2 1px;
-            border-radius: 20px;
-            text-align: center;
-            margin-left: 10px;
-            width: 380px;
-            height: 25px;
-            padding-top: 5px;
-            font-size: 15px;
-        }
-
-        #foot {
-            margin: 15px 0 0 0;
-            line-height: 23px;
-        }
-        
-        footer a {
-            font-size: 12px;
-            margin-right: 3px;
-            margin-left: 3px;
-            text-align: justify;
-            
-        }  
-        
-        #copy {
-            text-decoration: none;
-        }
-
-    }
-
-    @media (min-width:800px) {
-
-        .no {
-            display: none;
-        }
-
-        #formobile {
-            display: none;
-        }
-        
-        #mobhov {
-            display: none;
-        }
-
-        #mobhov2 {
-            display: none;
-        }
     }
 
 
@@ -325,25 +203,66 @@
 
     #mobhov:hover {
         background-color: #1A91DA;
+        
     }
 
     #mobhov2:hover {
         background-color: #E8F5FE;
     }
 
-    .container2{
-        justify-content: center;
-        margin-left: 1200px;
-        align-items: center;
-        margin-top: 200px;
-    }
-
     #foot {
         justify-content: center;
         margin-left: 360px;
         align-items: center;
-        margin-top: 385px;
+        margin-top: 345px;
     }
+
+#hove,#mobhov {
+    text-decoration: none;
+    color: #1DA1F2;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 7px;
+    border-radius: 20px;
+    display: inline-block;
+    text-align: center;
+    background-color: white; /* Asegurarse de que el botón sea visible */
+    margin-left: 0.5px;
+    width: 364px;
+    height: 25px;
+    position: relative;
+    bottom: 6px;
+}
+
+#hove:hover,
+#mobhov:hover {
+    background-color: #E8F5FE; /* Oscurecer ligeramente el botón al pasar el mouse */
+}
+
+#hove2,
+#mobhov2 {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 7px 20px;
+    border-radius: 20px;
+    display: inline-block;
+    background-color: #1DA1F2; /* Asegurarse de que el botón sea visible */
+    margin-left: 0.5px;
+    width: 340px;
+    height: 27px;
+    position: relative;
+    bottom: 7px;
+}
+
+#hove2:hover,
+#mobhov2:hover {
+    background-color: #1A91DA; /* Oscurecer ligeramente el botón al pasar el mouse */
+    
+}
+
+
 
         </style>
         <link rel="icon" type="image/x-icon" href="DatosDeLaApp\twitter-logo.png">
@@ -361,16 +280,12 @@
             <div class="tinybold"> Join Twitter today.</div>
             <br>
             <ul class="logsign">
-            <a id="hove" href="#"><li> Sign up </li> </a>
-            <a id="hove2" href="#"><li> Log in </li> </a>
+                <li><a id="hove2" href="LogIn.aspx"> Log in </a></li>
+                <li><a id="hove" href="#"> Sign up </a></li>
+                
+            </ul>
         </div>
     </main>
-                <div class="no">
-                <ul id="formobile">
-                <a id="mobhov" href="#"><li> Sign up </li> </a>
-                <a id="mobhov2" href="#"><li> Log in </li> </a>
-                </ul>
-                </div>
 
         <footer>
             <ul id="foot">

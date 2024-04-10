@@ -176,3 +176,7 @@ C:\Users\Chender Marte\Desktop\IDS348-FP\obj\Debug\IDS348-FinalProject.csproj.Co
 C:\Users\Chender Marte\Desktop\IDS348-FP\obj\Debug\IDS348-F.A6B805B3.Up2Date
 C:\Users\Chender Marte\Desktop\IDS348-FP\obj\Debug\IDS348-FinalProject.dll
 C:\Users\Chender Marte\Desktop\IDS348-FP\obj\Debug\IDS348-FinalProject.pdb
+C:\Users\Chender Marte\Desktop\IDS348-FP\bin\EntityFramework.dll
+C:\Users\Chender Marte\Desktop\IDS348-FP\bin\EntityFramework.SqlServer.dll
+C:\Users\Chender Marte\Desktop\IDS348-FP\bin\EntityFramework.xml
+C:\Users\Chender Marte\Desktop\IDS348-FP\bin\EntityFramework.SqlServer.xml

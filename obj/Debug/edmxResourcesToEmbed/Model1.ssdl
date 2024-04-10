@@ -1,0 +1,334 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Database1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Chats">
+    <Key>
+      <PropertyRef Name="ChatID" />
+    </Key>
+    <Property Name="ChatID" Type="int" Nullable="false" />
+    <Property Name="Chat_Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Chat_type" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Creation_date" Type="date" Nullable="false" />
+    <Property Name="Chat_Photo" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Comments">
+    <Key>
+      <PropertyRef Name="CommentID" />
+    </Key>
+    <Property Name="CommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PostID" Type="int" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="CommentDate" Type="datetime" Nullable="false" />
+    <Property Name="Comment_Text" Type="varchar(max)" Nullable="false" />
+    <Property Name="TipoContenido" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Followers">
+    <Key>
+      <PropertyRef Name="FollowerID" />
+    </Key>
+    <Property Name="FollowerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FollowingID" Type="int" Nullable="false" />
+    <Property Name="FollowDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Hashtags">
+    <Key>
+      <PropertyRef Name="HashtagID" />
+    </Key>
+    <Property Name="HashtagID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HashtagText" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Likes">
+    <Key>
+      <PropertyRef Name="LikeID" />
+    </Key>
+    <Property Name="LikeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="LikedEntityID" Type="int" Nullable="false" />
+    <Property Name="LikedEntityType" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LikeDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Mensajes">
+    <Key>
+      <PropertyRef Name="MessageID" />
+    </Key>
+    <Property Name="MessageID" Type="int" Nullable="false" />
+    <Property Name="RemitenteID" Type="int" Nullable="false" />
+    <Property Name="DestinatarioID" Type="int" Nullable="false" />
+    <Property Name="Message_text" Type="varchar(max)" Nullable="false" />
+    <Property Name="Date_sent" Type="datetime" Nullable="false" />
+    <Property Name="Message_read" Type="bit" Nullable="false" />
+    <Property Name="TieneAdjunto" Type="bit" Nullable="false" />
+    <Property Name="Adjunto" Type="varbinary(max)" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'C:\USERS\CHENDER MARTE\DESKTOP\IDS348-FP\DATABASE1.MDF.dbo.Post_Hastags' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="Post_Hastags">
+    <Key>
+      <PropertyRef Name="PostID" />
+      <PropertyRef Name="HastagID" />
+    </Key>
+    <Property Name="PostID" Type="int" Nullable="false" />
+    <Property Name="HastagID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Posts">
+    <Key>
+      <PropertyRef Name="PostID" />
+    </Key>
+    <Property Name="PostID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Text" Type="varchar(max)" Nullable="false" />
+    <Property Name="PublicationDate" Type="datetime" Nullable="false" />
+    <Property Name="TipoContenido" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="URLContenido" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Saves">
+    <Key>
+      <PropertyRef Name="SaveID" />
+    </Key>
+    <Property Name="SaveID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="PostID" Type="int" Nullable="false" />
+    <Property Name="SaveDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Names" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Passwords" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ProfilePhoto" Type="varchar" MaxLength="100" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Phone" Type="varchar" MaxLength="50" />
+    <Property Name="CreationDate" Type="datetime" Nullable="false" />
+    <Property Name="Birthday" Type="date" />
+    <Property Name="Biography" Type="varchar" MaxLength="500" />
+    <Property Name="PlaceWhereLives" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Sex" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Comments__PostID__4AB81AF0">
+    <End Role="Posts" Type="Self.Posts" Multiplicity="1" />
+    <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Posts">
+        <PropertyRef Name="PostID" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="PostID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Comments__UserID__4BAC3F29">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Followers__Follo__5535A963">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Followers" Type="Self.Followers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Followers">
+        <PropertyRef Name="FollowingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Likes__UserID__4E88ABD4">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Likes" Type="Self.Likes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Likes">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Mensajes__Destin__5AEE82B9">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Mensajes" Type="Self.Mensajes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Mensajes">
+        <PropertyRef Name="DestinatarioID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Mensajes__Remite__59FA5E80">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Mensajes" Type="Self.Mensajes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Mensajes">
+        <PropertyRef Name="RemitenteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Post_Hast__Hasta__47DBAE45">
+    <End Role="Hashtags" Type="Self.Hashtags" Multiplicity="1" />
+    <End Role="Post_Hastags" Type="Self.Post_Hastags" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hashtags">
+        <PropertyRef Name="HashtagID" />
+      </Principal>
+      <Dependent Role="Post_Hastags">
+        <PropertyRef Name="HastagID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Post_Hast__PostI__46E78A0C">
+    <End Role="Posts" Type="Self.Posts" Multiplicity="1" />
+    <End Role="Post_Hastags" Type="Self.Post_Hastags" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Posts">
+        <PropertyRef Name="PostID" />
+      </Principal>
+      <Dependent Role="Post_Hastags">
+        <PropertyRef Name="PostID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Posts__UserID__4222D4EF">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Posts" Type="Self.Posts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Posts">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Saves__PostID__52593CB8">
+    <End Role="Posts" Type="Self.Posts" Multiplicity="1" />
+    <End Role="Saves" Type="Self.Saves" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Posts">
+        <PropertyRef Name="PostID" />
+      </Principal>
+      <Dependent Role="Saves">
+        <PropertyRef Name="PostID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Saves__UserID__5165187F">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Saves" Type="Self.Saves" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Saves">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="CreateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserName" Type="varchar" Mode="In" />
+    <Parameter Name="Names" Type="varchar" Mode="In" />
+    <Parameter Name="Passwords" Type="varchar" Mode="In" />
+    <Parameter Name="ProfilePhoto" Type="varchar" Mode="In" />
+    <Parameter Name="Email" Type="varchar" Mode="In" />
+    <Parameter Name="Phone" Type="varchar" Mode="In" />
+    <Parameter Name="Birthday" Type="date" Mode="In" />
+    <Parameter Name="Biography" Type="varchar" Mode="In" />
+    <Parameter Name="PlaceWhereLives" Type="varchar" Mode="In" />
+    <Parameter Name="Sex" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="DeleteUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserName" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="ReadUserByUserName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserName" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="UpdateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="UserName" Type="varchar" Mode="In" />
+    <Parameter Name="Names" Type="varchar" Mode="In" />
+    <Parameter Name="Passwords" Type="varchar" Mode="In" />
+    <Parameter Name="ProfilePhoto" Type="varchar" Mode="In" />
+    <Parameter Name="Email" Type="varchar" Mode="In" />
+    <Parameter Name="Phone" Type="varchar" Mode="In" />
+    <Parameter Name="Birthday" Type="date" Mode="In" />
+    <Parameter Name="Biography" Type="varchar" Mode="In" />
+    <Parameter Name="PlaceWhereLives" Type="varchar" Mode="In" />
+    <Parameter Name="Sex" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="Database1ModelStoreContainer">
+    <EntitySet Name="Chats" EntityType="Self.Chats" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Followers" EntityType="Self.Followers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Hashtags" EntityType="Self.Hashtags" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Likes" EntityType="Self.Likes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Mensajes" EntityType="Self.Mensajes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Posts" EntityType="Self.Posts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Saves" EntityType="Self.Saves" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Post_Hastags" EntityType="Self.Post_Hastags" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Post_Hastags].[PostID] AS [PostID], 
+    [Post_Hastags].[HastagID] AS [HastagID]
+    FROM [dbo].[Post_Hastags] AS [Post_Hastags]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__Comments__PostID__4AB81AF0" Association="Self.FK__Comments__PostID__4AB81AF0">
+      <End Role="Posts" EntitySet="Posts" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Comments__UserID__4BAC3F29" Association="Self.FK__Comments__UserID__4BAC3F29">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Followers__Follo__5535A963" Association="Self.FK__Followers__Follo__5535A963">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Followers" EntitySet="Followers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Likes__UserID__4E88ABD4" Association="Self.FK__Likes__UserID__4E88ABD4">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Likes" EntitySet="Likes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Mensajes__Destin__5AEE82B9" Association="Self.FK__Mensajes__Destin__5AEE82B9">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Mensajes" EntitySet="Mensajes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Mensajes__Remite__59FA5E80" Association="Self.FK__Mensajes__Remite__59FA5E80">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Mensajes" EntitySet="Mensajes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Post_Hast__Hasta__47DBAE45" Association="Self.FK__Post_Hast__Hasta__47DBAE45">
+      <End Role="Hashtags" EntitySet="Hashtags" />
+      <End Role="Post_Hastags" EntitySet="Post_Hastags" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Post_Hast__PostI__46E78A0C" Association="Self.FK__Post_Hast__PostI__46E78A0C">
+      <End Role="Posts" EntitySet="Posts" />
+      <End Role="Post_Hastags" EntitySet="Post_Hastags" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Posts__UserID__4222D4EF" Association="Self.FK__Posts__UserID__4222D4EF">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Posts" EntitySet="Posts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Saves__PostID__52593CB8" Association="Self.FK__Saves__PostID__52593CB8">
+      <End Role="Posts" EntitySet="Posts" />
+      <End Role="Saves" EntitySet="Saves" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Saves__UserID__5165187F" Association="Self.FK__Saves__UserID__5165187F">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Saves" EntitySet="Saves" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

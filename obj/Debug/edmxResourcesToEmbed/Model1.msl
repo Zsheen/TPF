@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Database1ModelStoreContainer" CdmEntityContainer="Database1Entities">
+    <EntitySetMapping Name="Chats">
+      <EntityTypeMapping TypeName="Database1Model.Chat">
+        <MappingFragment StoreEntitySet="Chats">
+          <ScalarProperty Name="ChatID" ColumnName="ChatID" />
+          <ScalarProperty Name="Chat_Name" ColumnName="Chat_Name" />
+          <ScalarProperty Name="Chat_type" ColumnName="Chat_type" />
+          <ScalarProperty Name="Creation_date" ColumnName="Creation_date" />
+          <ScalarProperty Name="Chat_Photo" ColumnName="Chat_Photo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comments">
+      <EntityTypeMapping TypeName="Database1Model.Comment">
+        <MappingFragment StoreEntitySet="Comments">
+          <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+          <ScalarProperty Name="PostID" ColumnName="PostID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="CommentDate" ColumnName="CommentDate" />
+          <ScalarProperty Name="Comment_Text" ColumnName="Comment_Text" />
+          <ScalarProperty Name="TipoContenido" ColumnName="TipoContenido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Followers">
+      <EntityTypeMapping TypeName="Database1Model.Follower">
+        <MappingFragment StoreEntitySet="Followers">
+          <ScalarProperty Name="FollowerID" ColumnName="FollowerID" />
+          <ScalarProperty Name="FollowingID" ColumnName="FollowingID" />
+          <ScalarProperty Name="FollowDate" ColumnName="FollowDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Hashtags">
+      <EntityTypeMapping TypeName="Database1Model.Hashtag">
+        <MappingFragment StoreEntitySet="Hashtags">
+          <ScalarProperty Name="HashtagID" ColumnName="HashtagID" />
+          <ScalarProperty Name="HashtagText" ColumnName="HashtagText" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Likes">
+      <EntityTypeMapping TypeName="Database1Model.Like">
+        <MappingFragment StoreEntitySet="Likes">
+          <ScalarProperty Name="LikeID" ColumnName="LikeID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="LikedEntityID" ColumnName="LikedEntityID" />
+          <ScalarProperty Name="LikedEntityType" ColumnName="LikedEntityType" />
+          <ScalarProperty Name="LikeDate" ColumnName="LikeDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Mensajes">
+      <EntityTypeMapping TypeName="Database1Model.Mensaje">
+        <MappingFragment StoreEntitySet="Mensajes">
+          <ScalarProperty Name="MessageID" ColumnName="MessageID" />
+          <ScalarProperty Name="RemitenteID" ColumnName="RemitenteID" />
+          <ScalarProperty Name="DestinatarioID" ColumnName="DestinatarioID" />
+          <ScalarProperty Name="Message_text" ColumnName="Message_text" />
+          <ScalarProperty Name="Date_sent" ColumnName="Date_sent" />
+          <ScalarProperty Name="Message_read" ColumnName="Message_read" />
+          <ScalarProperty Name="TieneAdjunto" ColumnName="TieneAdjunto" />
+          <ScalarProperty Name="Adjunto" ColumnName="Adjunto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Posts">
+      <EntityTypeMapping TypeName="Database1Model.Post">
+        <MappingFragment StoreEntitySet="Posts">
+          <ScalarProperty Name="PostID" ColumnName="PostID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="PublicationDate" ColumnName="PublicationDate" />
+          <ScalarProperty Name="TipoContenido" ColumnName="TipoContenido" />
+          <ScalarProperty Name="URLContenido" ColumnName="URLContenido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Saves">
+      <EntityTypeMapping TypeName="Database1Model.Save">
+        <MappingFragment StoreEntitySet="Saves">
+          <ScalarProperty Name="SaveID" ColumnName="SaveID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="PostID" ColumnName="PostID" />
+          <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="Database1Model.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Names" ColumnName="Names" />
+          <ScalarProperty Name="Passwords" ColumnName="Passwords" />
+          <ScalarProperty Name="ProfilePhoto" ColumnName="ProfilePhoto" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+          <ScalarProperty Name="Biography" ColumnName="Biography" />
+          <ScalarProperty Name="PlaceWhereLives" ColumnName="PlaceWhereLives" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Post_Hastags" TypeName="Database1Model.Post_Hastags" StoreEntitySet="Post_Hastags">
+      <EndProperty Name="Hashtags">
+        <ScalarProperty Name="HashtagID" ColumnName="HastagID" />
+      </EndProperty>
+      <EndProperty Name="Posts">
+        <ScalarProperty Name="PostID" ColumnName="PostID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="CreateUser" FunctionName="Database1Model.Store.CreateUser" />
+    <FunctionImportMapping FunctionImportName="DeleteUser" FunctionName="Database1Model.Store.DeleteUser" />
+    <FunctionImportMapping FunctionImportName="ReadUserByUserName" FunctionName="Database1Model.Store.ReadUserByUserName">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Database1Model.ReadUserByUserName_Result">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Names" ColumnName="Names" />
+          <ScalarProperty Name="Passwords" ColumnName="Passwords" />
+          <ScalarProperty Name="ProfilePhoto" ColumnName="ProfilePhoto" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+          <ScalarProperty Name="Biography" ColumnName="Biography" />
+          <ScalarProperty Name="PlaceWhereLives" ColumnName="PlaceWhereLives" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UpdateUser" FunctionName="Database1Model.Store.UpdateUser" />
+  </EntityContainerMapping>
+</Mapping>

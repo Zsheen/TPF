@@ -1,0 +1,328 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Database1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Chat">
+    <Key>
+      <PropertyRef Name="ChatID" />
+    </Key>
+    <Property Name="ChatID" Type="Int32" Nullable="false" />
+    <Property Name="Chat_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Chat_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Creation_date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Chat_Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="CommentID" />
+    </Key>
+    <Property Name="CommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PostID" Type="Int32" Nullable="false" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="CommentDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Comment_Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TipoContenido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Post" Relationship="Self.FK__Comments__PostID__4AB81AF0" FromRole="Comments" ToRole="Posts" />
+    <NavigationProperty Name="User" Relationship="Self.FK__Comments__UserID__4BAC3F29" FromRole="Comments" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Follower">
+    <Key>
+      <PropertyRef Name="FollowerID" />
+    </Key>
+    <Property Name="FollowerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FollowingID" Type="Int32" Nullable="false" />
+    <Property Name="FollowDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="User" Relationship="Self.FK__Followers__Follo__5535A963" FromRole="Followers" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Hashtag">
+    <Key>
+      <PropertyRef Name="HashtagID" />
+    </Key>
+    <Property Name="HashtagID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HashtagText" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Posts" Relationship="Self.Post_Hastags" FromRole="Hashtags" ToRole="Posts" />
+  </EntityType>
+  <EntityType Name="Like">
+    <Key>
+      <PropertyRef Name="LikeID" />
+    </Key>
+    <Property Name="LikeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="LikedEntityID" Type="Int32" Nullable="false" />
+    <Property Name="LikedEntityType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LikeDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="User" Relationship="Self.FK__Likes__UserID__4E88ABD4" FromRole="Likes" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Mensaje">
+    <Key>
+      <PropertyRef Name="MessageID" />
+    </Key>
+    <Property Name="MessageID" Type="Int32" Nullable="false" />
+    <Property Name="RemitenteID" Type="Int32" Nullable="false" />
+    <Property Name="DestinatarioID" Type="Int32" Nullable="false" />
+    <Property Name="Message_text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Date_sent" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Message_read" Type="Boolean" Nullable="false" />
+    <Property Name="TieneAdjunto" Type="Boolean" Nullable="false" />
+    <Property Name="Adjunto" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK__Mensajes__Destin__5AEE82B9" FromRole="Mensajes" ToRole="Users" />
+    <NavigationProperty Name="User1" Relationship="Self.FK__Mensajes__Remite__59FA5E80" FromRole="Mensajes" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Post">
+    <Key>
+      <PropertyRef Name="PostID" />
+    </Key>
+    <Property Name="PostID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PublicationDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="TipoContenido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="URLContenido" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Comments" Relationship="Self.FK__Comments__PostID__4AB81AF0" FromRole="Posts" ToRole="Comments" />
+    <NavigationProperty Name="User" Relationship="Self.FK__Posts__UserID__4222D4EF" FromRole="Posts" ToRole="Users" />
+    <NavigationProperty Name="Saves" Relationship="Self.FK__Saves__PostID__52593CB8" FromRole="Posts" ToRole="Saves" />
+    <NavigationProperty Name="Hashtags" Relationship="Self.Post_Hastags" FromRole="Posts" ToRole="Hashtags" />
+  </EntityType>
+  <EntityType Name="Save">
+    <Key>
+      <PropertyRef Name="SaveID" />
+    </Key>
+    <Property Name="SaveID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="PostID" Type="Int32" Nullable="false" />
+    <Property Name="SaveDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Post" Relationship="Self.FK__Saves__PostID__52593CB8" FromRole="Saves" ToRole="Posts" />
+    <NavigationProperty Name="User" Relationship="Self.FK__Saves__UserID__5165187F" FromRole="Saves" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Names" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Passwords" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ProfilePhoto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Birthday" Type="DateTime" Precision="0" />
+    <Property Name="Biography" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="PlaceWhereLives" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Sex" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Comments" Relationship="Self.FK__Comments__UserID__4BAC3F29" FromRole="Users" ToRole="Comments" />
+    <NavigationProperty Name="Followers" Relationship="Self.FK__Followers__Follo__5535A963" FromRole="Users" ToRole="Followers" />
+    <NavigationProperty Name="Likes" Relationship="Self.FK__Likes__UserID__4E88ABD4" FromRole="Users" ToRole="Likes" />
+    <NavigationProperty Name="Mensajes" Relationship="Self.FK__Mensajes__Destin__5AEE82B9" FromRole="Users" ToRole="Mensajes" />
+    <NavigationProperty Name="Mensajes1" Relationship="Self.FK__Mensajes__Remite__59FA5E80" FromRole="Users" ToRole="Mensajes" />
+    <NavigationProperty Name="Posts" Relationship="Self.FK__Posts__UserID__4222D4EF" FromRole="Users" ToRole="Posts" />
+    <NavigationProperty Name="Saves" Relationship="Self.FK__Saves__UserID__5165187F" FromRole="Users" ToRole="Saves" />
+  </EntityType>
+  <Association Name="FK__Comments__PostID__4AB81AF0">
+    <End Role="Posts" Type="Self.Post" Multiplicity="1" />
+    <End Role="Comments" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Posts">
+        <PropertyRef Name="PostID" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="PostID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Comments__UserID__4BAC3F29">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="Comments" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Followers__Follo__5535A963">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="Followers" Type="Self.Follower" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Followers">
+        <PropertyRef Name="FollowingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Likes__UserID__4E88ABD4">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="Likes" Type="Self.Like" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Likes">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Mensajes__Destin__5AEE82B9">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="Mensajes" Type="Self.Mensaje" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Mensajes">
+        <PropertyRef Name="DestinatarioID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Mensajes__Remite__59FA5E80">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="Mensajes" Type="Self.Mensaje" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Mensajes">
+        <PropertyRef Name="RemitenteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Posts__UserID__4222D4EF">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="Posts" Type="Self.Post" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Posts">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Saves__PostID__52593CB8">
+    <End Role="Posts" Type="Self.Post" Multiplicity="1" />
+    <End Role="Saves" Type="Self.Save" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Posts">
+        <PropertyRef Name="PostID" />
+      </Principal>
+      <Dependent Role="Saves">
+        <PropertyRef Name="PostID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Saves__UserID__5165187F">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="Saves" Type="Self.Save" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Saves">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Post_Hastags">
+    <End Role="Hashtags" Type="Self.Hashtag" Multiplicity="*" />
+    <End Role="Posts" Type="Self.Post" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="Database1Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Chats" EntityType="Self.Chat" />
+    <EntitySet Name="Comments" EntityType="Self.Comment" />
+    <EntitySet Name="Followers" EntityType="Self.Follower" />
+    <EntitySet Name="Hashtags" EntityType="Self.Hashtag" />
+    <EntitySet Name="Likes" EntityType="Self.Like" />
+    <EntitySet Name="Mensajes" EntityType="Self.Mensaje" />
+    <EntitySet Name="Posts" EntityType="Self.Post" />
+    <EntitySet Name="Saves" EntityType="Self.Save" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK__Comments__PostID__4AB81AF0" Association="Self.FK__Comments__PostID__4AB81AF0">
+      <End Role="Posts" EntitySet="Posts" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Comments__UserID__4BAC3F29" Association="Self.FK__Comments__UserID__4BAC3F29">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Followers__Follo__5535A963" Association="Self.FK__Followers__Follo__5535A963">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Followers" EntitySet="Followers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Likes__UserID__4E88ABD4" Association="Self.FK__Likes__UserID__4E88ABD4">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Likes" EntitySet="Likes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Mensajes__Destin__5AEE82B9" Association="Self.FK__Mensajes__Destin__5AEE82B9">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Mensajes" EntitySet="Mensajes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Mensajes__Remite__59FA5E80" Association="Self.FK__Mensajes__Remite__59FA5E80">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Mensajes" EntitySet="Mensajes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Posts__UserID__4222D4EF" Association="Self.FK__Posts__UserID__4222D4EF">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Posts" EntitySet="Posts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Saves__PostID__52593CB8" Association="Self.FK__Saves__PostID__52593CB8">
+      <End Role="Posts" EntitySet="Posts" />
+      <End Role="Saves" EntitySet="Saves" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Saves__UserID__5165187F" Association="Self.FK__Saves__UserID__5165187F">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Saves" EntitySet="Saves" />
+    </AssociationSet>
+    <AssociationSet Name="Post_Hastags" Association="Self.Post_Hastags">
+      <End Role="Hashtags" EntitySet="Hashtags" />
+      <End Role="Posts" EntitySet="Posts" />
+    </AssociationSet>
+    <FunctionImport Name="CreateUser">
+      <Parameter Name="UserName" Mode="In" Type="String" />
+      <Parameter Name="Names" Mode="In" Type="String" />
+      <Parameter Name="Passwords" Mode="In" Type="String" />
+      <Parameter Name="ProfilePhoto" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Phone" Mode="In" Type="String" />
+      <Parameter Name="Birthday" Mode="In" Type="DateTime" />
+      <Parameter Name="Biography" Mode="In" Type="String" />
+      <Parameter Name="PlaceWhereLives" Mode="In" Type="String" />
+      <Parameter Name="Sex" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="DeleteUser">
+      <Parameter Name="UserName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ReadUserByUserName" ReturnType="Collection(Database1Model.ReadUserByUserName_Result)">
+      <Parameter Name="UserName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateUser">
+      <Parameter Name="UserID" Mode="In" Type="Int32" />
+      <Parameter Name="UserName" Mode="In" Type="String" />
+      <Parameter Name="Names" Mode="In" Type="String" />
+      <Parameter Name="Passwords" Mode="In" Type="String" />
+      <Parameter Name="ProfilePhoto" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Phone" Mode="In" Type="String" />
+      <Parameter Name="Birthday" Mode="In" Type="DateTime" />
+      <Parameter Name="Biography" Mode="In" Type="String" />
+      <Parameter Name="PlaceWhereLives" Mode="In" Type="String" />
+      <Parameter Name="Sex" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="ReadUserByUserName_Result">
+    <Property Type="Int32" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Names" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Passwords" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="ProfilePhoto" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Phone" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="CreationDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="Birthday" Nullable="true" />
+    <Property Type="String" Name="Biography" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="PlaceWhereLives" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Sex" Nullable="false" MaxLength="50" />
+  </ComplexType>
+</Schema>
