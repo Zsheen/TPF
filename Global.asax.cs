@@ -19,5 +19,11 @@ namespace IDS348_FinalProject
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);            
         }
+
+        void Session_Start(object sender, EventArgs e)
+        {
+            // Crear una variable de sesión y asignarle un valor inicial
+            HttpContext.Current.Session["Loged"] = "False";
+        }
     }
 }

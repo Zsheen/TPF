@@ -110,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Database1.mdf" />
+    <Content Include="DatosDeLaApp\Chen_ProfilePhoto.PNG" />
     <Content Include="DatosDeLaApp\twitter-logo.png" />
     <Content Include="Global.asax" />
     <Content Include="Home.aspx" />

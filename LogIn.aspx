@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LogIn.aspx.cs" Inherits="IDS348_FinalProject.LogIn" %>
+﻿ <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LogIn.aspx.cs" Inherits="IDS348_FinalProject.LogIn" %>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -160,7 +160,6 @@
       cursor: pointer;
     }
 
-    /* Footer */
     .signup {
       display: flex;
       justify-content: center;
@@ -187,11 +186,22 @@
       font-weight: 400;
     }
 
-#btnEntrar:enabled:hover,
-#mobbtnEntrar:enabled:hover {
-    background-color: #1A91DA; /* Oscurecer ligeramente el botón al pasar el mouse */
+    #btnEntrar:enabled:hover,
+    #mobbtnEntrar:enabled:hover
+    {
+        background-color: #1A91DA; /* Oscurecer ligeramente el botón al pasar el mouse */
     
-}
+    }
+
+    #rogressBar
+    {
+        display: none;
+        position: fixed;
+        top: -20px;
+        width: 0%;
+        height: 5px;
+        background-color: deepskyblue !important;
+    }
   </style>
 </head>
 <body>
@@ -199,6 +209,10 @@
       <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
       <asp:UpdatePanel ID="UpdatePanel1" runat="server">
           <ContentTemplate>
+              <asp:HiddenField ID="ProgressHiddenField" runat="server"/>
+              <div id="rogressBar" runat="server">
+                  <asp:UpdateProgress ID="ProgressBar" runat="server"></asp:UpdateProgress>
+              </div>
             <section id="login">
                 <div class="header">
                     <div class="logo">
@@ -219,7 +233,7 @@
                     </div>
                 </div>
                 <div class="entrar">
-                    <asp:Button id="btnEntrar" Text="Entrar" runat="server" Enabled="False" OnClick="btnEntrar_Click"/>
+                    <asp:Button id="btnEntrar" Text="Entrar" runat="server" Enabled="False" OnClick="btnEntrar_Click" OnClientClick="mostrarProgreso();"/>
                 </div>
                 <footer class="signup">
                     <a href="#">¿Olvidaste tu contraseña?</a>
@@ -245,8 +259,32 @@
                   btnEntrar.disabled = true;
               }
           }
-      </script>
 
+          function mostrarProgreso()
+          {
+              document.getElementById('rogressBar').style.display = 'block';
+
+              document.getElementById('rogressBar').style.width = 20 + '%';
+
+              setTimeout(function ()
+              {
+                  document.getElementById('rogressBar').style.width = 50 + '%';
+
+                  setTimeout(function ()
+                  {
+                      document.getElementById('rogressBar').style.width = 70 + '%';
+
+                      setTimeout(function ()
+                      {
+                          document.getElementById('rogressBar').style.width = 90 + '%';
+
+                      }, 2500);
+
+                  }, 2500);
+
+              }, 4000);
+          }
+      </script>
   </form>
 </body>
 </html>

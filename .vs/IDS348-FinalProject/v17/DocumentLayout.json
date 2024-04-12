@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Chender Marte\\Desktop\\IDS348-FP\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1C79EF68-44C3-4ACF-BF04-197ECD895517}|IDS348-FinalProject.csproj|c:\\users\\chender marte\\desktop\\ids348-fp\\login.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1C79EF68-44C3-4ACF-BF04-197ECD895517}|IDS348-FinalProject.csproj|solutionrelative:login.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1C79EF68-44C3-4ACF-BF04-197ECD895517}|IDS348-FinalProject.csproj|c:\\users\\chender marte\\desktop\\ids348-fp\\home.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{1C79EF68-44C3-4ACF-BF04-197ECD895517}|IDS348-FinalProject.csproj|solutionrelative:home.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C79EF68-44C3-4ACF-BF04-197ECD895517}|IDS348-FinalProject.csproj|C:\\Users\\Chender Marte\\Desktop\\IDS348-FP\\home.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C79EF68-44C3-4ACF-BF04-197ECD895517}|IDS348-FinalProject.csproj|solutionrelative:home.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1C79EF68-44C3-4ACF-BF04-197ECD895517}|IDS348-FinalProject.csproj|C:\\Users\\Chender Marte\\Desktop\\IDS348-FP\\login.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
       "RelativeMoniker": "D:0:0:{1C79EF68-44C3-4ACF-BF04-197ECD895517}|IDS348-FinalProject.csproj|solutionrelative:login.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1C79EF68-44C3-4ACF-BF04-197ECD895517}|IDS348-FinalProject.csproj|C:\\Users\\Chender Marte\\Desktop\\IDS348-FP\\model1.edmx||{C99AEA30-8E36-4515-B76F-496F5A48A6AA}|",
-      "RelativeMoniker": "D:0:0:{1C79EF68-44C3-4ACF-BF04-197ECD895517}|IDS348-FinalProject.csproj|solutionrelative:model1.edmx||{C99AEA30-8E36-4515-B76F-496F5A48A6AA}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,20 +38,32 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "LogIn.aspx.cs",
-              "DocumentMoniker": "C:\\Users\\Chender Marte\\Desktop\\IDS348-FP\\LogIn.aspx.cs",
-              "RelativeDocumentMoniker": "LogIn.aspx.cs",
-              "ToolTip": "C:\\Users\\Chender Marte\\Desktop\\IDS348-FP\\LogIn.aspx.cs",
-              "RelativeToolTip": "LogIn.aspx.cs",
-              "ViewState": "AQIAAAMAAAAwMzMzMzMlwAkAAAABAAAA",
+              "DocumentIndex": 1,
+              "Title": "Home.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\Chender Marte\\Desktop\\IDS348-FP\\Home.aspx.cs",
+              "RelativeDocumentMoniker": "Home.aspx.cs",
+              "ToolTip": "C:\\Users\\Chender Marte\\Desktop\\IDS348-FP\\Home.aspx.cs",
+              "RelativeToolTip": "Home.aspx.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAEgAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-10T13:58:16.202Z",
+              "WhenOpened": "2024-04-12T19:54:39.235Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Home.aspx",
+              "DocumentMoniker": "C:\\Users\\Chender Marte\\Desktop\\IDS348-FP\\Home.aspx",
+              "RelativeDocumentMoniker": "Home.aspx",
+              "ToolTip": "C:\\Users\\Chender Marte\\Desktop\\IDS348-FP\\Home.aspx",
+              "RelativeToolTip": "Home.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2024-04-12T19:54:14.773Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "LogIn.aspx",
               "DocumentMoniker": "C:\\Users\\Chender Marte\\Desktop\\IDS348-FP\\LogIn.aspx",
               "RelativeDocumentMoniker": "LogIn.aspx",
@@ -59,18 +71,7 @@
               "RelativeToolTip": "LogIn.aspx",
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2024-04-10T13:36:43.589Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Model1.edmx [Diagram1]",
-              "DocumentMoniker": "C:\\Users\\Chender Marte\\Desktop\\IDS348-FP\\Model1.edmx",
-              "RelativeDocumentMoniker": "Model1.edmx",
-              "ToolTip": "C:\\Users\\Chender Marte\\Desktop\\IDS348-FP\\Model1.edmx [Diagram1]",
-              "RelativeToolTip": "Model1.edmx [Diagram1]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001116|",
-              "WhenOpened": "2024-04-10T03:24:48.576Z"
+              "WhenOpened": "2024-04-12T19:10:33.343Z"
             }
           ]
         }
