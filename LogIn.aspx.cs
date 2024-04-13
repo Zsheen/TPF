@@ -25,10 +25,6 @@ namespace IDS348_FinalProject
         {
             using (Database1Entities context = new Database1Entities())
             {
-                //rogressBar.Attributes.CssStyle.Add(HtmlTextWriterStyle.Display, "block");
-
-                //rogressBar.Attributes.CssStyle.Add(HtmlTextWriterStyle.Width, "30%");
-
                 rogressBar.Style.Add(HtmlTextWriterStyle.Width, "30%");
 
                 ObjectResult<ReadUserByUserName_Result> User = context.ReadUserByUserName(Convert.ToString(user.Text));
@@ -44,6 +40,8 @@ namespace IDS348_FinalProject
                             Session["Loged"] = "True";
 
                             Session["UserName"] = userResult.UserName;
+
+                            Session["UserID"] = userResult.UserID;
 
                             Response.Redirect("Home.aspx");
 

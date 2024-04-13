@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Database1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Database1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Chats">
           <Key>
             <PropertyRef Name="ChatID" />
@@ -244,6 +244,14 @@ advertencia 6002: La tabla o vista 'C:\USERS\CHENDER MARTE\DESKTOP\IDS348-FP\DAT
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="CreatePost" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="UserName" Type="varchar" Mode="In" />
+          <Parameter Name="Text" Type="varchar(max)" Mode="In" />
+          <Parameter Name="PublicationDate" Type="datetime" Mode="In" />
+          <Parameter Name="TipoContenido" Type="varchar" Mode="In" />
+          <Parameter Name="URLContenido" Type="varchar(max)" Mode="In" />
+        </Function>
         <Function Name="CreateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserName" Type="varchar" Mode="In" />
           <Parameter Name="Names" Type="varchar" Mode="In" />
@@ -256,11 +264,26 @@ advertencia 6002: La tabla o vista 'C:\USERS\CHENDER MARTE\DESKTOP\IDS348-FP\DAT
           <Parameter Name="PlaceWhereLives" Type="varchar" Mode="In" />
           <Parameter Name="Sex" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="DeletePost" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PostID" Type="int" Mode="In" />
+        </Function>
         <Function Name="DeleteUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserName" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="GetPost" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PostID" Type="int" Mode="In" />
+        </Function>
         <Function Name="ReadUserByUserName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="UpdatePost" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PostID" Type="int" Mode="In" />
+          <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="UserName" Type="varchar" Mode="In" />
+          <Parameter Name="Text" Type="varchar(max)" Mode="In" />
+          <Parameter Name="PublicationDate" Type="datetime" Mode="In" />
+          <Parameter Name="TipoContenido" Type="varchar" Mode="In" />
+          <Parameter Name="URLContenido" Type="varchar(max)" Mode="In" />
         </Function>
         <Function Name="UpdateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="int" Mode="In" />
@@ -336,8 +359,7 @@ advertencia 6002: La tabla o vista 'C:\USERS\CHENDER MARTE\DESKTOP\IDS348-FP\DAT
             <End Role="Saves" EntitySet="Saves" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Database1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -633,10 +655,10 @@ advertencia 6002: La tabla o vista 'C:\USERS\CHENDER MARTE\DESKTOP\IDS348-FP\DAT
             <Parameter Name="Sex" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="DeleteUser">
-            <Parameter Name="UserName" Mode="In" Type="String" />
+          <Parameter Name="UserName" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="ReadUserByUserName" ReturnType="Collection(Database1Model.ReadUserByUserName_Result)">
-            <Parameter Name="UserName" Mode="In" Type="String" />
+          <Parameter Name="UserName" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="UpdateUser">
             <Parameter Name="UserID" Mode="In" Type="Int32" />
@@ -650,6 +672,37 @@ advertencia 6002: La tabla o vista 'C:\USERS\CHENDER MARTE\DESKTOP\IDS348-FP\DAT
             <Parameter Name="Biography" Mode="In" Type="String" />
             <Parameter Name="PlaceWhereLives" Mode="In" Type="String" />
             <Parameter Name="Sex" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DeletePost">
+          <Parameter Name="PostID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetPost" ReturnType="Collection(Database1Model.GetPost_Result)">
+          <Parameter Name="PostID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertPost" ReturnType="Collection(Decimal)">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Text" Mode="In" Type="String" />
+            <Parameter Name="PublicationDate" Mode="In" Type="DateTime" />
+            <Parameter Name="TipoContenido" Mode="In" Type="String" />
+            <Parameter Name="URLContenido" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdatePost">
+            <Parameter Name="PostID" Mode="In" Type="Int32" />
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Text" Mode="In" Type="String" />
+            <Parameter Name="PublicationDate" Mode="In" Type="DateTime" />
+            <Parameter Name="TipoContenido" Mode="In" Type="String" />
+            <Parameter Name="URLContenido" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CreatePost" ReturnType="Collection(Database1Model.CreatePost_Result)">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Text" Mode="In" Type="String" />
+            <Parameter Name="PublicationDate" Mode="In" Type="DateTime" />
+            <Parameter Name="TipoContenido" Mode="In" Type="String" />
+            <Parameter Name="URLContenido" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="ReadUserByUserName_Result">
@@ -665,6 +718,24 @@ advertencia 6002: La tabla o vista 'C:\USERS\CHENDER MARTE\DESKTOP\IDS348-FP\DAT
           <Property Type="String" Name="Biography" Nullable="true" MaxLength="500" />
           <Property Type="String" Name="PlaceWhereLives" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="Sex" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetPost_Result">
+          <Property Type="Int32" Name="PostID" Nullable="false" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Text" Nullable="false" />
+          <Property Type="DateTime" Name="PublicationDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="TipoContenido" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="URLContenido" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="CreatePost_Result">
+          <Property Type="Int32" Name="PostID" Nullable="false" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Text" Nullable="false" />
+          <Property Type="DateTime" Name="PublicationDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="TipoContenido" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="URLContenido" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -807,6 +878,34 @@ advertencia 6002: La tabla o vista 'C:\USERS\CHENDER MARTE\DESKTOP\IDS348-FP\DAT
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UpdateUser" FunctionName="Database1Model.Store.UpdateUser" />
+          <FunctionImportMapping FunctionImportName="DeletePost" FunctionName="Database1Model.Store.DeletePost" />
+          <FunctionImportMapping FunctionImportName="GetPost" FunctionName="Database1Model.Store.GetPost">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Database1Model.GetPost_Result">
+                <ScalarProperty Name="PostID" ColumnName="PostID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="PublicationDate" ColumnName="PublicationDate" />
+                <ScalarProperty Name="TipoContenido" ColumnName="TipoContenido" />
+                <ScalarProperty Name="URLContenido" ColumnName="URLContenido" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdatePost" FunctionName="Database1Model.Store.UpdatePost" />
+          <FunctionImportMapping FunctionImportName="CreatePost" FunctionName="Database1Model.Store.CreatePost">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Database1Model.CreatePost_Result">
+                <ScalarProperty Name="PostID" ColumnName="PostID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="PublicationDate" ColumnName="PublicationDate" />
+                <ScalarProperty Name="TipoContenido" ColumnName="TipoContenido" />
+                <ScalarProperty Name="URLContenido" ColumnName="URLContenido" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

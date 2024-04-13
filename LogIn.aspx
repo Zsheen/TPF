@@ -244,6 +244,7 @@
           </ContentTemplate>
       </asp:UpdatePanel>
       <script>
+
           function userInputChanged()
           {
               var UserText = document.getElementById('<%= user.ClientID %>').value;
