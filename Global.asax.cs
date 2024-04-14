@@ -17,7 +17,8 @@ namespace IDS348_FinalProject
             // Código que se ejecuta al iniciar la aplicación
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);            
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            AppDomain.CurrentDomain.SetData("DataDirectory", AppDomain.CurrentDomain.BaseDirectory);
         }
 
         void Session_Start(object sender, EventArgs e)
