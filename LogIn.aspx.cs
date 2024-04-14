@@ -1,6 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity.Core.Objects;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
@@ -19,36 +21,48 @@ namespace IDS348_FinalProject
             }
         }
 
-        [WebMethod]
-
         protected void btnEntrar_Click(object sender, EventArgs e)
         {
-            using (Database1Entities context = new Database1Entities())
+            using (SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True;Connect Timeout=30"))
             {
-                rogressBar.Style.Add(HtmlTextWriterStyle.Width, "30%");
+                connection.Open();
 
-                ObjectResult<ReadUserByUserName_Result> User = context.ReadUserByUserName(Convert.ToString(user.Text));
-
-                if (User != null)
+                using (SqlCommand command = new SqlCommand("ReadUserByUserName", connection))
                 {
-                    foreach (var userResult in User)
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@UserName", Convert.ToString(user.Text));
+
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        if (userResult.Passwords == password.Text)
+                        if (reader.HasRows)
                         {
-                            Application.Lock();
+                            while (reader.Read())
+                            {
+                                if (Convert.ToString(reader["Passwords"]) == password.Text)
+                                {
+                                    Application.Lock();
 
-                            Session["Loged"] = "True";
+                                    Session["Loged"] = "True";
 
-                            Session["UserName"] = userResult.UserName;
+                                    Session["UserName"] = Convert.ToString(reader["UserName"]);
 
-                            Session["UserID"] = userResult.UserID;
+                                    Session["UserID"] = Convert.ToString(reader["UserID"]);
 
-                            Response.Redirect("Home.aspx");
+                                    Response.Redirect("Home.aspx");
 
-                            Application.UnLock();
+                                    Application.UnLock();
+                                }
+                            }
+                        }
+
+                        else
+                        {
+                            //Console.WriteLine("No se encontraron filas.");
                         }
                     }
                 }
+            
             }
         }
     }
