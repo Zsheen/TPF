@@ -1,4 +1,4 @@
-﻿ <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LogIn.aspx.cs" Inherits="IDS348_FinalProject.LogIn" %>
+ <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LogIn.aspx.cs" Inherits="IDS348_FinalProject.LogIn" %>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -25,7 +25,7 @@
       --entrar-color: rgb(255, 255, 255);
       --entrar-hover-background-color: rgb(29, 161, 242);
       --entrar-hover-color: rgb(255, 255, 255);
-      --signup-a-color: rgb(80, 174, 231);
+      --singup-a-color: rgb(80, 174, 231);
       --dot-color: rgb(101, 119, 134);
     }
 
@@ -41,7 +41,7 @@
       --entrar-color: rgb(138, 143, 148);
       --entrar-hover-background-color: rgb(26, 145, 218);
       --entrar-hover-color: rgb(255, 255, 255);
-      --signup-a-color: rgb(27, 149, 224);
+      --singup-a-color: rgb(27, 149, 224);
     }
 
     /* Reset */
@@ -160,7 +160,7 @@
       cursor: pointer;
     }
 
-    .signup {
+    .singup {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -168,15 +168,15 @@
       margin-top: 30px;
     }
 
-    .signup a {
-      color: var(--signup-a-color);
+    .singup a {
+      color: var(--singup-a-color);
       font-weight: 400;
       margin: 0 5px;
       text-align: center;
       text-decoration: none;
     }
 
-    .signup a:hover {
+    .singup a:hover {
       text-decoration: underline;
     }
 
@@ -235,7 +235,7 @@
                 <div class="entrar">
                     <asp:Button id="btnEntrar" Text="Entrar" runat="server" Enabled="False" OnClick="btnEntrar_Click" OnClientClick="mostrarProgreso();"/>
                 </div>
-                <footer class="signup">
+                <footer class="singup">
                     <a href="#">¿Olvidaste tu contraseña?</a>
                     <span class="dot"></span>
                     <a href="#">Regístrate</a>
