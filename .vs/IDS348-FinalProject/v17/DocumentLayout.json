@@ -1,18 +1,14 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Chender Marte\\source\\repos\\IDS348-FP\\",
+  "WorkspaceRootPath": "C:\\Users\\Chender Marte\\Desktop\\IDS348-FP\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1C79EF68-44C3-4ACF-BF04-197ECD895517}|IDS348-FinalProject.csproj|c:\\users\\chender marte\\source\\repos\\ids348-fp\\singup.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1C79EF68-44C3-4ACF-BF04-197ECD895517}|IDS348-FinalProject.csproj|solutionrelative:singup.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1C79EF68-44C3-4ACF-BF04-197ECD895517}|IDS348-FinalProject.csproj|c:\\users\\chender marte\\source\\repos\\ids348-fp\\singup.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "AbsoluteMoniker": "D:0:0:{1C79EF68-44C3-4ACF-BF04-197ECD895517}|IDS348-FinalProject.csproj|C:\\Users\\Chender Marte\\Desktop\\IDS348-FP\\singup.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
       "RelativeMoniker": "D:0:0:{1C79EF68-44C3-4ACF-BF04-197ECD895517}|IDS348-FinalProject.csproj|solutionrelative:singup.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1C79EF68-44C3-4ACF-BF04-197ECD895517}|IDS348-FinalProject.csproj|C:\\Users\\Chender Marte\\source\\repos\\IDS348-FP\\home.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{1C79EF68-44C3-4ACF-BF04-197ECD895517}|IDS348-FinalProject.csproj|solutionrelative:home.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+      "AbsoluteMoniker": "D:0:0:{1C79EF68-44C3-4ACF-BF04-197ECD895517}|IDS348-FinalProject.csproj|c:\\users\\chender marte\\desktop\\ids348-fp\\singup.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C79EF68-44C3-4ACF-BF04-197ECD895517}|IDS348-FinalProject.csproj|solutionrelative:singup.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,57 +18,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SingUp.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\Chender Marte\\Desktop\\IDS348-FP\\SingUp.aspx.cs",
+              "RelativeDocumentMoniker": "SingUp.aspx.cs",
+              "ToolTip": "C:\\Users\\Chender Marte\\Desktop\\IDS348-FP\\SingUp.aspx.cs",
+              "RelativeToolTip": "SingUp.aspx.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAwBcAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-14T21:27:34.179Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "SingUp.aspx.cs",
-              "DocumentMoniker": "C:\\Users\\Chender Marte\\source\\repos\\IDS348-FP\\SingUp.aspx.cs",
-              "RelativeDocumentMoniker": "SingUp.aspx.cs",
-              "ToolTip": "C:\\Users\\Chender Marte\\source\\repos\\IDS348-FP\\SingUp.aspx.cs",
-              "RelativeToolTip": "SingUp.aspx.cs",
-              "ViewState": "AQIAABMAAAAAMzMzM7MlwHEAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-14T18:52:54.999Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "SingUp.aspx",
-              "DocumentMoniker": "C:\\Users\\Chender Marte\\source\\repos\\IDS348-FP\\SingUp.aspx",
+              "DocumentMoniker": "C:\\Users\\Chender Marte\\Desktop\\IDS348-FP\\SingUp.aspx",
               "RelativeDocumentMoniker": "SingUp.aspx",
-              "ToolTip": "C:\\Users\\Chender Marte\\source\\repos\\IDS348-FP\\SingUp.aspx",
+              "ToolTip": "C:\\Users\\Chender Marte\\Desktop\\IDS348-FP\\SingUp.aspx",
               "RelativeToolTip": "SingUp.aspx",
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
               "WhenOpened": "2024-04-14T18:52:30.137Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Home.aspx",
-              "DocumentMoniker": "C:\\Users\\Chender Marte\\source\\repos\\IDS348-FP\\Home.aspx",
-              "RelativeDocumentMoniker": "Home.aspx",
-              "ToolTip": "C:\\Users\\Chender Marte\\source\\repos\\IDS348-FP\\Home.aspx",
-              "RelativeToolTip": "Home.aspx",
-              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2024-04-12T19:54:14.773Z",
               "EditorCaption": ""
             }
           ]

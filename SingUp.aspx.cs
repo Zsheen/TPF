@@ -1,14 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity.Core.Objects;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Linq;
+using System.Net.Mail;
+using System.Net;
 using System.Security.Cryptography;
 using System.Web;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace IDS348_FinalProject
 {
@@ -24,10 +30,35 @@ namespace IDS348_FinalProject
 
         protected void btnEntrar_Click(object sender, EventArgs e)
         {
+            NotifyIcon notification = new NotifyIcon(); notification.Visible = true;
+
             txtUsername.Enabled = txtNames.Enabled = txtMail.Enabled = txtPassword.Enabled = txtTelefono.Enabled = ddlDia.Enabled = ddlMes.Enabled = ddlAño.Enabled = txtBiografia.Enabled = ddlPlaceWhereLives.Enabled = ddlSex.Enabled = false;
 
             try
             {
+                MailMessage mensaje = new MailMessage();
+
+                mensaje.From = new MailAddress("twitterproyetintec@hotmail.com", "Twitter", System.Text.Encoding.UTF8); ;
+
+                mensaje.To.Add(txtMail.Text);
+
+                mensaje.Subject = "Creación de usuario";
+
+                string intro = $"Se a creado una cuenta de Twitter a su nombre bajo el nombre de usuario {txtUsername.Text}";
+
+                mensaje.Body = $"<html><body><p>{intro}</p></body></html>";
+
+                mensaje.IsBodyHtml = true;
+
+                mensaje.Priority = MailPriority.Normal;
+
+                SmtpClient client = new SmtpClient("smtp.office365.com", 587);
+
+                client.Credentials = new NetworkCredential("twitterproyetintec@hotmail.com", ConfigurationManager.AppSettings["EmailPassword"]);
+
+                client.EnableSsl = true;
+
+                //client.Send(mensaje);
 
                 using (SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True;Connect Timeout=30"))
                 {
@@ -59,56 +90,50 @@ namespace IDS348_FinalProject
 
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            if (reader.HasRows)
+                            while (reader.Read())
                             {
-                                while (reader.Read())
-                                {
-                                    if (Convert.ToString(reader["Passwords"]) == txtPassword.Text)
-                                    {
-                                        Application.Lock();
+                                Application.Lock();
 
-                                        Session["Loged"] = "True";
+                                Session["Loged"] = "True";
 
-                                        Session["UserName"] = Convert.ToString(reader["UserName"]);
+                                Session["UserName"] = txtUsername.Text;
 
-                                        Session["UserID"] = Convert.ToString(reader["UserID"]);
+                                Session["UserID"] = Convert.ToString(reader["UserID"]);
 
-                                        Response.Redirect("Home.aspx");
+                                Response.Redirect("Home.aspx");
 
-                                        Application.UnLock();
-                                    }
-                                }
-                            }
-
-                            else
-                            {
-                                //Console.WriteLine("No se encontraron filas.");
+                                Application.UnLock();
                             }
                         }
                     }
-
                 }
             }
 
-            catch (Exception)
+            catch (SqlException)
             {
-
-
-                txtUsername.Enabled = txtNames.Enabled = txtMail.Enabled = txtPassword.Enabled = txtTelefono.Enabled = ddlDia.Enabled = ddlMes.Enabled = ddlAño.Enabled = txtBiografia.Enabled = ddlPlaceWhereLives.Enabled = ddlSex.Enabled = true;
-            }
-        }
-
-        protected void CambienTodos(object sender, EventArgs e)
-        {
-            if (txtUsername.Text != string.Empty & txtNames.Text != string.Empty & txtMail.Text != string.Empty & txtPassword.Text != string.Empty & txtTelefono.Text != string.Empty & txtBiografia.Text != string.Empty & new DateTime(Convert.ToInt32(ddlAño.SelectedValue), Convert.ToInt32(ddlMes.SelectedValue), Convert.ToInt32(ddlDia.SelectedValue)) <= DateTime.Now)
-            {
-                btnRegistrarse.Enabled = true;
+                notification.Icon = SystemIcons.Error;
+                notification.BalloonTipTitle = "Nombre de usuario";
+                notification.BalloonTipText = "el nombre de usuario o correo que ingreso ya esta en uso";
+                notification.ShowBalloonTip(4000);
             }
 
-            else
+            catch (FormatException)
             {
-                btnRegistrarse.Enabled = false;
+                notification.Icon = SystemIcons.Error;
+                notification.BalloonTipTitle = "Correo";
+                notification.BalloonTipText = "favor ingrese un correo valido";
+                notification.ShowBalloonTip(4000);
             }
+
+            catch (SmtpException)
+            {
+                notification.Icon = SystemIcons.Error;
+                notification.BalloonTipTitle = "Correo";
+                notification.BalloonTipText = "hubo un error al procesar su dirección de correo, favor reintentar";
+                notification.ShowBalloonTip(4000);
+            }
+
+            txtUsername.Enabled = txtNames.Enabled = txtMail.Enabled = txtPassword.Enabled = txtTelefono.Enabled = ddlDia.Enabled = ddlMes.Enabled = ddlAño.Enabled = txtBiografia.Enabled = ddlPlaceWhereLives.Enabled = ddlSex.Enabled = true;
         }
     }
 }

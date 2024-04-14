@@ -283,37 +283,37 @@
                 <div class="username">
                     <label for="username">Usuario</label> <br />
                     <div class="input-box input-username">
-                        <asp:TextBox type="username" id="txtUsername" runat="server"  AutoPostBack="True" OnTextChanged="CambienTodos" />
+                        <asp:TextBox type="username" id="txtUsername" runat="server" oninput="userInputChanged();" />
                     </div>
                 </div>
                 <div class="names">
                     <label for="names">Nombres</label> <br />
                     <div class="input-box input-username">
-                        <asp:TextBox type="names" id="txtNames" runat="server" AutoPostBack="True" OnTextChanged="CambienTodos" />
+                        <asp:TextBox type="names" id="txtNames" runat="server" oninput="userInputChanged();" />
                     </div>
                 </div>
                 <div class="mail">
                     <label for="mail">e-mail</label> <br />
                     <div class="input-box input-username">
-                        <asp:TextBox type="mail" id="txtMail" runat="server" AutoPostBack="True" OnTextChanged="CambienTodos" />
+                        <asp:TextBox type="mail" id="txtMail" runat="server" oninput="userInputChanged();" />
                     </div>
                 </div>
                 <div class="password">
                     <label for="password">Contraseña</label> <br />
                     <div class="input-box input-password">
-                        <asp:TextBox type="password" runat="server" id="txtPassword" AutoPostBack="True" OnTextChanged="CambienTodos" />
+                        <asp:TextBox type="password" runat="server" id="txtPassword" oninput="userInputChanged();" />
                     </div>
                 </div>
                 <div class="telefono">
                     <label for="telefono">Telefono</label> <br />
                     <div class="input-box input-password">
-                        <asp:TextBox type="telefono" runat="server" id="txtTelefono" AutoPostBack="true" OnTextChanged="CambienTodos"/>
+                        <asp:TextBox type="telefono" placeholder="+___ (___) ___-____" runat="server" id="txtTelefono" oninput="userInputChanged();"/>
                     </div>
                 </div>
                 <div class="birthday">
                     <label for="birthday">Fecha de cumpleaños</label> <br />
                     <div class="input-box input-password">
-                        <asp:DropDownList ID="ddlDia" runat="server" AutoPostBack="true" CssClass="custom-dropdown" OnTextChanged="CambienTodos">
+                        <asp:DropDownList ID="ddlDia" runat="server" CssClass="custom-dropdown" onchange="userInputChanged();">
                             <asp:ListItem Text="1" Value="1"></asp:ListItem>
                             <asp:ListItem Text="2" Value="2"></asp:ListItem>
                             <asp:ListItem Text="3" Value="3"></asp:ListItem>
@@ -346,7 +346,7 @@
                             <asp:ListItem Text="30" Value="30"></asp:ListItem>
                             <asp:ListItem Text="31" Value="30"></asp:ListItem>
                         </asp:DropDownList>
-                        <asp:DropDownList ID="ddlMes" runat="server" AutoPostBack="true" CssClass="custom-dropdown" OnTextChanged="CambienTodos">
+                        <asp:DropDownList ID="ddlMes" runat="server" CssClass="custom-dropdown" onchange="userInputChanged();">
                             <asp:ListItem Text="Enero" Value="1"></asp:ListItem>
                             <asp:ListItem Text="Febrero" Value="2"></asp:ListItem>
                             <asp:ListItem Text="Marzo" Value="3"></asp:ListItem>
@@ -360,7 +360,7 @@
                             <asp:ListItem Text="Noviembre" Value="11"></asp:ListItem>
                             <asp:ListItem Text="Diciembre" Value="12"></asp:ListItem>
                         </asp:DropDownList>
-                        <asp:DropDownList ID="ddlAño" runat="server" AutoPostBack="true" CssClass="custom-dropdown" OnTextChanged="CambienTodos">
+                        <asp:DropDownList ID="ddlAño" runat="server" CssClass="custom-dropdown" onchange="userInputChanged();">
                             <asp:ListItem Text="2024" Value="2024"></asp:ListItem>
                             <asp:ListItem Text="2023" Value="2023"></asp:ListItem>
                             <asp:ListItem Text="2022" Value="2022"></asp:ListItem>
@@ -493,13 +493,13 @@
                 <div class="biografia">
                     <label for="biografia">biografia</label> <br />
                     <div class="input-box input-password">
-                        <asp:TextBox type="biografia" runat="server" id="txtBiografia" AutoPostBack="true" OnTextChanged="CambienTodos"/>
+                        <asp:TextBox type="biografia" runat="server" id="txtBiografia" oninput="userInputChanged();"/>
                     </div>
                 </div>
                 <div class="placewherelives">
                     <label for="placewherelives">¿Donde vive?</label> <br />
                     <div class="input-box input-password">
-                        <asp:DropDownList ID="ddlPlaceWhereLives" runat="server" AutoPostBack="true" CssClass="custom-dropdown">
+                        <asp:DropDownList ID="ddlPlaceWhereLives" runat="server" CssClass="custom-dropdown">
                             <asp:ListItem Text="Antigua y Barbuda" Value="Antigua y Barbuda"></asp:ListItem>
                             <asp:ListItem Text="Argentina" Value="Argentina"></asp:ListItem>
                             <asp:ListItem Text="Bahamas" Value="Bahamas"></asp:ListItem>
@@ -541,7 +541,7 @@
                 <div class="sex">
                     <label for="sex">sexo</label> <br />
                     <div class="input-box input-password">
-                        <asp:DropDownList ID="ddlSex" runat="server" AutoPostBack="true" CssClass="custom-dropdown">
+                        <asp:DropDownList ID="ddlSex" runat="server" CssClass="custom-dropdown">
                             <asp:ListItem Text="M" Value="M"></asp:ListItem>
                             <asp:ListItem Text="F" Value="F"></asp:ListItem>
                         </asp:DropDownList>
@@ -556,7 +556,35 @@
   </form>
     <script>
 
-        document.getElementById('txtUsername').addEventListener("keypress", function (event) {
+        document.getElementById('txtTelefono').addEventListener('input', function () {
+            var valor = this.value.replace(/\D/g, '');
+            var mascara = '+000 (000) 000-0000';
+
+            // Aplicar la máscara
+            var valorMascarado = '';
+            var j = 0;
+            for (var i = 0; i < mascara.length; i++) {
+                if (mascara[i] === '0') {
+                    // Reemplazar '0' con el siguiente número en el valor
+                    if (valor[j]) {
+                        valorMascarado += valor[j++];
+                    } else {
+                        valorMascarado += '_'; // Si no hay más números, usar un marcador
+                    }
+                } else {
+                    // Conservar los caracteres estáticos de la máscara
+                    valorMascarado += mascara[i];
+                }
+            }
+
+            // Establecer el valor en el input
+            var posicionCursor = this.selectionStart;
+            this.value = valorMascarado;
+            // Establecer la posición del cursor
+            this.setSelectionRange(posicionCursor, posicionCursor);
+        });
+
+        document.getElementById('txtUsername').addEventListener("keydown", function (event) {
 
             var char = event.key;
 
@@ -565,7 +593,7 @@
             }
         });
 
-        document.getElementById('txtMail').addEventListener("keypress", function (event) {
+        document.getElementById('txtMail').addEventListener("keydown", function (event) {
 
             var char = event.key;
 
@@ -574,7 +602,7 @@
             }
         });
 
-        document.getElementById('txtPassword').addEventListener("keypress", function (event) {
+        document.getElementById('txtPassword').addEventListener("keydown", function (event) {
 
             var char = event.key;
 
@@ -583,7 +611,7 @@
             }
         });
 
-        document.getElementById('txtNames').addEventListener("keypress", function (event) {
+        document.getElementById('txtNames').addEventListener("keydown", function (event) {
 
             var char = event.key;
 
@@ -592,7 +620,7 @@
             }
         });
 
-        document.getElementById('txtBiografia').addEventListener("keypress", function (event) {
+        document.getElementById('txtBiografia').addEventListener("keydown", function (event) {
 
             var char = event.key;
 
@@ -600,6 +628,25 @@
                 event.preventDefault();
             }
         });
+
+        function userInputChanged() {
+            var UserText = document.getElementById('<%= txtUsername.ClientID %>').value;
+            var NamesText = document.getElementById('<%= txtNames.ClientID %>').value;
+            var MailText = document.getElementById('<%= txtMail.ClientID %>').value;
+            var PasswordText = document.getElementById('<%= txtPassword.ClientID %>').value;
+            var TelefonoText = document.getElementById('<%= txtTelefono.ClientID %>').value;
+            var BiografiaText = document.getElementById('<%= txtBiografia.ClientID %>').value;
+
+            var fechaEspecifica = new Date(document.getElementById('<%= ddlAño.ClientID %>').value, document.getElementById('<%= ddlMes.ClientID %>').value - 1, document.getElementById('<%= ddlDia.ClientID %>').value, 0, 0, 0);
+
+            if (UserText.trim() === '' || PasswordText.trim() === '' || NamesText.trim() === '' || MailText.trim() === '' || TelefonoText.trim() === '' || BiografiaText.trim() === '' || fechaEspecifica > new Date() || !MailText.includes("@") || !MailText.includes(".")) {
+                document.getElementById('<%= btnRegistrarse.ClientID %>').disabled = true;
+            }
+
+            else {
+                document.getElementById('<%= btnRegistrarse.ClientID %>').disabled = false;
+            }
+        }
 
         function mostrarProgreso() {
             document.getElementById('rogressBar').style.display = 'block';
