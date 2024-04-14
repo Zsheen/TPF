@@ -1,10 +1,13 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity.Core.Objects;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Web;
 using System.Web.Services;
@@ -26,20 +29,29 @@ namespace IDS348_FinalProject
                 Response.Redirect("Twitter.aspx");
             }
 
-            using (Database1Entities context = new Database1Entities())
+            using (SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True;Connect Timeout=30"))
             {
-                ObjectResult<ReadUserByUserName_Result> User = context.ReadUserByUserName(Convert.ToString(Session["UserName"]));
+                connection.Open();
 
-                foreach (var UserResult in User)
+                using (SqlCommand command = new SqlCommand("ReadUserByUserName", connection))
                 {
-                    Session["URLProfilePhoto"] = $"DatosDeLaApp\\{UserResult.ProfilePhoto}";
+                    command.CommandType = CommandType.StoredProcedure;
 
-                    imgFotoInferior.ImageUrl = Convert.ToString(Session["URLProfilePhoto"]);
+                    command.Parameters.AddWithValue("@UserName", Convert.ToString(Session["UserName"]));
 
-                    userPlaceholder.InnerText = $"@{UserResult.UserName}";
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Session["URLProfilePhoto"] = $"DatosDeLaApp\\{Convert.ToString(reader["ProfilePhoto"])}";
 
-                    nombrePlaceholder.InnerText = UserResult.Names;
+                            imgFotoInferior.ImageUrl = Convert.ToString(Session["URLProfilePhoto"]);
 
+                            userPlaceholder.InnerText = $"@{Convert.ToString(reader["UserName"])}";
+
+                            nombrePlaceholder.InnerText = Convert.ToString(reader["Names"]);
+                        }
+                    }
                 }
             }
         }
@@ -63,31 +75,58 @@ namespace IDS348_FinalProject
 
         protected void btnTwittear_Click(object sender, EventArgs e)
         {
-            using (Database1Entities context = new Database1Entities())
+            string NuevaURLParaContenido = string.Empty;
+            string NombreParaElArchivo;
+
+            if (File1.Value != string.Empty)
             {
-                string NuevaURLParaContenido = string.Empty;
-                string NombreParaElArchivo;
+                string TipoDeArchivo = File1.Value.Split('.')[File1.Value.Split('.').Length - 1].ToLower();
 
-                
-
-                if (File1.Value != string.Empty)
+                do
                 {
-                    string TipoDeArchivo = File1.Value.Split('.')[File1.Value.Split('.').Length - 1].ToLower();
+                    NombreParaElArchivo = GenerarNombreAleatorio();
 
-                    do
+                } while (File.Exists($"DatosDeLaApp\\{NombreParaElArchivo}_{Session["UserName"]}.{TipoDeArchivo}"));
+
+                NuevaURLParaContenido = $"DatosDeLaApp\\{NombreParaElArchivo}_{Session["UserName"]}.{TipoDeArchivo}";
+
+                File1.PostedFile.SaveAs(NuevaURLParaContenido);
+            }
+
+            using (SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True;Connect Timeout=30"))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("CreatePost", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@UserID", Convert.ToString(Session["UserID"]));
+
+                    command.Parameters.AddWithValue("@UserName", Convert.ToString(Session["UserName"]));
+
+                    command.Parameters.AddWithValue("@Text", textareaTwitt.Value);
+
+                    command.Parameters.AddWithValue("@PublicationDate", DateTime.Now);
+
+                    command.Parameters.AddWithValue("@TipoContenido", "");
+
+                    command.Parameters.AddWithValue("@URLContenido", NuevaURLParaContenido);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        NombreParaElArchivo = GenerarNombreAleatorio();
-                        
-                    } while (File.Exists($"DatosDeLaApp\\{NombreParaElArchivo}_{Session["UserName"]}.{TipoDeArchivo}"));
+                        while (reader.Read())
+                        {
+                            Session["URLProfilePhoto"] = $"DatosDeLaApp\\{Convert.ToString(reader["ProfilePhoto"])}";
 
-                    NuevaURLParaContenido = $"DatosDeLaApp\\{NombreParaElArchivo}_{Session["UserName"]}.{TipoDeArchivo}";
+                            imgFotoInferior.ImageUrl = Convert.ToString(Session["URLProfilePhoto"]);
 
-                    File1.PostedFile.SaveAs(NuevaURLParaContenido);
+                            userPlaceholder.InnerText = $"@{Convert.ToString(reader["UserName"])}";
+
+                            nombrePlaceholder.InnerText = Convert.ToString(reader["Names"]);
+                        }
+                    }
                 }
-
-                ObjectResult<CreatePost_Result> Post = context.CreatePost(Convert.ToInt32(Session["UserID"]), Convert.ToString(Session["UserName"]), textareaTwitt.Value, DateTime.Now, "", NuevaURLParaContenido);
-
-                context.SaveChanges();
             }
         }
     }
