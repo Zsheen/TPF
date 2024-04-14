@@ -44,42 +44,6 @@ namespace IDS348_FinalProject
             }
         }
 
-        [System.Web.Services.WebMethod]
-        public static void HacerPostStatic(string texto, string NombreDelArchivo)
-        {
-                using (Database1Entities context = new Database1Entities())
-                {
-                    string NuevaURLParaContenido = string.Empty;
-                    string NombreParaElArchivo;
-
-                    if (NombreDelArchivo != string.Empty)
-                    {
-                        string TipoDeArchivo = NombreDelArchivo.Split('.')[NombreDelArchivo.Split('.').Length - 1].ToLower();
-
-                        do
-                        {
-                            NombreParaElArchivo = GenerarNombreAleatorio();
-
-                        } while (File.Exists($"DatosDeLaApp\\{NombreParaElArchivo}_{HttpContext.Current.Session["UserName"]}.{TipoDeArchivo}"));
-
-                        HttpContext.Current.Session["RutaParaGuardarElArchivoDelPost"] = NuevaURLParaContenido = $"DatosDeLaApp\\{NombreParaElArchivo}_{HttpContext.Current.Session["UserName"]}.{TipoDeArchivo}";
-
-                        //archivo.SaveAs(NuevaURLParaContenido);        
-
-                        /*HttpPostedFile file = */
-                        //homeInstance.FileUpload1.PostedFile.SaveAs(NuevaURLParaContenido);
-
-                        //FileUpload1.SaveAs(NuevaURLParaContenido);
-
-                        //File.Copy(@"\\?\" + URLDelArchivo, NuevaURLParaContenido);
-                    }
-
-                    ObjectResult<CreatePost_Result> Post = context.CreatePost(Convert.ToInt32(HttpContext.Current.Session["UserID"]), Convert.ToString(HttpContext.Current.Session["UserName"]), texto, DateTime.Now, "", NuevaURLParaContenido);
-
-                    context.SaveChanges();
-                }
-        }
-
         public static string GenerarNombreAleatorio()
         {
             const string caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -119,15 +83,6 @@ namespace IDS348_FinalProject
                     NuevaURLParaContenido = $"DatosDeLaApp\\{NombreParaElArchivo}_{Session["UserName"]}.{TipoDeArchivo}";
 
                     File1.PostedFile.SaveAs(NuevaURLParaContenido);
-
-                    //archivo.SaveAs(NuevaURLParaContenido);        
-
-                    /*HttpPostedFile file = */
-                    //homeInstance.FileUpload1.PostedFile.SaveAs(NuevaURLParaContenido);
-
-                    //FileUpload1.SaveAs(NuevaURLParaContenido);
-
-                    //File.Copy(@"\\?\" + URLDelArchivo, NuevaURLParaContenido);
                 }
 
                 ObjectResult<CreatePost_Result> Post = context.CreatePost(Convert.ToInt32(Session["UserID"]), Convert.ToString(Session["UserName"]), textareaTwitt.Value, DateTime.Now, "", NuevaURLParaContenido);
