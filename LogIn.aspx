@@ -1,4 +1,4 @@
- <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LogIn.aspx.cs" Inherits="IDS348_FinalProject.LogIn" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LogIn.aspx.cs" Inherits="IDS348_FinalProject.LogIn" %>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -245,38 +245,31 @@
       </asp:UpdatePanel>
       <script>
 
-          function userInputChanged()
-          {
+          function userInputChanged() {
               var UserText = document.getElementById('<%= user.ClientID %>').value;
               var PasswordText = document.getElementById('<%= password.ClientID %>').value;
 
-              if (UserText.trim() !== '' && PasswordText.trim() !== '')
-              {
+              if (UserText.trim() !== '' && PasswordText.trim() !== '') {
                   btnEntrar.disabled = false;
               }
 
-              else
-              {
+              else {
                   btnEntrar.disabled = true;
               }
           }
 
-          function mostrarProgreso()
-          {
+          function mostrarProgreso() {
               document.getElementById('rogressBar').style.display = 'block';
 
               document.getElementById('rogressBar').style.width = 20 + '%';
 
-              setTimeout(function ()
-              {
+              setTimeout(function () {
                   document.getElementById('rogressBar').style.width = 50 + '%';
 
-                  setTimeout(function ()
-                  {
+                  setTimeout(function () {
                       document.getElementById('rogressBar').style.width = 70 + '%';
 
-                      setTimeout(function ()
-                      {
+                      setTimeout(function () {
                           document.getElementById('rogressBar').style.width = 90 + '%';
 
                       }, 2500);
