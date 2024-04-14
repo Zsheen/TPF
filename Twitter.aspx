@@ -281,7 +281,7 @@
             <br>
             <ul class="logsign">
                 <li><a id="hove2" href="LogIn.aspx"> Log in </a></li>
-                <li><a id="hove" href="#"> Sign up </a></li>
+                <li><a id="hove" href="SingUp.aspx"> Sign up </a></li>
                 
             </ul>
         </div>
