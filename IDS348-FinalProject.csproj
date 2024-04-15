@@ -115,6 +115,7 @@
     <Content Include="DatosDeLaApp\twitter-logo.png" />
     <Content Include="Global.asax" />
     <Content Include="Home1.aspx" />
+    <Content Include="HtmlPage1.html" />
     <Content Include="LogIn.aspx" />
     <Content Include="SingUp.aspx" />
     <Content Include="Twitter.aspx" />

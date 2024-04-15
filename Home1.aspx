@@ -1388,7 +1388,7 @@ body {
                                   <asp:Button CssClass="pasando__twittear" runat="server" Enabled="false" ID="btnTwittear" Text="Twittear" OnClick="btnTwittear_Click"/>
                               </div>
                           </div>
-                          <div id="CentroDTweets" class="centro__tweets">
+                          <div id="CentroDTweets" class="centro__tweets" runat="server">
                               <section id="99999" class="centro__tweet">
                                   <div class="centro__col">
                                       <img class="centro__user" src="https://pbs.twimg.com/profile_images/1763308910692184064/PD37Hou2_400x400.jpg" alt="User">
