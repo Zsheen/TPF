@@ -81,19 +81,23 @@ namespace IDS348_FinalProject
             string NuevaURLParaContenido = string.Empty;
             string NombreParaElArchivo;
 
-            if (File1.Value != string.Empty)
+            if (fuPost.HasFiles & !File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\\Downloads\\aoiMLPAxw(Wdecaq123423KliLNbcGghtXfsd)." + form1.Name))
             {
-                string TipoDeArchivo = File1.Value.Split('.')[File1.Value.Split('.').Length - 1].ToLower();
+                //string TipoDeArchivo = File1.Value.Split('.')[File1.Value.Split('.').Length - 1].ToLower();
 
                 do
                 {
                     NombreParaElArchivo = GenerarNombreAleatorio();
 
-                } while (File.Exists($"DatosDeLaApp\\{NombreParaElArchivo}_{Session["UserName"]}.{TipoDeArchivo}"));
+                } while (File.Exists(@"DatosDeLaApp\" + NombreParaElArchivo + "_" + Session["UserName"]));//.{TipoDeArchivo}"));
 
-                NuevaURLParaContenido = $"DatosDeLaApp\\{NombreParaElArchivo}_{Session["UserName"]}.{TipoDeArchivo}";
+                NuevaURLParaContenido = @"DatosDeLaApp\" + NombreParaElArchivo + "_" + Session["UserName"];//.{TipoDeArchivo}";
 
-                File1.PostedFile.SaveAs(NuevaURLParaContenido);
+                //File.Copy(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\\Downloads\aoiMLPAxw(Wdecaq123423KliLNbcGghtXfsd)." + form1.Name, NuevaURLParaContenido);
+
+                //File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\\Downloads\aoiMLPAxw(Wdecaq123423KliLNbcGghtXfsd)." + form1.Name);
+
+                //File1.PostedFile.SaveAs(NuevaURLParaContenido);
             }
 
             using (SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True;Connect Timeout=30"))

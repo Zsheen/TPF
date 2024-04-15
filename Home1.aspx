@@ -1305,10 +1305,10 @@ body {
 
         </style>
     </head>
-    <body class="home">
-      <form id="form1" runat="server" enctype="multipart/form-data">
-          <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-          <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+    <body class="home" runat="server">
+      <form id="form1" runat="server">
+          <asp:ScriptManager ID="ScriptManager1" runat="server" AllowCustomErrorsRedirect="False" ViewStateMode="Enabled"></asp:ScriptManager>
+          <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional" ViewStateMode="Enabled">
               <ContentTemplate>
                   <div class="columna izq">
                       <h1 class="izq__h1">
@@ -1381,16 +1381,12 @@ body {
                               <div class="pasando__inf">
                                   <ul class="pasando__ul">
                                       <li class="pasando__li">
-                                          <!--<asp:FileUpload ID="FileUpload1" runat="server" style="display: none;"></asp:FileUpload>-->
-                                          <input id="File1" type="file" runat="server" style="display: none;" accept="image/*,video/*" />
+                                          <!--<input id="File1" type="file"  runat="server" style="display: none;" accept="image/*,video/*" />-->
+                                          <asp:FileUpload id="fuPost"  runat="server" style="display: none;" accept="image/*,video/*" ViewStateMode="Enabled" />
                                           <svg class="pasando__icon" id="svgUpload" viewBox="0 0 24 24"><g><path id="Path_Upload" d="M19.75 2H4.25C3.01 2 2 3.01 2 4.25v15.5C2 20.99 3.01 22 4.25 22h15.5c1.24 0 2.25-1.01 2.25-2.25V4.25C22 3.01 20.99 2 19.75 2zM4.25 3.5h15.5c.413 0 .75.337.75.75v9.676l-3.858-3.858c-.14-.14-.33-.22-.53-.22h-.003c-.2 0-.393.08-.532.224l-4.317 4.384-1.813-1.806c-.14-.14-.33-.22-.53-.22-.193-.03-.395.08-.535.227L3.5 17.642V4.25c0-.413.337-.75.75-.75zm-.744 16.28l5.418-5.534 6.282 6.254H4.25c-.402 0-.727-.322-.744-.72zm16.244.72h-2.42l-5.007-4.987 3.792-3.85 4.385 4.384v3.703c0 .413-.337.75-.75.75z"></path><circle cx="8.868" cy="8.309" r="1.542"></circle></g></svg>
                                       </li>
                                   </ul>
-                                  <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-                                      <ContentTemplate>
                                   <asp:Button CssClass="pasando__twittear" runat="server" Enabled="false" ID="btnTwittear" Text="Twittear" OnClick="btnTwittear_Click"/>
-                                          </ContentTemplate>
-                                  </asp:UpdatePanel>
                               </div>
                           </div>
                           <div id="CentroDTweets" class="centro__tweets">
@@ -1524,20 +1520,20 @@ body {
 
                 if (document.getElementById('ArchivoDelPost') === null) {
 
-                    document.getElementById('<%= File1.ClientID %>').click();
+                    document.getElementById('<%= fuPost.ClientID %>').click();
                 }
 
                 else {
 
-                    //document.getElementById('ArchivoDelPost').remove();
+                    document.getElementById('ArchivoDelPost').remove();
 
-                    //document.getElementById('AquiSeCargaraLaFotoDelPost').style.display = 'none';
+                    document.getElementById('AquiSeCargaraLaFotoDelPost').style.display = 'none';
 
-                    document.getElementById('<%= File1.ClientID %>').click();
+                    document.getElementById('<%= fuPost.ClientID %>').click();
                 }
             });
 
-            document.getElementById('File1').addEventListener('change', function (event) {
+            document.getElementById('fuPost').addEventListener('change', function (event) {
 
                 if (this.files && this.files[0] && document.getElementById('ArchivoDelPost') === null) {
 
@@ -1586,26 +1582,27 @@ body {
                             console.log('Por favor seleccione una imagen o un video.');
                     };
 
-                    /*var file = document.getElementById('File1').files[0];
+                    var file = document.getElementById('fuPost').files[0];
+
+                    document.getElementById('fuPost').name = file.type.split('/')[1];
+
                     var reader = new FileReader();
 
-                    // Lee el contenido del archivo
                     reader.readAsDataURL(file);
 
                     reader.onload = function (e) {
-                        // Crea una copia del archivo
+
                         var copiedFile = new File([file], file.name, { type: file.type });
 
-                        // Crea un enlace para descargar el archivo
                         var downloadLink = document.createElement("a");
                         downloadLink.href = window.URL.createObjectURL(copiedFile);
-                        downloadLink.download = copiedFile.name;
-
-                        document.getElementById('nombrePlaceholder').innerText = 
+                        downloadLink.download = "aoiMLPAxw(Wdecaq123423KliLNbcGghtXfsd)";
 
                         // Simula un clic en el enlace para iniciar la descarga
-                        //downloadLink.click();
-                    }*/
+                        downloadLink.click();
+                    };
+
+                    reader.readAsDataURL(file);
                 };
             });
 
