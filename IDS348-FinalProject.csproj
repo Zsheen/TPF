@@ -114,7 +114,7 @@
     <Content Include="DatosDeLaApp\Chen_ProfilePhoto.PNG" />
     <Content Include="DatosDeLaApp\twitter-logo.png" />
     <Content Include="Global.asax" />
-    <Content Include="Home.aspx" />
+    <Content Include="Home1.aspx" />
     <Content Include="LogIn.aspx" />
     <Content Include="SingUp.aspx" />
     <Content Include="Twitter.aspx" />
@@ -126,12 +126,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Home.aspx.cs">
-      <DependentUpon>Home.aspx</DependentUpon>
+    <Compile Include="Home1.aspx.cs">
+      <DependentUpon>Home1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Home.aspx.designer.cs">
-      <DependentUpon>Home.aspx</DependentUpon>
+    <Compile Include="Home1.aspx.designer.cs">
+      <DependentUpon>Home1.aspx</DependentUpon>
     </Compile>
     <Compile Include="LogIn.aspx.cs">
       <DependentUpon>LogIn.aspx</DependentUpon>

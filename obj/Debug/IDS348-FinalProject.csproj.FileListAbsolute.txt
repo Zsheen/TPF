@@ -139,6 +139,8 @@ C:\Users\Chender Marte\Desktop\IDS348-FP\bin\roslyn\vbc.exe.config
 C:\Users\Chender Marte\Desktop\IDS348-FP\bin\roslyn\vbc.rsp
 C:\Users\Chender Marte\Desktop\IDS348-FP\bin\roslyn\VBCSCompiler.exe
 C:\Users\Chender Marte\Desktop\IDS348-FP\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Chender Marte\Desktop\IDS348-FP\bin\EntityFramework.dll
+C:\Users\Chender Marte\Desktop\IDS348-FP\bin\EntityFramework.SqlServer.dll
 C:\Users\Chender Marte\Desktop\IDS348-FP\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\Chender Marte\Desktop\IDS348-FP\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\Chender Marte\Desktop\IDS348-FP\bin\Newtonsoft.Json.dll
@@ -151,6 +153,8 @@ C:\Users\Chender Marte\Desktop\IDS348-FP\bin\System.Web.Razor.dll
 C:\Users\Chender Marte\Desktop\IDS348-FP\bin\System.Web.Webpages.Deployment.dll
 C:\Users\Chender Marte\Desktop\IDS348-FP\bin\System.Web.Webpages.dll
 C:\Users\Chender Marte\Desktop\IDS348-FP\bin\System.Web.Webpages.Razor.dll
+C:\Users\Chender Marte\Desktop\IDS348-FP\bin\EntityFramework.xml
+C:\Users\Chender Marte\Desktop\IDS348-FP\bin\EntityFramework.SqlServer.xml
 C:\Users\Chender Marte\Desktop\IDS348-FP\bin\System.Web.Razor.xml
 C:\Users\Chender Marte\Desktop\IDS348-FP\bin\System.Web.Webpages.xml
 C:\Users\Chender Marte\Desktop\IDS348-FP\bin\System.Web.Webpages.Deployment.xml
@@ -176,7 +180,3 @@ C:\Users\Chender Marte\Desktop\IDS348-FP\obj\Debug\IDS348-FinalProject.csproj.Co
 C:\Users\Chender Marte\Desktop\IDS348-FP\obj\Debug\IDS348-F.A6B805B3.Up2Date
 C:\Users\Chender Marte\Desktop\IDS348-FP\obj\Debug\IDS348-FinalProject.dll
 C:\Users\Chender Marte\Desktop\IDS348-FP\obj\Debug\IDS348-FinalProject.pdb
-C:\Users\Chender Marte\Desktop\IDS348-FP\bin\EntityFramework.dll
-C:\Users\Chender Marte\Desktop\IDS348-FP\bin\EntityFramework.SqlServer.dll
-C:\Users\Chender Marte\Desktop\IDS348-FP\bin\EntityFramework.xml
-C:\Users\Chender Marte\Desktop\IDS348-FP\bin\EntityFramework.SqlServer.xml

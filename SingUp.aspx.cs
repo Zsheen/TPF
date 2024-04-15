@@ -100,7 +100,7 @@ namespace IDS348_FinalProject
 
                                 Session["UserID"] = Convert.ToString(reader["UserID"]);
 
-                                Response.Redirect("Home.aspx");
+                                Response.Redirect("Home1.aspx");
 
                                 Application.UnLock();
                             }
