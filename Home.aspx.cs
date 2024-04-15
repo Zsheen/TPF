@@ -10,6 +10,8 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Web;
+using System.Web.Http;
+using System.Web.Mvc;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -117,17 +119,79 @@ namespace IDS348_FinalProject
                     {
                         while (reader.Read())
                         {
-                            Session["URLProfilePhoto"] = $"DatosDeLaApp\\{Convert.ToString(reader["ProfilePhoto"])}";
 
-                            imgFotoInferior.ImageUrl = Convert.ToString(Session["URLProfilePhoto"]);
-
-                            userPlaceholder.InnerText = $"@{Convert.ToString(reader["UserName"])}";
-
-                            nombrePlaceholder.InnerText = Convert.ToString(reader["Names"]);
                         }
                     }
                 }
             }
         }
+
+        protected string BuscarPosts(string searchTerm)
+        {
+            // Conexión a la base de datos
+            string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True;Connect Timeout=30";
+
+            StringBuilder htmlResult = new StringBuilder();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                // Nombre del stored procedure creado para buscar posts
+                string storedProcedureName = "SearchPosts";
+
+                using (SqlCommand command = new SqlCommand(storedProcedureName, connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    // Parámetro para el término de búsqueda
+                    command.Parameters.AddWithValue("@SearchTerm", searchTerm);
+
+                    try
+                    {
+                        connection.Open();
+
+                        // Ejecutar el comando y obtener los resultados
+                        SqlDataReader reader = command.ExecuteReader();
+
+                        // Construir la cadena HTML con los resultados de la búsqueda
+                        while (reader.Read())
+                        {
+                            // Por ejemplo, asumiendo que la columna "Text" contiene el texto de cada post
+                            string postText = reader["Text"].ToString();
+                            htmlResult.Append($"<div>{postText}</div>");
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+
+                        // lblMessage.Text = "Error al buscar posts: " + ex.Message;
+                    }
+                }
+            }
+
+            return htmlResult.ToString();
+        }
+
+        /*[System.Web.Mvc.HttpPost]
+        public void SubirArchivo(HttpPostedFileBase archivo)
+        {
+            try
+            {       
+
+                    // Procesa el archivo aquí, por ejemplo, guarda el archivo en el servidor
+                    // Puedes usar archivo.CopyTo para guardar el archivo en el servidor
+                    // Aquí hay un ejemplo de cómo guardar el archivo en la carpeta 'DatosDeLaApp'
+                    var ruta = Path.Combine(Directory.GetCurrentDirectory(), "DatosDeLaApp", archivo.FileName);
+                    using (var stream = new FileStream(ruta, FileMode.Create))
+                    {
+                        archivo.SaveAs(ruta);
+                    }
+            }
+            catch (Exception)
+            {
+
+            }
+        }*/
+
     }
 }

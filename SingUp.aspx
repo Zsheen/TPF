@@ -307,7 +307,7 @@
                 <div class="telefono">
                     <label for="telefono">Telefono</label> <br />
                     <div class="input-box input-password">
-                        <asp:TextBox type="telefono" placeholder="+___ (___) ___-____" runat="server" id="txtTelefono" oninput="userInputChanged();"/>
+                        <asp:TextBox type="telefono" runat="server" id="txtTelefono" oninput="userInputChanged();"/>
                     </div>
                 </div>
                 <div class="birthday">
@@ -556,34 +556,6 @@
   </form>
     <script>
 
-        document.getElementById('txtTelefono').addEventListener('input', function () {
-            var valor = this.value.replace(/\D/g, '');
-            var mascara = '+000 (000) 000-0000';
-
-            // Aplicar la máscara
-            var valorMascarado = '';
-            var j = 0;
-            for (var i = 0; i < mascara.length; i++) {
-                if (mascara[i] === '0') {
-                    // Reemplazar '0' con el siguiente número en el valor
-                    if (valor[j]) {
-                        valorMascarado += valor[j++];
-                    } else {
-                        valorMascarado += '_'; // Si no hay más números, usar un marcador
-                    }
-                } else {
-                    // Conservar los caracteres estáticos de la máscara
-                    valorMascarado += mascara[i];
-                }
-            }
-
-            // Establecer el valor en el input
-            var posicionCursor = this.selectionStart;
-            this.value = valorMascarado;
-            // Establecer la posición del cursor
-            this.setSelectionRange(posicionCursor, posicionCursor);
-        });
-
         document.getElementById('txtUsername').addEventListener("keydown", function (event) {
 
             var char = event.key;
@@ -592,6 +564,16 @@
                 event.preventDefault();
             }
         });
+
+        document.getElementById('txtTelefono').addEventListener("keydown", function (event) {
+            var char = event.key;
+
+            if (!(/[0-9]/.test(char))) {
+                event.preventDefault();
+            }
+        });
+
+
 
         document.getElementById('txtMail').addEventListener("keydown", function (event) {
 
