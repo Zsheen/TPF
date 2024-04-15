@@ -56,6 +56,27 @@ namespace IDS348_FinalProject
                         }
                     }
                 }
+
+                using (SqlCommand command = new SqlCommand("GetPostByFollowing", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@UserID", Convert.ToString(Session["UserID"]));
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Session["URLProfilePhoto"] = $"DatosDeLaApp\\{Convert.ToString(reader["ProfilePhoto"])}";
+
+                            imgFotoInferior.ImageUrl = Convert.ToString(Session["URLProfilePhoto"]);
+
+                            userPlaceholder.InnerText = $"@{Convert.ToString(reader["UserName"])}";
+
+                            nombrePlaceholder.InnerText = Convert.ToString(reader["Names"]);
+                        }
+                    }
+                }
             }
         }
 
