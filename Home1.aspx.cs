@@ -35,7 +35,7 @@ namespace IDS348_FinalProject
                         {
                             Session["URLProfilePhoto"] = $"DatosDeLaApp\\{Convert.ToString(reader["ProfilePhoto"])}";
 
-                            imgFotoInferior.ImageUrl = $"DatosDeLaApp\\Anonimo.jpg";//imgFotoInferior.ImageUrl = Convert.ToString(Session["URLProfilePhoto"]);
+                            imgFotoInferior.ImageUrl = Convert.ToString(Session["URLProfilePhoto"]);
 
                             userPlaceholder.InnerText = $"@{Convert.ToString(reader["UserName"])}";
 
@@ -70,8 +70,8 @@ namespace IDS348_FinalProject
                                                                 </div>
                                                                 <div class='centro__col'>
                                                                     <div class='centro__row centro__row--user'>
-                                                                        <h3 class='centro__h3'>{Convert.ToString(reader["UserName"])}</h3>
-                                                                        <h4 class='centro__h4'>{Convert.ToString(reader["UserID"])}</h4>
+                                                                        <h3 class='centro__h3'>{Convert.ToString(reader["Names"])}</h3>
+                                                                        <h4 class='centro__h4'>{Convert.ToString(reader["UserName"])}</h4>
                                                                         <span class='centro__tiempo'> 15s </span>
                                                                     </div>
                                                                     <div class='centro__row'>
@@ -108,14 +108,14 @@ namespace IDS348_FinalProject
                                                                 </div>
                                                                 <div class='centro__col'>
                                                                     <div class='centro__row centro__row--user'>
-                                                                        <h3 class='centro__h3'>{Convert.ToString(reader["UserName"])}</h3>
-                                                                        <h4 class='centro__h4'>{Convert.ToString(reader["UserID"])}</h4>
+                                                                        <h3 class='centro__h3'>{Convert.ToString(reader["Names"])}</h3>
+                                                                        <h4 class='centro__h4'>{Convert.ToString(reader["UserName"])}</h4>
                                                                         <span class='centro__tiempo'> 15s </span>
                                                                     </div>
                                                                     <div class='centro__row'>
                                                                         <p class='centro__text'>{Convert.ToString(reader["Text"])}</p>
-                                                                        <video width='320' height='240' controls>
-                                                                          <source src='{Contenido}' type='video/mp4'>
+                                                                        <video class='centro__img' width='320' height='240' controls>
+                                                                          <source class='centro__img' src='{Contenido}' type='video/mp4'>
                                                                           Tu navegador no admite el elemento de video.
                                                                         </video>
                                                                     </div>

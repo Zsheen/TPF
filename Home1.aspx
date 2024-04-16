@@ -1162,6 +1162,7 @@ body {
   background-color: #1b242e;
 }
 .home .centro__user {
+  margin-top: 15px;
   width: 4em;
   height: 4em;
   border-radius: 50%;
@@ -1184,6 +1185,7 @@ body {
 .home .centro__h3 {
   font-weight: 700;
   margin: 0 0.4em 0 0;
+  margin-top: 16px;
 }
 .home .centro__h4 {
   color: #8899a6;
@@ -1364,8 +1366,7 @@ body {
                           </div>
                           <svg class="user__svg" viewBox="0 0 24 24"><g><path d="M3 12c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm9 2c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm7 0c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"></path></g></svg>
                       </div>
-                  </div>
-                  
+                  </div>                  
                   <div class="centrado">
                       <div class="columna centro">
                           <div class="centro__titular">
