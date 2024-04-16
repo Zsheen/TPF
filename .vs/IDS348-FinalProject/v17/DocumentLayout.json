@@ -3,10 +3,13 @@
   "WorkspaceRootPath": "C:\\Users\\Chender Marte\\source\\repos\\IDS348-FP\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/C__USERS_CHENDER_MARTE_SOURCE_REPOS_IDS348_FP_DATABASE1.MDF/True/SqlTable/dbo.Posts.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/C__USERS_CHENDER_MARTE_SOURCE_REPOS_IDS348_FP_DATABASE1.MDF/True/SqlTable/dbo.Users.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1C79EF68-44C3-4ACF-BF04-197ECD895517}|IDS348-FinalProject.csproj|c:\\users\\chender marte\\source\\repos\\ids348-fp\\home1.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{1C79EF68-44C3-4ACF-BF04-197ECD895517}|IDS348-FinalProject.csproj|C:\\Users\\Chender Marte\\source\\repos\\IDS348-FP\\home1.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1C79EF68-44C3-4ACF-BF04-197ECD895517}|IDS348-FinalProject.csproj|solutionrelative:home1.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -21,7 +24,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -37,7 +40,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "dbo.Users [Datos]",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/C__USERS_CHENDER_MARTE_SOURCE_REPOS_IDS348_FP_DATABASE1.MDF/True/SqlTable/dbo.Users.sql",
               "ToolTip": "dbo.Users [Datos]",
@@ -47,7 +50,17 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
+              "Title": "dbo.Posts [Datos]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/C__USERS_CHENDER_MARTE_SOURCE_REPOS_IDS348_FP_DATABASE1.MDF/True/SqlTable/dbo.Posts.sql",
+              "ToolTip": "dbo.Posts [Datos]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2024-04-16T00:44:17.546Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "Home1.aspx",
               "DocumentMoniker": "C:\\Users\\Chender Marte\\source\\repos\\IDS348-FP\\Home1.aspx",
               "RelativeDocumentMoniker": "Home1.aspx",
@@ -60,13 +73,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Home1.aspx.cs",
               "DocumentMoniker": "C:\\Users\\Chender Marte\\source\\repos\\IDS348-FP\\Home1.aspx.cs",
               "RelativeDocumentMoniker": "Home1.aspx.cs",
               "ToolTip": "C:\\Users\\Chender Marte\\source\\repos\\IDS348-FP\\Home1.aspx.cs",
               "RelativeToolTip": "Home1.aspx.cs",
-              "ViewState": "AQIAAF0AAAAAz8zMzMwmwG4AAAB+AAAA",
+              "ViewState": "AQIAADMAAAAAODMzMzMLwEIAAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-15T15:28:37.692Z",
               "EditorCaption": ""
