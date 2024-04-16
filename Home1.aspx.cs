@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity.Core.Objects;
 using System.Data.SqlClient;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web.UI.HtmlControls;
 using File = System.IO.File;
 
@@ -71,8 +72,8 @@ namespace IDS348_FinalProject
                                                                 <div class='centro__col'>
                                                                     <div class='centro__row centro__row--user'>
                                                                         <h3 class='centro__h3'>{Convert.ToString(reader["Names"])}</h3>
-                                                                        <h4 class='centro__h4'>{Convert.ToString(reader["UserName"])}</h4>
-                                                                        <span class='centro__tiempo'> 15s </span>
+                                                                        <h4 class='centro__h4'>@{Convert.ToString(reader["UserName"])}</h4>
+                                                                        <span class='centro__tiempo'> {Convertir_Fecha_a_Texto(Convert.ToDateTime(reader["PublicationDate"]))} </span>
                                                                     </div>
                                                                     <div class='centro__row'>
                                                                         <p class='centro__text'>{Convert.ToString(reader["Text"])}</p>
@@ -84,7 +85,7 @@ namespace IDS348_FinalProject
                                                                             <span class='centro__numero'> 1 </span>
                                                                         </li>
                                                                         <li class='centro__li'>
-                                                                            <svg class='centro__svg' viewBox='0 0 24 24'><g><path d='M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z'></path></g></svg>
+                                                                            <svg class='centro__svg' onclick='cambiarColorDeFondo(event);' viewBox='0 0 24 24'><g><path d='M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z'></path></g></svg>
                                                                             <span class='centro__numero'> 1 </span>
                                                                         </li>
                                                                         <li class='centro__li'>
@@ -109,8 +110,8 @@ namespace IDS348_FinalProject
                                                                 <div class='centro__col'>
                                                                     <div class='centro__row centro__row--user'>
                                                                         <h3 class='centro__h3'>{Convert.ToString(reader["Names"])}</h3>
-                                                                        <h4 class='centro__h4'>{Convert.ToString(reader["UserName"])}</h4>
-                                                                        <span class='centro__tiempo'> 15s </span>
+                                                                        <h4 class='centro__h4'>@{Convert.ToString(reader["UserName"])}</h4>
+                                                                        <span class='centro__tiempo'> {Convertir_Fecha_a_Texto(Convert.ToDateTime(reader["PublicationDate"]))} </span>
                                                                     </div>
                                                                     <div class='centro__row'>
                                                                         <p class='centro__text'>{Convert.ToString(reader["Text"])}</p>
@@ -125,7 +126,7 @@ namespace IDS348_FinalProject
                                                                             <span class='centro__numero'> 1 </span>
                                                                         </li>
                                                                         <li class='centro__li'>
-                                                                            <svg class='centro__svg' viewBox='0 0 24 24'><g><path d='M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z'></path></g></svg>
+                                                                            <svg class='centro__svg' onclick='cambiarColorDeFondo(event);' viewBox='0 0 24 24'><g><path d='M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z'></path></g></svg>
                                                                             <span class='centro__numero'> 1 </span>
                                                                         </li>
                                                                         <li class='centro__li'>
@@ -163,6 +164,106 @@ namespace IDS348_FinalProject
             }
 
             return nombreAleatorio.ToString();
+        }
+
+        public static string Convertir_Fecha_a_Texto(DateTime Fecha)
+        {
+            string Fecha_en_Texto = string.Empty;
+
+            switch (Fecha.Month)
+            {
+                case 1:
+
+                    Fecha_en_Texto += "Ene ";
+
+                    break;
+
+                case 2:
+
+                    Fecha_en_Texto += "Feb ";
+
+                    break;
+
+                case 3:
+
+                    Fecha_en_Texto += "Mar ";
+
+                    break;
+
+                case 4:
+
+                    Fecha_en_Texto += "Abr ";
+
+                    break;
+
+                case 5:
+
+                    Fecha_en_Texto += "May ";
+
+                    break;
+
+                case 6:
+
+                    Fecha_en_Texto += "Jun ";
+
+                    break;
+
+                case 7:
+
+                    Fecha_en_Texto += "Jul ";
+
+                    break;
+
+                case 8:
+
+                    Fecha_en_Texto += "Ago ";
+
+                    break;
+
+                case 9:
+
+                    Fecha_en_Texto += "Sep ";
+
+                    break;
+
+                case 10:
+
+                    Fecha_en_Texto += "Oct ";
+
+                    break;
+
+                case 11:
+
+                    Fecha_en_Texto += "Nov ";
+
+                    break;
+
+                case 12:
+
+                    Fecha_en_Texto += "Dic ";
+
+                    break;
+            }
+
+            return Fecha_en_Texto + Fecha.Day;
+        }
+
+        static async Task DarLike()
+        {
+            Console.WriteLine("Comenzando método asíncrono...");
+
+
+            Console.WriteLine("Método asíncrono completado.");
+        }
+
+        static async Task QuitarLike()
+        {
+            Console.WriteLine("Comenzando método asíncrono...");
+
+            // Simular una operación asincrónica con Task.Delay
+            await Task.Delay(2000); // Espera 2 segundos
+
+            Console.WriteLine("Método asíncrono completado.");
         }
 
         protected void btnTwittear_Click(object sender, EventArgs e)
