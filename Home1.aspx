@@ -1309,6 +1309,18 @@ body {
 .btnCargar {
     display: none;
 }
+
+#CentroDTweets, #centro_tweet, #centro__col, #centro_ul, #centro_li {
+    pointer-events: none; /* Impide que este elemento reciba eventos */
+}
+
+#CentroDTweets > *,
+#centro_tweet > *,
+#centro_col > *,
+#centro_ul > *,
+#centro_li > *{
+    pointer-events: auto; /* Permite que los elementos hijos reciban eventos */
+}
 </style>
     </head>
     <body class="home" runat="server">
@@ -1485,20 +1497,60 @@ body {
               </ContentTemplate>
           </asp:UpdatePanel>
       </form>    
+        <script src = "https://code.jquery.com/jquery-3.6.0.min.js" ></script>
         <script>
 
             function cambiarColorDeFondo(event) {
 
-                if (event.currentTarget.style.backgroundColor === "transparent") {
+                var valores = event.currentTarget.id.split("*");
 
-                    event.currentTarget.style.backgroundColor = "red";
-                }
+                    if (event.currentTarget.style.backgroundColor === "transparent") {
 
-                else {
+                        $.ajax({
+                            type: "POST",
+                            url: "Home1.aspx/DarLike",
+                            data: JSON.stringify({ UserID: valores[1], LikedEntityID: valores[0], LikedEntityType: 'Post' }),
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (response) {
+                                console.log("El método C# se ejecutó con éxito.");
+                            },
+                            error: function (error) {
 
-                    event.currentTarget.style.backgroundColor = "transparent";
-                }       
-            }
+                                console.error("Error al llamar al método C#: " + error.responseText);
+                            }
+                        });
+
+                        event.currentTarget.style.backgroundColor = "red";
+
+                        event.target.nextElementSibling.innerText = ' ' + (parseInt(event.target.nextElementSibling.innerText.trim()) + 1) + ' ';
+                    }
+
+                    else if (event.currentTarget.style.backgroundColor === "red") {
+                        $.ajax({
+                            type: "POST",
+                            url: "Home1.aspx/QuitarLike",
+                            data: JSON.stringify({ UserID: valores[1], LikedEntityID: valores[0], LikedEntityType: 'Post' }),
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (response) {
+                                console.log("El método C# se ejecutó con éxito.");
+                            },
+                            error: function (error) {
+
+                                console.error("Error al llamar al método C#: " + error.responseText);
+                            }
+                        });
+
+                        event.currentTarget.style.backgroundColor = "transparent";
+
+                        event.target.nextElementSibling.innerText = ' ' + (parseInt(event.target.nextElementSibling.innerText.trim()) - 1) + ' ';
+                    }
+            };
+
+            $(document).ready(function () {
+
+            });
 
             document.getElementById('svgUpload').addEventListener('click', function () {
 
