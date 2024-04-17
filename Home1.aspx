@@ -20,7 +20,7 @@ table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
-time, mark, audio, video, button, .btnTwittear {
+time, mark, audio, video, button, .TwittearAlgo {
   margin: 0;
   padding: 0;
   border: 0;
@@ -104,7 +104,7 @@ input,
 textarea,
 select,
 button,
-label, .btnTwittear {
+label, .TwittearAlgo {
   font-family: inherit;
   font-size: inherit;
   -webkit-hyphens: auto;
@@ -1209,7 +1209,8 @@ body {
   color: #1da1f2;
   text-decoration: underline;
 }
-.home .centro__img {
+.home .centro__img,
+.home .centro__vid{
   background-color: coral;
   border-radius: 1em;
   margin: 2em 0 0 0;
@@ -1292,8 +1293,8 @@ body {
     
 }
 
-#btnTwittear:enabled:hover,
-#mobbtnTwittear:enabled:hover
+#TwittearAlgo:enabled:hover,
+#TwittearAlgo:enabled:hover
 {
     background-color: #1A91DA;
 }
@@ -1310,7 +1311,7 @@ body {
     display: none;
 }
 
-#CentroDTweets, #centro_tweet, #centro__col, #centro_ul, #centro_li {
+#CentroDTweets, #centro_tweet, #centro__col, #centro_ul, #centro_li, #MiDivObjetivo, #pasando_up, #pasando_inf, #pasando_ul, #pasando_li {
     pointer-events: none; /* Impide que este elemento reciba eventos */
 }
 
@@ -1318,7 +1319,12 @@ body {
 #centro_tweet > *,
 #centro_col > *,
 #centro_ul > *,
-#centro_li > *{
+#centro_li > *,
+#MiDivObjetivo > *,
+#pasando_up > *,
+#pasando_inf > *,
+#pasando_ul > *,
+#pasando_li > *{
     pointer-events: auto; /* Permite que los elementos hijos reciban eventos */
 }
 </style>
@@ -1390,20 +1396,20 @@ body {
                               <svg class="centro__svg" viewBox="0 0 24 24"><g><path d="M22.772 10.506l-5.618-2.192-2.16-6.5c-.102-.307-.39-.514-.712-.514s-.61.207-.712.513l-2.16 6.5-5.62 2.192c-.287.112-.477.39-.477.7s.19.585.478.698l5.62 2.192 2.16 6.5c.102.306.39.513.712.513s.61-.207.712-.513l2.16-6.5 5.62-2.192c.287-.112.477-.39.477-.7s-.19-.585-.478-.697zm-6.49 2.32c-.208.08-.37.25-.44.46l-1.56 4.695-1.56-4.693c-.07-.21-.23-.38-.438-.462l-4.155-1.62 4.154-1.622c.208-.08.37-.25.44-.462l1.56-4.693 1.56 4.694c.07.212.23.382.438.463l4.155 1.62-4.155 1.622zM6.663 3.812h-1.88V2.05c0-.414-.337-.75-.75-.75s-.75.336-.75.75v1.762H1.5c-.414 0-.75.336-.75.75s.336.75.75.75h1.782v1.762c0 .414.336.75.75.75s.75-.336.75-.75V5.312h1.88c.415 0 .75-.336.75-.75s-.335-.75-.75-.75zm2.535 15.622h-1.1v-1.016c0-.414-.335-.75-.75-.75s-.75.336-.75.75v1.016H5.57c-.414 0-.75.336-.75.75s.336.75.75.75H6.6v1.016c0 .414.335.75.75.75s.75-.336.75-.75v-1.016h1.098c.414 0 .75-.336.75-.75s-.336-.75-.75-.75z"></path></g></svg>
                           </div>
                           <div id="MiDivObjetivo" class="centro__pasando">
-                              <div class="pasando__up">
+                              <div id="pasando_up" class="pasando__up">
                                   <div id="AquiSeCargaraLaFotoDelPost" class="divFotoPost">
                                   </div>
                                   <textarea id="textareaTwitt" runat="server" class="pasando__textarea" placeholder="¿Qué está pasando?"></textarea>
                               </div>
-                              <div class="pasando__inf">
-                                  <ul class="pasando__ul">
-                                      <li class="pasando__li">
-                                          <asp:FileUpload id="fuPost"  runat="server" style="display: none;" accept="image/*,video/*" ViewStateMode="Enabled" />
+                              <div id="pasando_inf" class="pasando__inf">
+                                  <ul id="pasando_ul" class="pasando__ul">
+                                      <li id="pasando_li" class="pasando__li">
+                                          <asp:FileUpload id="fuPost"  runat="server" style="display: none;" accept="image/*,video/*" />
                                           <svg class="pasando__icon" id="svgUpload" viewBox="0 0 24 24"><g><path id="Path_Upload" d="M19.75 2H4.25C3.01 2 2 3.01 2 4.25v15.5C2 20.99 3.01 22 4.25 22h15.5c1.24 0 2.25-1.01 2.25-2.25V4.25C22 3.01 20.99 2 19.75 2zM4.25 3.5h15.5c.413 0 .75.337.75.75v9.676l-3.858-3.858c-.14-.14-.33-.22-.53-.22h-.003c-.2 0-.393.08-.532.224l-4.317 4.384-1.813-1.806c-.14-.14-.33-.22-.53-.22-.193-.03-.395.08-.535.227L3.5 17.642V4.25c0-.413.337-.75.75-.75zm-.744 16.28l5.418-5.534 6.282 6.254H4.25c-.402 0-.727-.322-.744-.72zm16.244.72h-2.42l-5.007-4.987 3.792-3.85 4.385 4.384v3.703c0 .413-.337.75-.75.75z"></path><circle cx="8.868" cy="8.309" r="1.542"></circle></g></svg>
                                       </li>
                                   </ul>
-                                  <asp:Button CssClass="pasando__twittear" runat="server" Enabled="false" ID="btnTwittear" Text="Twittear" OnClick="btnTwittear_Click"/>
-                              </div>
+                                  <asp:Button ID="TwittearAlgo" CssClass="pasando__twittear" runat="server" Text="Twittear" Enabled="false"></asp:Button>
+                               </div>
                           </div>
                           <div id="CentroDTweets" class="centro__tweets" runat="server">
                           </div>
@@ -1500,9 +1506,27 @@ body {
         <script src = "https://code.jquery.com/jquery-3.6.0.min.js" ></script>
         <script>
 
+            document.getElementById('TwittearAlgo').addEventListener('click', function () {
+
+                $.ajax({
+                    type: "POST",
+                    url: "Home1.aspx/Twittear",
+                    data: JSON.stringify({ Archivo: document.getElementById('fuPost').files[0], Texto: document.getElementById('textareaTwitt').value}),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        console.log("El método C# se ejecutó con éxito.");
+                    },
+                    error: function (error) {
+
+                        return;
+                    }
+                });
+            });
+
             function cambiarColorDeFondo(event) {
 
-                var valores = event.currentTarget.id.split("*");
+                    var valores = event.currentTarget.id.split("*");
 
                     if (event.currentTarget.style.backgroundColor === "transparent") {
 
@@ -1517,7 +1541,7 @@ body {
                             },
                             error: function (error) {
 
-                                console.error("Error al llamar al método C#: " + error.responseText);
+                                return;
                             }
                         });
 
@@ -1538,7 +1562,7 @@ body {
                             },
                             error: function (error) {
 
-                                console.error("Error al llamar al método C#: " + error.responseText);
+                                return;
                             }
                         });
 
@@ -1643,13 +1667,44 @@ body {
             });
 
             document.getElementById('textareaTwitt').addEventListener("input", function () {
-                if (this.value.trim() !== "" || (document.getElementById('File1').files && document.getElementById('File1').files[0])) {
-                    document.getElementById('btnTwittear').disabled = false;
+
+                if (this.value.trim() !== "" || (document.getElementById('fuPost').files && document.getElementById('fuPost').files[0])) {
+                    document.getElementById('TwittearAlgo').disabled = false;
                 }
                 else {
-                    document.getElementById('btnTwittear').disabled = true;
+                    document.getElementById('TwittearAlgo').disabled = true;
                 }
             });
+
+            document.addEventListener('DOMContentLoaded', function () {
+
+                const videos = document.querySelectorAll('.centro__vid');
+
+                const observer = new IntersectionObserver(entries => {
+
+                    entries.forEach(entry =>
+                    {
+                        const video = entry.target;
+
+                        if (entry.isIntersecting)
+                        {
+                            video.currentTime = 0; video.play();
+
+                        }
+
+                        else
+                        {
+                            video.pause();
+                        }
+                    });
+                });
+
+                // Observa cada elemento de video
+                videos.forEach(video => {
+                    observer.observe(video);
+                });
+            });
+
         </script>
   </body>
 </html>

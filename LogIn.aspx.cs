@@ -59,7 +59,6 @@ namespace IDS348_FinalProject
 
                         else
                         {
-                            //Console.WriteLine("No se encontraron filas.");
                         }
                     }
                 }
