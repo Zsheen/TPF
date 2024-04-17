@@ -236,7 +236,7 @@
                     <asp:Button id="btnEntrar" Text="Entrar" runat="server" Enabled="False" OnClick="btnEntrar_Click" OnClientClick="mostrarProgreso();"/>
                 </div>
                 <footer class="singup">
-                    <a href="#">¿Olvidaste tu contraseña?</a>
+                    <a href="#" >¿Olvidaste tu contraseña?</a>
                     <span class="dot"></span>
                     <a href="#">Regístrate</a>
                 </footer>

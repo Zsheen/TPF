@@ -128,7 +128,8 @@ td {
 svg {
   width: 100%;
   display: block;
-  fill: currentColor;
+  /*fill: currentColor;*/
+  fill: red;
 }
 
 body {
@@ -530,10 +531,11 @@ body {
   background: #15202b;
 }
 .home .centrado {
-  width: calc( 100% - ((20% + 250px) + (20% + 300px)) );
+  /*width: calc( 100% - ((20% + 250px) + (20% + 300px)) );*/
+  width: calc( 100% - ((20% + 163px) + (20% + 200px)) );
   min-height: 100vh;
   position: relative;
-  left: calc( 20% + 250px );
+  left: calc( 14% + 250px );
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -560,7 +562,7 @@ body {
   border-right: 1px solid #38444d;
   position: fixed;
   top: 0px;
-  left: 20%;
+  left: 14%;
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
@@ -715,7 +717,7 @@ body {
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
   top: 0;
-  right: 20%;
+  right: 16%;
   border-left: 1px solid #38444d;
   padding: 1em;
   overflow-x: hidden;
@@ -1005,19 +1007,24 @@ body {
   font-weight: 900;
   font-size: 1.2em;
 }
+
 .home .centro__svg {
   width: 1.9em;
   height: 1.9em;
-  fill: #1da1f2;
+  fill: lightgray;
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
   padding: 0.2em;
   border-radius: 50%;
   cursor: pointer;
 }
-.home .centro__svg:hover {
-  background: #207ed4;
+
+.centro__svg {
+  fill: #8899a6;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
+
 .home .centro__pasando {
   width: 100%;
 }
@@ -1183,6 +1190,12 @@ body {
       -ms-flex-align: center;
           align-items: center;
 }
+
+            .centro__row--user {
+                position: relative;
+                right: 2%;
+            }
+
 .home .centro__h3 {
   font-weight: 700;
   margin: 0 0.4em 0 0;
@@ -1208,12 +1221,24 @@ body {
 .home .centro__text a {
   color: #1da1f2;
   text-decoration: underline;
+  position: relative;
+  right: 2%;
+  margin-bottom: 50px;
 }
+
+.centro__text {
+  position: relative;
+  right: 2%;
+  margin-bottom: 35px;
+}
+
 .home .centro__img,
 .home .centro__vid{
   background-color: coral;
   border-radius: 1em;
   margin: 2em 0 0 0;
+  position: relative;
+  right: 3%;
 }
 .home .centro__ul {
   width: 80%;
@@ -1247,11 +1272,7 @@ body {
       -ms-flex-align: center;
           align-items: center;
 }
-.home .centro__svg {
-  width: 1.5em;
-  height: 1.5em;
-  fill: #8899a6;
-}
+
 .home .centro__numero {
   color: #8899a6;
   font-size: 0.9em;
@@ -1416,7 +1437,7 @@ body {
                       </div>
                   </div>
                   
-                  <div class="columna der">
+                  <div id="columna_der" class="columna der">
                       <div class="der__search">
                           <input id="ContenedorBuscar" class="der__input" type="text" placeholder="Buscar en Twitter">
                       </div>
@@ -1528,7 +1549,7 @@ body {
 
                     var valores = event.currentTarget.id.split("*");
 
-                    if (event.currentTarget.style.backgroundColor === "transparent") {
+                if (event.currentTarget.style.fill === "lightgray") {
 
                         $.ajax({
                             type: "POST",
@@ -1545,12 +1566,12 @@ body {
                             }
                         });
 
-                        event.currentTarget.style.backgroundColor = "red";
+                        event.currentTarget.style.fill = "red";
 
                         event.target.nextElementSibling.innerText = ' ' + (parseInt(event.target.nextElementSibling.innerText.trim()) + 1) + ' ';
                     }
 
-                    else if (event.currentTarget.style.backgroundColor === "red") {
+                    else if (event.currentTarget.style.fill === "red") {
                         $.ajax({
                             type: "POST",
                             url: "Home1.aspx/QuitarLike",
@@ -1566,7 +1587,7 @@ body {
                             }
                         });
 
-                        event.currentTarget.style.backgroundColor = "transparent";
+                    event.currentTarget.style.fill = "lightgray";
 
                         event.target.nextElementSibling.innerText = ' ' + (parseInt(event.target.nextElementSibling.innerText.trim()) - 1) + ' ';
                     }
