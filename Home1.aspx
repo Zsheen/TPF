@@ -1531,17 +1531,16 @@ body {
                                           <svg class="pasando__icon" id="svgUpload" viewBox="0 0 24 24"><g><path id="Path_Upload" d="M19.75 2H4.25C3.01 2 2 3.01 2 4.25v15.5C2 20.99 3.01 22 4.25 22h15.5c1.24 0 2.25-1.01 2.25-2.25V4.25C22 3.01 20.99 2 19.75 2zM4.25 3.5h15.5c.413 0 .75.337.75.75v9.676l-3.858-3.858c-.14-.14-.33-.22-.53-.22h-.003c-.2 0-.393.08-.532.224l-4.317 4.384-1.813-1.806c-.14-.14-.33-.22-.53-.22-.193-.03-.395.08-.535.227L3.5 17.642V4.25c0-.413.337-.75.75-.75zm-.744 16.28l5.418-5.534 6.282 6.254H4.25c-.402 0-.727-.322-.744-.72zm16.244.72h-2.42l-5.007-4.987 3.792-3.85 4.385 4.384v3.703c0 .413-.337.75-.75.75z"></path><circle cx="8.868" cy="8.309" r="1.542"></circle></g></svg>
                                       </li>
                                   </ul>
-                                  <asp:Button ID="TwittearAlgo" CssClass="pasando__twittear" runat="server" Text="Twittear" Enabled="false" OnClick="TwittearAlgo_Click"></asp:Button>
+                                  <asp:Button ID="btnTwittear" CssClass="pasando__twittear" runat="server" Text="Twittear" Enabled="false"></asp:Button>
                                </div>
                           </div>
                           <div id="CentroDTweets" class="centro__tweets" runat="server">
                           </div>
                       </div>
                   </div>
-                  
                   <div id="columna_der" class="columna der">
                       <div class="der__search">
-                          <input id="ContenedorBuscar" class="der__input" type="text" placeholder="Buscar en Twitter">
+                          <input id="ContenedorBuscar" class="der__input" runat="server" type="text" placeholder="Buscar en Twitter">
                       </div>
                       <div class="der__seguir">
                           <h2 class="seguir__h2">A quién seguir</h2>
@@ -1564,25 +1563,56 @@ body {
         <script src = "https://code.jquery.com/jquery-3.6.0.min.js" ></script>
         <script>
 
-            /*document.getElementById('TwittearAlgo').addEventListener('click', function (event) {
+            document.getElementById('ContenedorBuscar').addEventListener('keydown', function (event)
+            {
+                if (event.key === 'Enter')
+                {
+                    event.preventDefault();
+
+                    $.ajax({
+                        type: "POST",
+                        url: "Home1.aspx/Search",
+                        data: JSON.stringify(event.currentTarget.value),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+
+                            console.log("Devolvio OK");
+
+                        },
+                        error: function (error) {
+
+                            return;
+                        }
+                    });
+
+                    window.location.href = "Busquedas.aspx";
+                }
+            });
+
+            document.getElementById('btnTwittear').addEventListener('click', function (event) {
 
                 event.preventDefault();
+
+                var formData = new FormData();
+                formData.append('Archivo', document.getElementById('fuPost').files[0]);
+                formData.append('Texto', document.getElementById('textareaTwitt').value);
 
                 $.ajax({
                     type: "POST",
                     url: "Home1.aspx/Twittear",
-                    data: JSON.stringify({ Archivo: document.getElementById('fuPost').files[0], Texto: document.getElementById('textareaTwitt').value}),
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
                     success: function (response) {
-                        console.log("El método C# se ejecutó con éxito.");
+                        console.log("El método de C# devolvio OK");
                     },
                     error: function (error) {
 
                         return;
                     }
                 });
-            });*/
+            });
 
             function Seguir(event) {
 
@@ -1735,9 +1765,11 @@ body {
 
             document.getElementById('svgUpload').addEventListener('click', function () {
 
+
+
                 if (document.getElementById('ArchivoDelPost') === null) {
 
-                    document.getElementById('<//%= fuPost.ClientID %>').click();
+                    document.getElementById('<%= fuPost.ClientID %>').click();
                 }
 
                 else {
@@ -1746,12 +1778,13 @@ body {
 
                     document.getElementById('AquiSeCargaraLaFotoDelPost').style.display = 'none';
 
-                    document.getElementById('<//%= fuPost.ClientID %>').click();
+                    document.getElementById('<%= fuPost.ClientID %>').click();
                 }
             });
 
             document.getElementById('fuPost').addEventListener('change', function (event) {
 
+                event.preventDefault();
 
                 if (this.files && this.files[0] && document.getElementById('ArchivoDelPost') === null) {
 
@@ -1808,10 +1841,10 @@ body {
             document.getElementById('textareaTwitt').addEventListener("input", function () {
 
                 if (this.value.trim() !== "" || (document.getElementById('fuPost').files && document.getElementById('fuPost').files[0])) {
-                    document.getElementById('TwittearAlgo').disabled = false;
+                    document.getElementById('btnTwittear').disabled = false;
                 }
                 else {
-                    document.getElementById('TwittearAlgo').disabled = true;
+                    document.getElementById('btnTwittear').disabled = true;
                 }
             });
 

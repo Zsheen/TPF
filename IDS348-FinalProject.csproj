@@ -478,10 +478,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Busquedas.aspx" />
     <Content Include="Database1.mdf" />
     <Content Include="DatosDeLaApp\Chen_ProfilePhoto.PNG" />
     <Content Include="DatosDeLaApp\twitter-logo.png" />
-    <Content Include="Editor.html" />
     <Content Include="Global.asax" />
     <Content Include="Home1.aspx" />
     <Content Include="LogIn.aspx" />
@@ -492,6 +492,13 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Busquedas.aspx.cs">
+      <DependentUpon>Busquedas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Busquedas.aspx.designer.cs">
+      <DependentUpon>Busquedas.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

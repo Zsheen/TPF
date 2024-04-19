@@ -141,13 +141,13 @@ namespace IDS348_FinalProject
         protected global::System.Web.UI.WebControls.FileUpload fuPost;
 
         /// <summary>
-        /// Control TwittearAlgo.
+        /// Control btnTwittear.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button TwittearAlgo;
+        protected global::System.Web.UI.WebControls.Button btnTwittear;
 
         /// <summary>
         /// Control CentroDTweets.
@@ -157,6 +157,15 @@ namespace IDS348_FinalProject
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl CentroDTweets;
+
+        /// <summary>
+        /// Control ContenedorBuscar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        public global::System.Web.UI.HtmlControls.HtmlInputText ContenedorBuscar;
 
         /// <summary>
         /// Control PersonasDSugerencias.

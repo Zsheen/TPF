@@ -15,6 +15,12 @@ namespace IDS348_FinalProject
 
         public static int UserID;
 
+        public static string find;
+
+        public static TextWriter textWriter;
+
+        public static HttpResponse response = new HttpResponse(textWriter);
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Convert.ToString(Session["Loged"]) != "True")
@@ -368,56 +374,15 @@ namespace IDS348_FinalProject
 
         #endregion
 
-        protected void TwittearAlgo_Click(object sender, EventArgs e)
+        [System.Web.Services.WebMethod]
+        public static void Search(string search)
         {
-            string NuevaURLParaContenido = string.Empty;
-            //string NombreParaElArchivo;
+            HttpContext.Current.Session["Search"] = search;
 
-            if (fuPost.HasFiles)
-            {
-                //string TipoDeArchivo = fuPost.FileName.Split('.')[fuPost.FileName.Split('.').Length - 1].ToLower();
-
-                //do
-                //{
-                //    NombreParaElArchivo = GenerarNombreAleatorio();
-
-                //} while (File.Exists(@"DatosDeLaApp\" + NombreParaElArchivo + "_" + UserName + "." + TipoDeArchivo));
-
-                //NuevaURLParaContenido = @"DatosDeLaApp\" + NombreParaElArchivo + "_" + UserName + "." + TipoDeArchivo;
-
-                //File.Copy(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\\Downloads\aoiMLPAxw(Wdecaq123423KliLNbcGghtXfsd)." + form1.Name, NuevaURLParaContenido);
-
-                //File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\\Downloads\aoiMLPAxw(Wdecaq123423KliLNbcGghtXfsd)." + form1.Name);
-
-                //fuPost.SaveAs(NuevaURLParaContenido);
-            }
-
-            using (SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True;Connect Timeout=30"))
-            {
-                connection.Open();
-
-                using (SqlCommand command = new SqlCommand("CreatePost", connection))
-                {
-                    command.CommandType = CommandType.StoredProcedure;
-
-                    command.Parameters.AddWithValue("@UserID", Session["UserID"]);
-
-                    command.Parameters.AddWithValue("@Text", textareaTwitt.Value);
-
-                    command.Parameters.AddWithValue("@PublicationDate", DateTime.Now);
-
-                    command.Parameters.AddWithValue("@TipoContenido", "");
-
-                    command.Parameters.AddWithValue("@URLContenido", NuevaURLParaContenido);
-
-                    command.ExecuteNonQuery();
-                }
-            }
+            //HttpContext.Current.Response.Redirect("Busquedas.aspx");
         }
 
-        [System.Web.Services.WebMethod]
-
-        public static void Twittear(dynamic Archivo, string Texto)
+        public static void Twittear(HttpPostedFileBase Archivo, string Texto)
         {
             string NuevaURLParaContenido = string.Empty;
             string NombreParaElArchivo;
@@ -430,13 +395,9 @@ namespace IDS348_FinalProject
                 {
                     NombreParaElArchivo = GenerarNombreAleatorio();
 
-                } while (File.Exists(@"DatosDeLaApp\" + NombreParaElArchivo + "_" + UserName + "." + TipoDeArchivo));
+                } while (File.Exists($@"DatosDeLaApp\\{NombreParaElArchivo}_{UserName}.{TipoDeArchivo}"));
 
-                NuevaURLParaContenido = @"DatosDeLaApp\" + NombreParaElArchivo + "_" + UserName + "." + TipoDeArchivo;
-
-                //File.Copy(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\\Downloads\aoiMLPAxw(Wdecaq123423KliLNbcGghtXfsd)." + form1.Name, NuevaURLParaContenido);
-
-                //File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\\Downloads\aoiMLPAxw(Wdecaq123423KliLNbcGghtXfsd)." + form1.Name);
+                NuevaURLParaContenido = NombreParaElArchivo + "_" + UserName + "." + TipoDeArchivo;
 
                 Archivo.SaveAs(NuevaURLParaContenido);
             }
