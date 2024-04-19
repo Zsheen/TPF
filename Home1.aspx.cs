@@ -74,6 +74,7 @@ namespace IDS348_FinalProject
                                                                         <h3 class='centro__h3'>{Convert.ToString(reader["Names"])}</h3>
                                                                         <h4 class='centro__h4'>@{Convert.ToString(reader["UserName"])}</h4>
                                                                         <span class='centro__tiempo'> {Convertir_Fecha_a_Texto(Convert.ToDateTime(reader["PublicationDate"]))} </span>
+                                                                        <input id='{Convert.ToString(reader["UserID"])}' type='button' class='seguir___p' onclick='cambiarColorDeTexto(event);' value='siguiendo' />
                                                                     </div>
                                                                     <div class='centro__row'>
                                                                         <p class='centro__text'>{Convert.ToString(reader["Text"])}</p>
@@ -89,7 +90,7 @@ namespace IDS348_FinalProject
 
                             else if (revisar == "mp4" || revisar == "avi" || revisar == "mov" || revisar == "wmv")
                             {
-                                CentroDTweets.InnerHtml += $@"<video class='centro__vid' width='320' height='240' muted controls>
+                                CentroDTweets.InnerHtml += $@"<video class='centro__vid' muted controls>
                                                                <source class='centro__vid' src='{Contenido}' type='video/mp4'>Tu navegador no admite el elemento de video.
                                                              </video>
                                                          ";
@@ -106,7 +107,7 @@ namespace IDS348_FinalProject
 
                             if (Convert.ToInt16(reader["UserLiked"]) == 1)
                             {
-                                CentroDTweets.InnerHtml += $@"<svg class='centro__svg' id='{Convert.ToString(reader["PostID"])}*{Session["UserID"]}' style='fill: red;' onclick='cambiarColorDeFondo(event);' viewBox='0 0 24 24'><g><path d='M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z'></path></g></svg>
+                                CentroDTweets.InnerHtml += $@"<svg class='centro__svg' id='{Convert.ToString(reader["PostID"])}' style='fill: red;' onclick='cambiarColorDeFondo(event);' viewBox='0 0 24 24'><g><path d='M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z'></path></g></svg>
                                                                   <span id='sDLikes' class='centro__numero'> {Convert.ToInt64(reader["LikesCount"])} </span>
                                                                   </li>
                                                                   <li class='centro__li'>
@@ -155,9 +156,9 @@ namespace IDS348_FinalProject
                         {
                             string UserName = Convert.ToString(reader["UserName"]); string Names = Convert.ToString(reader["Names"]);
 
-                            if (UserName.Length > 8) { UserName = UserName.Substring(0, 9) + "..."; }
+                            if (UserName.Length > 12) { UserName = UserName.Substring(0, 13) + "..."; }
 
-                            if (Names.Length > 8) { Names = Names.Substring(0, 9) + "..."; }
+                            if (Names.Length > 12) { Names = Names.Substring(0, 13) + "..."; }
 
                             PersonasDSugerencias.InnerHtml += $@"<li class='seguir__li'>
                                                                      <img class='seguir__user' src='DatosDeLaApp\\{Convert.ToString(reader["ProfilePhoto"])}' alt='User'>
@@ -415,6 +416,7 @@ namespace IDS348_FinalProject
         }
 
         [System.Web.Services.WebMethod]
+
         public static void Twittear(dynamic Archivo, string Texto)
         {
             string NuevaURLParaContenido = string.Empty;

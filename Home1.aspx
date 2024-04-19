@@ -274,8 +274,8 @@ body {
   border-bottom: 2px solid #8899a6;
   outline: none;
   color: white;
-  -webkit-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+  -webkit-transition: all 0.8s ease;
+  transition: all 0.8s ease;
   font-size: 1.2em;
   font-weight: 600;
 }
@@ -304,8 +304,8 @@ body {
   border: 1px solid #1da1f2;
   font-weight: 700;
   cursor: pointer;
-  -webkit-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+  -webkit-transition: all 0.8s ease;
+  transition: all 0.8s ease;
 }
 
 .index .form__submit:hover {
@@ -356,8 +356,8 @@ body {
   font-size: 0.8em;
   font-weight: bold;
   border: 1px solid transparent;
-  -webkit-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+  -webkit-transition: all 0.8s ease;
+  transition: all 0.8s ease;
 }
 
 .index .boton-registrate {
@@ -532,7 +532,6 @@ body {
 }
 
 .home .centrado {
-  /*width: calc( 100% - ((20% + 250px) + (20% + 300px)) );*/
   width: calc( 100% - ((20% + 163px) + (20% + 200px)) );
   min-height: 100vh;
   position: relative;
@@ -550,8 +549,8 @@ body {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
-  -webkit-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+  -webkit-transition: all 0.8s ease;
+  transition: all 0.8s ease;
 }
 
 .home .columna {
@@ -566,8 +565,8 @@ body {
   position: fixed;
   top: 0px;
   left: 14%;
-  -webkit-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+  -webkit-transition: all 0.8s ease;
+  transition: all 0.8s ease;
 }
 
 .home .izq__h1 {
@@ -610,8 +609,8 @@ body {
 .home .izq__li a {
   padding: 0.5em 1em;
   border-radius: 2em;
-  -webkit-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+  -webkit-transition: all 0.8s ease;
+  transition: all 0.8s ease;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -641,8 +640,8 @@ body {
   height: 1.5em;
   fill: white;
   margin: 0 0.5em 0 0;
-  -webkit-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+  -webkit-transition: all 0.8s ease;
+  transition: all 0.8s ease;
 }
 
 .home .boton-twittear {
@@ -698,8 +697,8 @@ body {
   bottom: 1em;
   cursor: pointer;
   color: white;
-  -webkit-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+  -webkit-transition: all 0.8s ease;
+  transition: all 0.8s ease;
 }
 
 .home .izq__user:hover {
@@ -733,13 +732,13 @@ body {
 }
 
 .home .der {
-  width: 300px;
+  width: 360px;
   height: 100vh;
   position: fixed;
-  -webkit-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+  -webkit-transition: all 0.8s ease;
+  transition: all 0.8s ease;
   top: 0;
-  right: 16%;
+  right: 12.8%;
   border-left: 1px solid #38444d;
   padding: 1em;
   overflow-x: hidden;
@@ -829,8 +828,8 @@ body {
 }
 
 .home .pasando__a {
-  -webkit-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+  -webkit-transition: all 0.8s ease;
+  transition: all 0.8s ease;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -939,8 +938,8 @@ body {
           align-items: center;
   color: #1da1f2;
   font-size: 0.9em;
-  -webkit-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+  -webkit-transition: all 0.8s ease;
+  transition: all 0.8s ease;
 }
 
 .home .der__mostrar:hover {
@@ -956,10 +955,7 @@ body {
 }
 
 .home .seguir__li {
-  -webkit-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-  display: -webkit-box;
-  display: -ms-flexbox;
+  transition: all 0.8s ease;
   display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
@@ -986,20 +982,27 @@ body {
 
 .home .seguir__text {
   font-size: 0.9em;
+  position: relative;
+  right: 20px;
+  width: 85px;
+  max-width: 85px;
+  min-width: 85px;
 }
 
 .home .seguir__h4 {
   font-size: 1.1em;
   font-weight: 900;
   position: relative;
-  left: 4%;
+  /*right: 32%;*/
+  text-align: left;
 }
 
 .home .seguir__p {
   font-size: 0.9em;
   color: #8899a6;
   position: relative;
-  left: 4%;
+  /*right: 32%;*/
+  text-align: left;
 }
 
 .home .seguir__a {
@@ -1015,9 +1018,6 @@ body {
 }
 
 .seguir___a {
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
   padding: 0.4em 0.8em;
   border-radius: 1.2em;
   border: 1px solid #1da1f2;
@@ -1025,11 +1025,27 @@ body {
   font-size: 0.9em;
   color: #1da1f2;
   background-color: #ffffff;
+  transition: all 0.7s ease;
+  width: 102px;
 }
 
 .seguir___a:hover {
 
   background-color: #e6e6e6;
+  transition: all 0.7s ease;
+}
+
+.seguir___p {
+  padding: 0.4em 0.8em;
+  border: 0;
+  font-weight: 900;
+  font-size: 0.9em;
+  color: #1da1f2;
+  background-color: transparent;
+  transition: all 0.7s ease;
+  position: relative;
+  left: 2%;
+  top: 7px;
 }
 
 .siguiendo___a {
@@ -1107,8 +1123,8 @@ body {
   width: 1.9em;
   height: 1.9em;
   fill: lightgray;
-  -webkit-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+  -webkit-transition: all 0.8s ease;
+  transition: all 0.8s ease;
   padding: 0.2em;
   border-radius: 50%;
   cursor: pointer;
@@ -1116,8 +1132,8 @@ body {
 
 .centro__svg {
   fill: #8899a6;
-  -webkit-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+  -webkit-transition: all 0.8s ease;
+  transition: all 0.8s ease;
 }
 
 .home .centro__pasando {
@@ -1231,8 +1247,8 @@ body {
   fill: #1da1f2;
   margin: 0 1em 0 0;
   padding: 0.5em;
-  -webkit-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+  -webkit-transition: all 0.8s ease;
+  transition: all 0.8s ease;
   cursor: pointer;
   border-radius: 50%;
 }
@@ -1358,6 +1374,7 @@ body {
   margin: 2em 0 0 0;
   position: relative;
   right: 3%;
+  max-height: 835px;
 }
 
 .home .centro__ul {
@@ -1399,25 +1416,6 @@ body {
   font-size: 0.9em;
 }
 
-@media screen and (max-width: 1600px) {
-  
-  .home .centrado {
-    background: transparent;
-    width: calc( 100% - ((5% + 250px) + (5% + 300px)) );
-    left: calc( 5% + 250px );
-  }
-
-  .home .izq {
-    width: 250px;
-    left: 5%;
-  }
-
-  .home .der {
-    width: 300px;
-    right: 5%;
-  }
-}
-
 #seguir1:hover, #mobseguir1:hover, #seguir2:hover, #mobseguir2:hover, #seguir3:hover, #mobseguir3:hover, #seguir4:hover, #mobseguir4:hover, #seguir5:hover, #mobseguir5:hover, #seguir6:hover, #mobseguir6:hover, #seguir7:hover, #mobseguir7:hover, #seguir8:hover, #mobseguir8:hover{
     background-color: #1A91DA;
     
@@ -1429,10 +1427,9 @@ body {
 }
 
 .divFotoPost {
-    /*border: 2px solid #1da1f2;*/
     display: none;
-    border-width: 10px; /* Ancho del borde */
-    border-style: solid; /* Estilo del borde */
+    border-width: 10px;
+    border-style: solid;
     border-image: linear-gradient(to right, #1da1f2, #1da1f2, #1da1f2, #1da1f2, #1da1f2, #1da1f2, #1da1f2);
 }
 
@@ -1441,11 +1438,11 @@ body {
 }
 
 #CentroDTweets, #centro_tweet, #centro__col, #centro_ul, #centro_li, #MiDivObjetivo, #pasando_up, #pasando_inf, #pasando_ul, #pasando_li {
-    pointer-events: none; /* Impide que este elemento reciba eventos */
+    pointer-events: none;
 }
 
 #CentroDTweets > *, #centro_tweet > *, #centro_col > *, #centro_ul > *, #centro_li > *, #MiDivObjetivo > *, #pasando_up > *, #pasando_inf > *, #pasando_ul > *, #pasando_li > *{
-    pointer-events: auto; /* Permite que los elementos hijos reciban eventos */
+    pointer-events: auto;
 }
 
 #svgHome
@@ -1646,6 +1643,46 @@ body {
                 }
             };
 
+            function cambiarColorDeTexto(event) {
+
+                if (event.currentTarget.value === "siguiendo") {
+
+                    $.ajax({
+                        type: "POST",
+                        url: "Home1.aspx/QuitarFollow",
+                        data: JSON.stringify({ SugerenceID: event.currentTarget.id }),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                        },
+                        error: function (error) {
+
+                            return;
+                        }
+                    });
+
+                    event.currentTarget.style.color = "#ffffff"; event.currentTarget.value = "seguir";
+                }
+
+                else if (event.currentTarget.value === "seguir") {
+                    $.ajax({
+                        type: "POST",
+                        url: "Home1.aspx/DarFollow",
+                        data: JSON.stringify({ SugerenceID: event.currentTarget.id }),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                        },
+                        error: function (error) {
+
+                            return;
+                        }
+                    });
+
+                    event.currentTarget.style.color = "#1da1f2"; event.currentTarget.value = "siguiendo";
+                }
+            };
+
             function cambiarColorDeFondo(event) {
 
                 if (event.currentTarget.style.fill === "lightgray") {
@@ -1700,7 +1737,7 @@ body {
 
                 if (document.getElementById('ArchivoDelPost') === null) {
 
-                    document.getElementById('<%= fuPost.ClientID %>').click();
+                    document.getElementById('<//%= fuPost.ClientID %>').click();
                 }
 
                 else {
@@ -1709,7 +1746,7 @@ body {
 
                     document.getElementById('AquiSeCargaraLaFotoDelPost').style.display = 'none';
 
-                    document.getElementById('<%= fuPost.ClientID %>').click();
+                    document.getElementById('<//%= fuPost.ClientID %>').click();
                 }
             });
 
