@@ -8,19 +8,7 @@
         <title>Twitter - Home</title>
         <style>
         @charset "UTF-8";
-html, body, div, script, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video, button, .TwittearAlgo {
+html, body, div, script, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video, button, .TwittearAlgo {
   margin: 0;
   padding: 0;
   border: 0;
@@ -29,11 +17,7 @@ time, mark, audio, video, button, .TwittearAlgo {
   vertical-align: baseline;
 }
 
-img,
-picture,
-video,
-iframe,
-figure {
+img, picture, video, iframe, figure {
   max-width: 100%;
   width: 100%;
   display: block;
@@ -59,21 +43,7 @@ html {
   scroll-behavior: smooth;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-span,
-a,
-strong,
-blockquote,
-i,
-b,
-u,
-em {
+h1, h2, h3, h4, h5, h6, p, span, a, strong, blockquote, i, b, u, em {
   font-size: 1em;
   font-weight: inherit;
   font-style: inherit;
@@ -81,10 +51,7 @@ em {
   color: inherit;
 }
 
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
+blockquote:before, blockquote:after, q:before, q:after {
   content: "";
   content: none;
 }
@@ -99,12 +66,7 @@ q:after {
   color: var(--blanco);
 }
 
-form,
-input,
-textarea,
-select,
-button,
-label, .TwittearAlgo {
+form, input, textarea, select, button, label, .TwittearAlgo {
   font-family: inherit;
   font-size: inherit;
   -webkit-hyphens: auto;
@@ -118,9 +80,7 @@ label, .TwittearAlgo {
           appearance: none;
 }
 
-table,
-tr,
-td {
+table, tr, td {
   border-collapse: collapse;
   border-spacing: 0;
 }
@@ -128,8 +88,6 @@ td {
 svg {
   width: 100%;
   display: block;
-  /*fill: currentColor;*/
-  fill: red;
 }
 
 body {
@@ -181,6 +139,7 @@ body {
       -ms-flex-align: start;
           align-items: flex-start;
 }
+
 .index .der {
   width: 50%;
   height: calc( 100vh - 50px );
@@ -201,12 +160,14 @@ body {
       -ms-flex-align: center;
           align-items: center;
 }
+
 .index .der__ul {
   width: 100%;
   max-width: 310px;
   position: relative;
   z-index: 2;
 }
+
 .index .der__li {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -224,11 +185,13 @@ body {
   margin: 0 0 1.7em;
   font-weight: bold;
 }
+
 .index .der__li svg {
   width: 1.55em;
   margin: 0 1em 0 0;
   fill: white;
 }
+
 .index .der__fondo {
   width: 200%;
   height: 200%;
@@ -240,6 +203,7 @@ body {
   -webkit-transform: scale(0.85);
           transform: scale(0.85);
 }
+
 .index .izq {
   width: 50%;
   height: calc( 100vh - 50px );
@@ -257,6 +221,7 @@ body {
       -ms-flex-align: center;
           align-items: center;
 }
+
 .index .izq__form {
   width: 100%;
   max-width: 600px;
@@ -278,6 +243,7 @@ body {
   font-size: 0.8em;
   color: #8899a6;
 }
+
 .index .form__input {
   width: calc( 100% / 3 - 1em);
   background: rgba(255, 255, 255, 0.036);
@@ -298,9 +264,11 @@ body {
       -ms-flex-align: start;
           align-items: flex-start;
 }
+
 .index .form__input label {
   padding: 0 0.3em;
 }
+
 .index .form__input input {
   width: 100%;
   border-bottom: 2px solid #8899a6;
@@ -311,12 +279,15 @@ body {
   font-size: 1.2em;
   font-weight: 600;
 }
+
 .index .form__input input:focus {
   border-color: #1da1f2;
 }
+
 .index .form__input input:focus + label {
   color: #1da1f2;
 }
+
 .index .form__input a {
   position: absolute;
   color: #1da1f2;
@@ -324,6 +295,7 @@ body {
   padding: 0 0 0 0.2em;
   bottom: -2em;
 }
+
 .index .form__submit {
   margin: 0.6em 0 0;
   padding: 0.5em 1.3em;
@@ -335,28 +307,34 @@ body {
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
+
 .index .form__submit:hover {
   background: rgba(29, 160, 242, 0.194);
 }
+
 .index .izq__centrado {
   width: 100%;
   max-width: 320px;
   margin: 24vh 0 0;
 }
+
 .index .izq__logo {
   width: 2.1em;
   fill: white;
 }
+
 .index .izq__h2 {
   font-size: 1.5em;
   font-weight: 800;
   line-height: 1.3em;
   margin: 0.3em 0 2em;
 }
+
 .index .izq__h3 {
   font-size: 0.8em;
   font-weight: bold;
 }
+
 .index .izq__button {
   width: 100%;
   margin: 0.35em 0;
@@ -381,19 +359,24 @@ body {
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
+
 .index .boton-registrate {
   background: #1da1f2;
 }
+
 .index .boton-registrate:hover {
   background: #1b8ed5;
 }
+
 .index .boton-iniciar {
   border-color: #1da1f2;
   color: #1da1f2;
 }
+
 .index .boton-iniciar:hover {
   background: rgba(29, 160, 242, 0.194);
 }
+
 .index .footer {
   width: 100%;
   min-height: 50px;
@@ -414,6 +397,7 @@ body {
       -ms-flex-align: center;
           align-items: center;
 }
+
 .index .footer__ul {
   width: 95%;
   margin: auto;
@@ -431,16 +415,20 @@ body {
       -ms-flex-align: center;
           align-items: center;
 }
+
 .index .footer__li {
   margin: 0 1em 0.5em;
   color: #8899a6;
 }
+
 .index .footer__li a {
   font-weight: 500;
 }
+
 .index .footer__li a:hover {
   text-decoration: underline;
 }
+
 .index .footer__buttons {
   display: none;
 }
@@ -450,7 +438,9 @@ body {
     display: none;
   }
 }
+
 @media screen and (max-width: 800px) {
+  
   .index {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -458,6 +448,7 @@ body {
             flex-direction: column;
     font-size: 18px;
   }
+
   .index .der, .index .izq {
     width: 100%;
     min-height: 50vh;
@@ -469,19 +460,23 @@ body {
         -ms-flex-align: center;
             align-items: center;
   }
+
   .index .der {
     -webkit-box-ordinal-group: 3;
         -ms-flex-order: 2;
             order: 2;
   }
+
   .index .izq {
     -webkit-box-ordinal-group: 2;
         -ms-flex-order: 1;
             order: 1;
   }
+
   .index .izq__centrado {
     margin: 0;
   }
+
   .index .footer {
     -webkit-box-ordinal-group: 4;
         -ms-flex-order: 3;
@@ -492,6 +487,7 @@ body {
             flex-direction: column;
     padding: 2em 0;
   }
+
   .index .footer__buttons {
     width: 100%;
     display: -webkit-box;
@@ -510,6 +506,7 @@ body {
         -ms-flex-align: center;
             align-items: center;
   }
+
   .index .footer__button {
     margin: 0 0.8em;
     padding: 0.5em 2em;
@@ -517,19 +514,23 @@ body {
     font-size: 1.2em;
     font-weight: 900;
   }
+
   .index .boton-iniciar {
     border: 1px solid #1da1f2;
   }
 }
+
 @media screen and (max-width: 320px) {
   .index .der, .index .izq {
     padding: 2em;
   }
 }
+
 .home {
   min-height: 200vh;
   background: #15202b;
 }
+
 .home .centrado {
   /*width: calc( 100% - ((20% + 250px) + (20% + 300px)) );*/
   width: calc( 100% - ((20% + 163px) + (20% + 200px)) );
@@ -552,10 +553,12 @@ body {
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
+
 .home .columna {
   width: 100%;
   min-height: 100vh;
 }
+
 .home .izq {
   width: 250px;
   padding: 1em 2em 0 0;
@@ -566,14 +569,17 @@ body {
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
+
 .home .izq__h1 {
   margin: 1em 1em 1em 1em;
 }
+
 .home .izq__svg {
   width: 1.9em;
   height: 1.9em;
   fill: white;
 }
+
 .home .izq__ul {
   width: 100%;
   display: -webkit-box;
@@ -590,6 +596,7 @@ body {
       -ms-flex-align: start;
           align-items: flex-start;
 }
+
 .home .izq__li {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
@@ -599,6 +606,7 @@ body {
   font-weight: 900;
   color: white;
 }
+
 .home .izq__li a {
   padding: 0.5em 1em;
   border-radius: 2em;
@@ -618,13 +626,16 @@ body {
       -ms-flex-align: center;
           align-items: center;
 }
+
 .home .izq__li a:hover, .home .izq__li a.active {
   color: #1da1f2;
   background: rgba(29, 160, 242, 0.194);
 }
+
 .home .izq__li a:hover svg, .home .izq__li a.active svg {
   fill: #1da1f2;
 }
+
 .home .izq__li svg {
   width: 1.5em;
   height: 1.5em;
@@ -633,10 +644,12 @@ body {
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
+
 .home .boton-twittear {
   width: 100%;
   margin: 2em 0 0;
 }
+
 .home .boton-twittear a {
   width: 100%;
   background: #1da1f2;
@@ -658,10 +671,12 @@ body {
   font-size: 0.8em;
   font-weight: 900;
 }
+
 .home .boton-twittear a:hover {
   color: white;
   background: #207ed4;
 }
+
 .home .izq__user {
   width: 100%;
   padding: 0.4em 1em 0.4em 0.4em;
@@ -686,30 +701,37 @@ body {
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
+
 .home .izq__user:hover {
   background: #2c333e;
 }
+
 .home .user__img {
   width: 3em;
   height: 3em;
   border-radius: 50%;
   margin: 0 0.7em 0 0;
 }
+
 .home .user__text {
   width: 80%;
 }
+
 .home .user__h4 {
   font-weight: 900;
 }
+
 .home .user__p {
   font-size: 0.8em;
   color: #8899a6;
 }
+
 .home .user__svg {
   width: 1.7em;
   height: 1.7em;
   fill: white;
 }
+
 .home .der {
   width: 300px;
   height: 100vh;
@@ -722,19 +744,24 @@ body {
   padding: 1em;
   overflow-x: hidden;
 }
+
 .home .der::-webkit-scrollbar {
   width: 10px;
 }
+
 .home .der::-webkit-scrollbar-track {
   background: #2c333e;
 }
+
 .home .der::-webkit-scrollbar-thumb {
   background: #1da1f2;
   border-radius: 1em;
 }
+
 .home .der::-webkit-scrollbar-thumb:hover {
   background: #71c9f8;
 }
+
 .home .der__search {
   width: 100%;
   position: relative;
@@ -763,6 +790,7 @@ body {
       -ms-flex-align: center;
           align-items: center;
 }
+
 .home .der__input {
   width: 79%;
   height: 50px;
@@ -774,10 +802,12 @@ body {
   font-size: 0.9em;
   color: white;
 }
+
 .home .der__input:focus {
   border-color: #1da1f2;
   color: white;
 }
+
 .home .der__pasando {
   width: 100%;
   min-height: 400px;
@@ -785,6 +815,7 @@ body {
   border-radius: 1em;
   margin: 0.7em 0;
 }
+
 .home .pasando__h2 {
   width: 100%;
   padding: 0.8em 0 0.8em 0.5em;
@@ -792,9 +823,11 @@ body {
   font-size: 1.2em;
   font-weight: 900;
 }
+
 .home .pasando__ul {
   width: 100%;
 }
+
 .home .pasando__a {
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
@@ -815,15 +848,18 @@ body {
   border-bottom: 1px solid #38444d;
   padding: 0.7em;
 }
+
 .home .pasando__a > h3 {
   color: white;
   font-weight: 900;
   font-size: 0.9em;
 }
+
 .home .pasando__a > p {
   color: #8899a6;
   font-size: 0.85em;
 }
+
 .home .pasando__a .user {
   width: 100%;
   display: -webkit-box;
@@ -840,41 +876,50 @@ body {
       -ms-flex-align: center;
           align-items: center;
 }
+
 .home .pasando__a .user__img {
   width: 1.2em;
   height: 1.2em;
   border-radius: 50%;
   margin: 0 0.2em 0 0;
 }
+
 .home .pasando__a .user__p {
   color: white;
   font-size: 0.8em;
   font-weight: 900;
   margin: 0 0.4em 0 0;
 }
+
 .home .pasando__a .user__p::before {
   content: "@";
 }
+
 .home .pasando__a:hover {
   background: #2c333e;
 }
+
 .home .pasando__claim {
   color: #8899a6;
   font-size: 0.8em;
 }
+
 .home .pasando__tendencias {
   color: #8899a6;
   font-size: 0.8em;
 }
+
 .home .pasando__tendencias span {
   color: #1da1f2;
 }
+
 .home .der__seguir {
   width: 100%;
   background: #192734;
   border-radius: 1em;
   margin: 0.7em 0;
 }
+
 .home .der__mostrar {
   width: 100%;
   padding: 0.5em 1em;
@@ -897,9 +942,11 @@ body {
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
+
 .home .der__mostrar:hover {
   background: #38444d;
 }
+
 .home .seguir__h2 {
   width: 100%;
   padding: 0.8em 0 0.8em 0.5em;
@@ -907,6 +954,7 @@ body {
   font-size: 1.2em;
   font-weight: 900;
 }
+
 .home .seguir__li {
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
@@ -928,23 +976,32 @@ body {
   padding: 0.7em;
   color: white;
 }
+
 .home .seguir__user {
   width: 3.4em;
   height: 3.4em;
   background: red;
   border-radius: 50%;
 }
+
 .home .seguir__text {
   font-size: 0.9em;
 }
+
 .home .seguir__h4 {
   font-size: 1.1em;
   font-weight: 900;
+  position: relative;
+  left: 4%;
 }
+
 .home .seguir__p {
   font-size: 0.9em;
   color: #8899a6;
+  position: relative;
+  left: 4%;
 }
+
 .home .seguir__a {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
@@ -956,9 +1013,43 @@ body {
   font-size: 0.9em;
   color: #1da1f2;
 }
-.home .seguir__a:hover {
-  background: #1b242e;
+
+.seguir___a {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 0.4em 0.8em;
+  border-radius: 1.2em;
+  border: 1px solid #1da1f2;
+  font-weight: 900;
+  font-size: 0.9em;
+  color: #1da1f2;
+  background-color: #ffffff;
 }
+
+.seguir___a:hover {
+
+  background-color: #e6e6e6;
+}
+
+.siguiendo___a {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 0.4em 0.8em;
+  border-radius: 1.2em;
+  border: 1px solid #ffffff;
+  font-weight: 900;
+  font-size: 0.9em;
+  color: #ffffff;
+  background-color: #1da1f2;
+}
+
+.siguiendo___a:hover {
+
+  background-color: #1A91DA;
+}
+
 .home .der__ul {
   width: 100%;
   font-size: 0.7em;
@@ -977,12 +1068,15 @@ body {
       -ms-flex-align: start;
           align-items: flex-start;
 }
+
 .home .der__li {
   margin: 0 1em;
 }
+
 .home .der__li a:hover {
   text-decoration: underline;
 }
+
 .home .centro__titular {
   width: 100%;
   display: -webkit-box;
@@ -1001,6 +1095,7 @@ body {
   padding: 1em 1.1em;
   border-bottom: 1px solid #38444d;
 }
+
 .home .centro__h2 {
   color: white;
   text-align: left;
@@ -1028,6 +1123,7 @@ body {
 .home .centro__pasando {
   width: 100%;
 }
+
 .home .centro__pasando .pasando__up {
   width: 100%;
   padding: 1em;
@@ -1047,12 +1143,14 @@ body {
           flex-direction: column;
           align-items: center;
 }
+
 .home .centro__pasando .pasando__img {
   width: 3.7em;
   height: 3.7em;
   margin: 0 1em 0 0;
   border-radius: 50%;
 }
+
 .home .centro__pasando .pasando__textarea {
   width: 90%;
   resize: none;
@@ -1064,24 +1162,31 @@ body {
   border-radius: 1em;
   padding: 1em;
 }
+
 .home .centro__pasando .pasando__textarea:focus {
   border-color: #1da1f2;
 }
+
 .home .centro__pasando .pasando__textarea::-webkit-input-placeholder {
   color: #8899a6;
 }
+
 .home .centro__pasando .pasando__textarea::-moz-placeholder {
   color: #8899a6;
 }
+
 .home .centro__pasando .pasando__textarea:-ms-input-placeholder {
   color: #8899a6;
 }
+
 .home .centro__pasando .pasando__textarea:-ms-input-placeholder {
   color: #8899a6;
 }
+
 .home .centro__pasando .pasando__textarea::placeholder {
   color: #8899a6;
 }
+
 .home .centro__pasando .pasando__inf {
   width: calc( 100% - 5em );
   display: -webkit-box;
@@ -1101,6 +1206,7 @@ body {
   border-bottom: 1px solid #38444d;
   margin: 0 0 0 5em;
 }
+
 .home .centro__pasando .pasando__ul {
   width: 100%;
   display: -webkit-box;
@@ -1118,6 +1224,7 @@ body {
           align-items: center;
   padding: 1em 1.5em 1em 0;
 }
+
 .home .centro__pasando .pasando__icon {
   width: 2.5em;
   height: 2.5em;
@@ -1129,9 +1236,11 @@ body {
   cursor: pointer;
   border-radius: 50%;
 }
+
 .home .centro__pasando .pasando__icon:hover {
   background-color: #2c333e;
 }
+
 .home .centro__pasando .pasando__twittear {
   white-space: nowrap;
   display: -webkit-inline-box;
@@ -1148,14 +1257,17 @@ body {
   outline: none;
   cursor: pointer;
 }
+
 .home .centro__pasando .pasando__twittear:disabled {
   opacity: 0.5;
 }
+
 .home .centro__tweets {
   color: white;
   padding: 1em;
   border-top: 1px solid #38444d;
 }
+
 .home .centro__tweet {
   width: 100%;
   border-bottom: 1px solid #38444d;
@@ -1166,15 +1278,18 @@ body {
   gap: 0.2em;
   cursor: pointer;
 }
+
 .home .centro__tweet:hover {
   background-color: #1b242e;
 }
+
 .home .centro__user {
   margin-top: 15px;
   width: 4em;
   height: 4em;
   border-radius: 50%;
 }
+
 .home .centro__row--user {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1191,7 +1306,7 @@ body {
           align-items: center;
 }
 
-            .centro__row--user {
+.centro__row--user {
                 position: relative;
                 right: 2%;
             }
@@ -1201,6 +1316,7 @@ body {
   margin: 0 0.4em 0 0;
   margin-top: 18px;
 }
+
 .home .centro__h4 {
   color: #8899a6;
   font-size: 0.8em;
@@ -1208,16 +1324,19 @@ body {
   margin-top: 16px;
   margin-left: 4px;
 }
+
 .home .centro__tiempo {
   color: #8899a6;
   font-size: 0.8em;
   margin-top: 16px;
   margin-left: 3px;
 }
+
 .home .centro__tiempo::before {
   content: "·";
   margin: 0 0.3em 0 0;
 }
+
 .home .centro__text a {
   color: #1da1f2;
   text-decoration: underline;
@@ -1240,6 +1359,7 @@ body {
   position: relative;
   right: 3%;
 }
+
 .home .centro__ul {
   width: 80%;
   padding: 1em 0 0;
@@ -1257,6 +1377,7 @@ body {
       -ms-flex-align: center;
           align-items: center;
 }
+
 .home .centro__li {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1279,43 +1400,30 @@ body {
 }
 
 @media screen and (max-width: 1600px) {
+  
   .home .centrado {
     background: transparent;
     width: calc( 100% - ((5% + 250px) + (5% + 300px)) );
     left: calc( 5% + 250px );
   }
+
   .home .izq {
     width: 250px;
     left: 5%;
   }
+
   .home .der {
     width: 300px;
     right: 5%;
   }
 }
 
-#seguir1:hover,
-#mobseguir1:hover,
-#seguir2:hover,
-#mobseguir2:hover,
-#seguir3:hover,
-#mobseguir3:hover,
-#seguir4:hover,
-#mobseguir4:hover,
-#seguir5:hover,
-#mobseguir5:hover,
-#seguir6:hover,
-#mobseguir6:hover,
-#seguir7:hover,
-#mobseguir7:hover,
-#seguir8:hover,
-#mobseguir8:hover{
+#seguir1:hover, #mobseguir1:hover, #seguir2:hover, #mobseguir2:hover, #seguir3:hover, #mobseguir3:hover, #seguir4:hover, #mobseguir4:hover, #seguir5:hover, #mobseguir5:hover, #seguir6:hover, #mobseguir6:hover, #seguir7:hover, #mobseguir7:hover, #seguir8:hover, #mobseguir8:hover{
     background-color: #1A91DA;
     
 }
 
-#TwittearAlgo:enabled:hover,
-#TwittearAlgo:enabled:hover
+#TwittearAlgo:enabled:hover, #TwittearAlgo:enabled:hover
 {
     background-color: #1A91DA;
 }
@@ -1336,66 +1444,63 @@ body {
     pointer-events: none; /* Impide que este elemento reciba eventos */
 }
 
-#CentroDTweets > *,
-#centro_tweet > *,
-#centro_col > *,
-#centro_ul > *,
-#centro_li > *,
-#MiDivObjetivo > *,
-#pasando_up > *,
-#pasando_inf > *,
-#pasando_ul > *,
-#pasando_li > *{
+#CentroDTweets > *, #centro_tweet > *, #centro_col > *, #centro_ul > *, #centro_li > *, #MiDivObjetivo > *, #pasando_up > *, #pasando_inf > *, #pasando_ul > *, #pasando_li > *{
     pointer-events: auto; /* Permite que los elementos hijos reciban eventos */
 }
+
+#svgHome
+{
+    width: 30%;
+    display: block;
+    height: 50%;
+}
+
 </style>
     </head>
     <body class="home" runat="server">
       <form id="form1" runat="server">
           <asp:ScriptManager ID="ScriptManager1" runat="server" AllowCustomErrorsRedirect="False" ViewStateMode="Enabled"></asp:ScriptManager>
           <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional" ViewStateMode="Enabled">
-              <ContentTemplate>
+              <ContentTemplate> 
                   <div class="columna izq">
                       <h1 class="izq__h1">
                           <a class="izq__a  " href="#" title="Twitter">
-                              <svg class="izq__svg" viewBox="0 0 24 24">
-                                  <g><path d="M23.643 4.937c-.835.37-1.732.62-2.675.733.962-.576 1.7-1.49 2.048-2.578-.9.534-1.897.922-2.958 1.13-.85-.904-2.06-1.47-3.4-1.47-2.572 0-4.658 2.086-4.658 4.66 0 .364.042.718.12 1.06-3.873-.195-7.304-2.05-9.602-4.868-.4.69-.63 1.49-.63 2.342 0 1.616.823 3.043 2.072 3.878-.764-.025-1.482-.234-2.11-.583v.06c0 2.257 1.605 4.14 3.737 4.568-.392.106-.803.162-1.227.162-.3 0-.593-.028-.877-.082.593 1.85 2.313 3.198 4.352 3.234-1.595 1.25-3.604 1.995-5.786 1.995-.376 0-.747-.022-1.112-.065 2.062 1.323 4.51 2.093 7.14 2.093 8.57 0 13.255-7.098 13.255-13.254 0-.2-.005-.402-.014-.602.91-.658 1.7-1.477 2.323-2.41z"></path></g>
-                              </svg>
+                              <svg viewBox="0 0 128 128" style="width: 34%;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--noto" preserveAspectRatio="xMidYMid meet" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M44.57 93.84s2.67 7.18 1.13 9.71c-1.55 2.53-7.74 2.04-9.64 3.24c-1.36.86-1.34 3.24-.49 4.22c.84.99 13.09.14 15.49-4.5s-.86-13.52-.86-13.52l-5.63.85z" fill="#f97d23"></path><path d="M64.13 92.99l-5.21 1.13s2.25 9.43.42 12.53c-1.83 3.1-8.39 6.41-9.57 9.01c-1.06 2.32 1.55 4.22 5.63 1.69s8.7-6.31 9.57-8.17c2.12-4.5-.84-16.19-.84-16.19z" fill="#f97d23"></path><path d="M28.52 21.9C17.44 24.39 8.81 33.73 12.05 47.94c1.92 8.43 3.1 11.4 3.8 15.2c1.48 7.99 1.08 11.5 4.46 18.82c3.59 7.79 16.8 17.79 33.27 15.39s23.09-4.65 23.09-4.65l5.91-5.21l5.63-1.41l.84-4.08s4.21-.19 5.07-1.55c1.36-2.16.56-3.94-1.83-4.79c-2.39-.84-3.8-1.55-3.8-1.55s23.23-15.35 26.04-17.03s7.18-4.58 7.39-5.63c.53-2.67-6.69-8.59-16.12-11.4c-9.43-2.82-17.53-3.59-18.86-2.53c-1.77 1.39-9.57 16.05-14.78 15.35c-6.76-.92-11.4-7.25-12.67-10.84c-1.44-4.07-10.09-24.82-30.97-20.13z" fill="#36b4e1"></path><path d="M14.3 43.86c-1.69-.28-6.01 4.32-6.85 5.44s-2.17 2.73-1.69 3.94c.75 1.88 4.6 1.98 6.85 2.16c2.35.19 6.85.56 7.6-.84c.75-1.41-.84-4.97-2.16-7.13c-1.22-2.01-1.99-3.27-3.75-3.57z" fill="#f97d23"></path><ellipse transform="rotate(-6.88 32.19 43.623)" cx="32.19" cy="43.61" rx="4.02" ry="4.36" fill="#2a2d2f"></ellipse><path d="M45.41 73.71c-1.95.71.61 7.6 3.24 10.7c2.77 3.26 9.47 10.58 19.71 11.54c6.95.66 10.04-1.31 11.68-3.1c1.22-1.33 2.53-2.87 3.43-3.57c1.31-1.03 2.63-.14 4.88-1.78c1.62-1.18 1.97-3.14 2.82-3.85c.84-.7 2.27-.54 3-1.22c1.31-1.22 1.13-4.79.19-4.97s-1.03 2.53-1.97 2.91s-2.19.14-3.94 1.13c-1.5.84-1.03 2.53-2.06 3.28s-2.91-.28-5.44 1.13c-1.37.76-2.53 4.41-6.48 5.26c-4.9 1.05-12.25-2.52-15.77-5.07c-8.17-5.92-9.96-13.61-13.29-12.39z" fill="#026aa8"></path></g></svg>
                           </a>
                       </h1>
                       <ul class="izq__ul">
                           <li class="izq__li">
-                              <asp:LinkButton class="active" ID="lnkInicio" runat="server" CssClass="InicioLink">
+                              <asp:LinkButton class="active" ID="lnkInicio" runat="server" Enabled="false" CssClass="InicioLink">
                                   <svg viewBox="0 0 24 24"><g><path d="M22.58 7.35L12.475 1.897c-.297-.16-.654-.16-.95 0L1.425 7.35c-.486.264-.667.87-.405 1.356.18.335.525.525.88.525.16 0 .324-.038.475-.12l.734-.396 1.59 11.25c.216 1.214 1.31 2.062 2.66 2.062h9.282c1.35 0 2.444-.848 2.662-2.088l1.588-11.225.737.398c.485.263 1.092.082 1.354-.404.263-.486.08-1.093-.404-1.355zM12 15.435c-1.795 0-3.25-1.455-3.25-3.25s1.455-3.25 3.25-3.25 3.25 1.455 3.25 3.25-1.455 3.25-3.25 3.25z"></path></g></svg>
                                   <span>Inicio</span>
                               </asp:LinkButton>
                           </li>
                           <li class="izq__li">
-                              <asp:LinkButton ID="lnkNotificaciones" runat="server" CssClass="NotificacionesLink">
+                              <asp:LinkButton ID="lnkNotificaciones" runat="server" Enabled="false" CssClass="NotificacionesLink">
                                   <svg viewBox="0 0 24 24"><g><path d="M21.697 16.468c-.02-.016-2.14-1.64-2.103-6.03.02-2.532-.812-4.782-2.347-6.335C15.872 2.71 14.01 1.94 12.005 1.93h-.013c-2.004.01-3.866.78-5.242 2.174-1.534 1.553-2.368 3.802-2.346 6.334.037 4.33-2.02 5.967-2.102 6.03-.26.193-.366.53-.265.838.102.308.39.515.712.515h4.92c.102 2.31 1.997 4.16 4.33 4.16s4.226-1.85 4.327-4.16h4.922c.322 0 .61-.206.71-.514.103-.307-.003-.645-.263-.838zM12 20.478c-1.505 0-2.73-1.177-2.828-2.658h5.656c-.1 1.48-1.323 2.66-2.828 2.66zM4.38 16.32c.74-1.132 1.548-3.028 1.524-5.896-.018-2.16.644-3.982 1.913-5.267C8.91 4.05 10.397 3.437 12 3.43c1.603.008 3.087.62 4.18 1.728 1.27 1.285 1.933 3.106 1.915 5.267-.024 2.868.785 4.765 1.525 5.896H4.38z"></path></g></svg>
                                   <span>Notificaciones</span>
                               </asp:LinkButton>
                           </li>
                           <li class="izq__li">
-                              <asp:LinkButton ID="lnkMensajes" runat="server" CssClass="MensajesLink">
+                              <asp:LinkButton ID="lnkMensajes" runat="server" Enabled="false" CssClass="MensajesLink">
                                   <svg viewBox="0 0 24 24"><g><path d="M19.25 3.018H4.75C3.233 3.018 2 4.252 2 5.77v12.495c0 1.518 1.233 2.753 2.75 2.753h14.5c1.517 0 2.75-1.235 2.75-2.753V5.77c0-1.518-1.233-2.752-2.75-2.752zm-14.5 1.5h14.5c.69 0 1.25.56 1.25 1.25v.714l-8.05 5.367c-.273.18-.626.182-.9-.002L3.5 6.482v-.714c0-.69.56-1.25 1.25-1.25zm14.5 14.998H4.75c-.69 0-1.25-.56-1.25-1.25V8.24l7.24 4.83c.383.256.822.384 1.26.384.44 0 .877-.128 1.26-.383l7.24-4.83v10.022c0 .69-.56 1.25-1.25 1.25z"></path></g></svg>
                                   <span>Mensajes</span>
                               </asp:LinkButton>
                           </li>
                           <li class="izq__li">
-                              <asp:LinkButton ID="lnkGuardados" runat="server" CssClass="GuardadosLink">
+                              <asp:LinkButton ID="lnkGuardados" runat="server" Enabled="false" CssClass="GuardadosLink">
                                   <svg viewBox="0 0 24 24" aria-hidden="true" class="r-4qtqp9 r-yyyyoo r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-1nao33i r-lwhw9o r-cnnz9e"><g><path d="M4 4.5C4 3.12 5.119 2 6.5 2h11C18.881 2 20 3.12 20 4.5v18.44l-8-5.71-8 5.71V4.5zM6.5 4c-.276 0-.5.22-.5.5v14.56l6-4.29 6 4.29V4.5c0-.28-.224-.5-.5-.5h-11z"></path></g></svg>
                                   <span>Guardados</span>
                               </asp:LinkButton>
                           </li>
                           <li class="izq__li">
-                              <asp:LinkButton ID="lnkPerfil" runat="server" CssClass="perfilLink">
+                              <asp:LinkButton ID="lnkPerfil" runat="server" Enabled="false" CssClass="perfilLink">
                                   <svg viewBox="0 0 24 24"><g><path d="M12 11.816c1.355 0 2.872-.15 3.84-1.256.814-.93 1.078-2.368.806-4.392-.38-2.825-2.117-4.512-4.646-4.512S7.734 3.343 7.354 6.17c-.272 2.022-.008 3.46.806 4.39.968 1.107 2.485 1.256 3.84 1.256zM8.84 6.368c.162-1.2.787-3.212 3.16-3.212s2.998 2.013 3.16 3.212c.207 1.55.057 2.627-.45 3.205-.455.52-1.266.743-2.71.743s-2.255-.223-2.71-.743c-.507-.578-.657-1.656-.45-3.205zm11.44 12.868c-.877-3.526-4.282-5.99-8.28-5.99s-7.403 2.464-8.28 5.99c-.172.692-.028 1.4.395 1.94.408.52 1.04.82 1.733.82h12.304c.693 0 1.325-.3 1.733-.82.424-.54.567-1.247.394-1.94zm-1.576 1.016c-.126.16-.316.246-.552.246H5.848c-.235 0-.426-.085-.552-.246-.137-.174-.18-.412-.12-.654.71-2.855 3.517-4.85 6.824-4.85s6.114 1.994 6.824 4.85c.06.242.017.48-.12.654z"></path></g></svg>
                                   <span>Perfil</span>
                               </asp:LinkButton>
                           </li>
                           <li class="izq__li">
-                              <asp:LinkButton ID="lnkAjustes" runat="server" CssClass="AjustesLink">
+                              <asp:LinkButton ID="lnkAjustes" runat="server" Enabled="false" CssClass="AjustesLink">
                                   <svg viewBox="0 0 24 24" class="r-jwli3a r-4qtqp9 r-yyyyoo r-lwhw9o r-dnmrzs r-bnwqim r-1plcrui r-lrvibr"><g><path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"></path></g></svg>
                                   <span>Ajustes</span>
                               </asp:LinkButton>
@@ -1429,7 +1534,7 @@ body {
                                           <svg class="pasando__icon" id="svgUpload" viewBox="0 0 24 24"><g><path id="Path_Upload" d="M19.75 2H4.25C3.01 2 2 3.01 2 4.25v15.5C2 20.99 3.01 22 4.25 22h15.5c1.24 0 2.25-1.01 2.25-2.25V4.25C22 3.01 20.99 2 19.75 2zM4.25 3.5h15.5c.413 0 .75.337.75.75v9.676l-3.858-3.858c-.14-.14-.33-.22-.53-.22h-.003c-.2 0-.393.08-.532.224l-4.317 4.384-1.813-1.806c-.14-.14-.33-.22-.53-.22-.193-.03-.395.08-.535.227L3.5 17.642V4.25c0-.413.337-.75.75-.75zm-.744 16.28l5.418-5.534 6.282 6.254H4.25c-.402 0-.727-.322-.744-.72zm16.244.72h-2.42l-5.007-4.987 3.792-3.85 4.385 4.384v3.703c0 .413-.337.75-.75.75z"></path><circle cx="8.868" cy="8.309" r="1.542"></circle></g></svg>
                                       </li>
                                   </ul>
-                                  <asp:Button ID="TwittearAlgo" CssClass="pasando__twittear" runat="server" Text="Twittear" Enabled="false"></asp:Button>
+                                  <asp:Button ID="TwittearAlgo" CssClass="pasando__twittear" runat="server" Text="Twittear" Enabled="false" OnClick="TwittearAlgo_Click"></asp:Button>
                                </div>
                           </div>
                           <div id="CentroDTweets" class="centro__tweets" runat="server">
@@ -1443,72 +1548,7 @@ body {
                       </div>
                       <div class="der__seguir">
                           <h2 class="seguir__h2">A quién seguir</h2>
-                          <ul class="seguir__ul">
-                              <li class="seguir__li">
-                                  <img class="seguir__user" src="DatosDeLaApp/Anonimo.jpg" alt="User">
-                                  <div class="seguir__text">
-                                      <h4 class="seguir__h4">Nombre</h4>
-                                      <p class="seguir__p">@nombreuser</p>
-                                  </div>
-                                  <a class="seguir__a" id="seguir1" href="#" title="Seguir">Seguir</a>
-                              </li>
-                              <li class="seguir__li">
-                                  <img class="seguir__user" src="DatosDeLaApp/Anonimo.jpg" alt="User">
-                                  <div class="seguir__text">
-                                      <h4 class="seguir__h4">Nombre</h4>
-                                      <p class="seguir__p">@nombreuser</p>
-                                  </div>
-                                  <a class="seguir__a" id="seguir2" href="#" title="Seguir">Seguir</a>
-                              </li>
-                              <li class="seguir__li">
-                                  <img class="seguir__user" src="DatosDeLaApp/Anonimo.jpg" alt="User">
-                                  <div class="seguir__text">
-                                      <h4 class="seguir__h4">Nombre</h4>
-                                      <p class="seguir__p">@nombreuser</p>
-                                  </div>
-                                  <a class="seguir__a" id="seguir3" href="#" title="Seguir">Seguir</a>
-                              </li>
-                              <li class="seguir__li">
-                                  <img class="seguir__user" src="DatosDeLaApp/Anonimo.jpg" alt="User">
-                                  <div class="seguir__text">
-                                      <h4 class="seguir__h4">Nombre</h4>
-                                      <p class="seguir__p">@nombreuser</p>
-                                  </div>
-                                  <a class="seguir__a" id="seguir4" href="#" title="Seguir">Seguir</a>
-                              </li>
-                              <li class="seguir__li">
-                                  <img class="seguir__user" src="DatosDeLaApp/Anonimo.jpg" alt="User">
-                                  <div class="seguir__text">
-                                      <h4 class="seguir__h4">Nombre</h4>
-                                      <p class="seguir__p">@nombreuser</p>
-                                  </div>
-                                  <a class="seguir__a" id="seguir5" href="#" title="Seguir">Seguir</a>
-                              </li>
-                              <li class="seguir__li">
-                                  <img class="seguir__user" src="DatosDeLaApp/Anonimo.jpg" alt="User">
-                                  <div class="seguir__text">
-                                      <h4 class="seguir__h4">Nombre</h4>
-                                      <p class="seguir__p">@nombreuser</p>
-                                  </div>
-                                  <a class="seguir__a" id="seguir6" href="#" title="Seguir">Seguir</a>
-                              </li>
-                              <li class="seguir__li">
-                                  <img class="seguir__user" src="DatosDeLaApp/Anonimo.jpg" alt="User">
-                                  <div class="seguir__text">
-                                      <h4 class="seguir__h4">Nombre</h4>
-                                      <p class="seguir__p">@nombreuser</p>
-                                  </div>
-                                  <a class="seguir__a" id="seguir7" href="#" title="Seguir">Seguir</a>
-                              </li>
-                              <li class="seguir__li">
-                                  <img class="seguir__user" src="DatosDeLaApp/Anonimo.jpg" alt="User">
-                                  <div class="seguir__text">
-                                      <h4 class="seguir__h4">Nombre</h4>
-                                      <p class="seguir__p">@nombreuser</p>
-                                  </div>
-                                  <a class="seguir__a" id="seguir8" href="#" title="Seguir">Seguir</a>
-                              </li>
-                              <a class="der__mostrar" href="#" title="Mostrar Más">Mostrar Más</a>
+                          <ul id="PersonasDSugerencias" class="seguir__ul" runat="server">
                           </ul>
                       </div>
                       <ul class="der__ul">
@@ -1527,7 +1567,9 @@ body {
         <script src = "https://code.jquery.com/jquery-3.6.0.min.js" ></script>
         <script>
 
-            document.getElementById('TwittearAlgo').addEventListener('click', function () {
+            /*document.getElementById('TwittearAlgo').addEventListener('click', function (event) {
+
+                event.preventDefault();
 
                 $.ajax({
                     type: "POST",
@@ -1543,18 +1585,75 @@ body {
                         return;
                     }
                 });
-            });
+            });*/
+
+            function Seguir(event) {
+
+                if (event.currentTarget.value === "seguir")
+                {
+                    $.ajax({
+                        type: "POST",
+                        url: "Home1.aspx/DarFollow",
+                        data: JSON.stringify({ SugerenceID: event.currentTarget.id}),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+
+                        },
+                        error: function (error) {
+
+                            return;
+                        }
+                    });
+
+                    event.currentTarget.value = "siguiendo";
+
+                    event.currentTarget.class = "siguiendo___a";
+
+                    event.currentTarget.style.border = "1px solid #ffffff";
+
+                    event.currentTarget.style.color = "#ffffff";
+
+                    event.currentTarget.style.backgroundColor = "#1da1f2";
+                }
+
+                else if (event.currentTarget.value === "siguiendo")
+                {
+                    $.ajax({
+                        type: "POST",
+                        url: "Home1.aspx/QuitarFollow",
+                        data: JSON.stringify({ SugerenceID: event.currentTarget.id }),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+
+                        },
+                        error: function (error) {
+
+                            return;
+                        }
+                    });
+
+                    event.currentTarget.value = "seguir";
+
+                    event.currentTarget.class = "seguir___a";
+
+                    event.currentTarget.style.border = "1px solid #1da1f2";
+
+                    event.currentTarget.style.color = "#1da1f2";
+
+                    event.currentTarget.style.backgroundColor = "#ffffff";
+                }
+            };
 
             function cambiarColorDeFondo(event) {
-
-                    var valores = event.currentTarget.id.split("*");
 
                 if (event.currentTarget.style.fill === "lightgray") {
 
                         $.ajax({
                             type: "POST",
                             url: "Home1.aspx/DarLike",
-                            data: JSON.stringify({ UserID: valores[1], LikedEntityID: valores[0], LikedEntityType: 'Post' }),
+                            data: JSON.stringify({ LikedEntityID: event.currentTarget.id, LikedEntityType: 'Post' }),
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
                             success: function (response) {
@@ -1575,7 +1674,7 @@ body {
                         $.ajax({
                             type: "POST",
                             url: "Home1.aspx/QuitarLike",
-                            data: JSON.stringify({ UserID: valores[1], LikedEntityID: valores[0], LikedEntityType: 'Post' }),
+                            data: JSON.stringify({ LikedEntityID: event.currentTarget.id, LikedEntityType: 'Post' }),
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
                             success: function (response) {
@@ -1616,6 +1715,7 @@ body {
 
             document.getElementById('fuPost').addEventListener('change', function (event) {
 
+
                 if (this.files && this.files[0] && document.getElementById('ArchivoDelPost') === null) {
 
                     const divElement = document.getElementById('AquiSeCargaraLaFotoDelPost');
@@ -1630,27 +1730,29 @@ body {
 
                         imageElement.id = "ArchivoDelPost"; imageElement.style.left = "50px"; imageElement.height = 200;
 
-                        reader.onload = function (e) {
-                            imageElement.src = e.target.result;
+                        imageElement.runnat = "server";
 
-                            imageElement.alt = e.alt.result
+                        reader.onload = function (e) {
+
+                            imageElement.src = e.target.result; 
                         }
 
                         reader.readAsDataURL(this.files[0]);
 
                         divElement.appendChild(imageElement);
                     }
+
                     else if (event.target.files[0].type.startsWith('video/')) {
 
                         const videoElement = document.createElement('video');
 
                         videoElement.id = "ArchivoDelPost"; videoElement.style.left = "50px"; videoElement.height = 200; videoElement.controls = true;
 
+                        videoElement.runnat = "server";
+
                         reader.onload = function (e) {
 
                             videoElement.src = e.target.result;
-
-                            videoElement.alt = 'Este es el video que quieres postear'
                         }
 
                         reader.readAsDataURL(this.files[0]);
@@ -1663,27 +1765,6 @@ body {
                             console.log('Por favor seleccione una imagen o un video.');
                     };
 
-                    /*var file = document.getElementById('fuPost').files[0];
-
-                    document.getElementById('fuPost').name = file.type.split('/')[1];
-
-                    var reader = new FileReader();
-
-                    reader.readAsDataURL(file);
-
-                    reader.onload = function (e) {
-
-                        var copiedFile = new File([file], file.name, { type: file.type });
-
-                        var downloadLink = document.createElement("a");
-                        downloadLink.href = window.URL.createObjectURL(copiedFile);
-                        downloadLink.download = "aoiMLPAxw(Wdecaq123423KliLNbcGghtXfsd)";
-
-                        // Simula un clic en el enlace para iniciar la descarga
-                        downloadLink.click();
-                    };
-
-                    reader.readAsDataURL(file);*/
                 };
             });
 
@@ -1720,7 +1801,6 @@ body {
                     });
                 });
 
-                // Observa cada elemento de video
                 videos.forEach(video => {
                     observer.observe(video);
                 });

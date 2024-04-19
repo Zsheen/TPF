@@ -15,9 +15,6 @@ namespace IDS348_FinalProject
 
         public static int UserID;
 
-
-        #region Favor_No_Tocar_Si_Usted_No_Se_Llama_Chen
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Convert.ToString(Session["Loged"]) != "True")
@@ -53,8 +50,6 @@ namespace IDS348_FinalProject
                         }
                     }
                 }
-
-                HtmlGenericControl centroTweets = (HtmlGenericControl)Page.FindControl("CentroDTweets");
 
                 using (SqlCommand command = new SqlCommand("GetPostByFollowing", connection))
                 {
@@ -94,7 +89,7 @@ namespace IDS348_FinalProject
 
                             else if (revisar == "mp4" || revisar == "avi" || revisar == "mov" || revisar == "wmv")
                             {
-                                centroTweets.InnerHtml += $@"<video class='centro__vid' width='320' height='240' muted controls>
+                                CentroDTweets.InnerHtml += $@"<video class='centro__vid' width='320' height='240' muted controls>
                                                                <source class='centro__vid' src='{Contenido}' type='video/mp4'>Tu navegador no admite el elemento de video.
                                                              </video>
                                                          ";
@@ -129,7 +124,7 @@ namespace IDS348_FinalProject
 
                             else
                             {
-                                CentroDTweets.InnerHtml += $@"<svg class='centro__svg' id='{Convert.ToString(reader["PostID"])}*{Session["UserID"]}' style='fill: lightgray' onclick='cambiarColorDeFondo(event);' viewBox='0 0 24 24'><g><path d='M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z'></path></g></svg>
+                                CentroDTweets.InnerHtml += $@"<svg class='centro__svg' id='{Convert.ToString(reader["PostID"])}' style='fill: lightgray' onclick='cambiarColorDeFondo(event);' viewBox='0 0 24 24'><g><path d='M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z'></path></g></svg>
                                                                   <span id='sDLikes' class='centro__numero'> {Convert.ToInt64(reader["LikesCount"])} </span>
                                                                   </li>
                                                                   <li class='centro__li'>
@@ -148,12 +143,45 @@ namespace IDS348_FinalProject
                     }
                 }
 
+                using (SqlCommand command = new SqlCommand("GetUserByFollowing", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@UserID", Convert.ToString(Session["UserID"]));
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string UserName = Convert.ToString(reader["UserName"]); string Names = Convert.ToString(reader["Names"]);
+
+                            if (UserName.Length > 8) { UserName = UserName.Substring(0, 9) + "..."; }
+
+                            if (Names.Length > 8) { Names = Names.Substring(0, 9) + "..."; }
+
+                            PersonasDSugerencias.InnerHtml += $@"<li class='seguir__li'>
+                                                                     <img class='seguir__user' src='DatosDeLaApp\\{Convert.ToString(reader["ProfilePhoto"])}' alt='User'>
+                                                                     <div class='seguir__text'>
+                                                                         <h4 class='seguir__h4'>{Names}</h4>
+                                                                         <p class='seguir__p'>@{UserName}</p>
+                                                                     </div>
+                                                                     <input type='button' value='seguir' onclick='Seguir(event);' class='seguir___a' id='{Convert.ToString(reader["UserID"])}'>
+                                                                 </li>
+                                                                 ";
+                        }
+
+                        PersonasDSugerencias.InnerHtml += "<a class='der__mostrar' href='#' title='Mostrar Más'>Mostrar Más</a>";
+                    }
+                }
+
                 connection.Close();
             }
         }
 
+        #region Likes
+
         [System.Web.Services.WebMethod]
-        public static void DarLike(int UserID, int LikedEntityID, string LikedEntityType)
+        public static void DarLike(int LikedEntityID, string LikedEntityType)
         {
             using (SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True;Connect Timeout=30"))
             {
@@ -173,7 +201,7 @@ namespace IDS348_FinalProject
         }
 
         [System.Web.Services.WebMethod]
-        public static void QuitarLike(int UserID, int LikedEntityID, string LikedEntityType)
+        public static void QuitarLike(int LikedEntityID, string LikedEntityType)
         {
             using (SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True;Connect Timeout=30"))
             {
@@ -194,55 +222,49 @@ namespace IDS348_FinalProject
 
         #endregion
 
+        #region Followers
+
         [System.Web.Services.WebMethod]
-        public static void Twittear(HttpPostedFile Archivo, string Texto)
+        public static void DarFollow(int SugerenceID)
         {
-            string NuevaURLParaContenido = string.Empty;
-            string NombreParaElArchivo;
-
-            if (Archivo != null)
-            {
-                string TipoDeArchivo = Archivo.FileName.Split('.')[Archivo.FileName.Split('.').Length - 1].ToLower();
-
-                do
-                {
-                    NombreParaElArchivo = GenerarNombreAleatorio();
-
-                } while (File.Exists(@"DatosDeLaApp\" + NombreParaElArchivo + "_" + UserName + "." + TipoDeArchivo));
-
-                NuevaURLParaContenido = @"DatosDeLaApp\" + NombreParaElArchivo + "_" + UserName + "." + TipoDeArchivo;
-
-                //File.Copy(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\\Downloads\aoiMLPAxw(Wdecaq123423KliLNbcGghtXfsd)." + form1.Name, NuevaURLParaContenido);
-
-                //File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\\Downloads\aoiMLPAxw(Wdecaq123423KliLNbcGghtXfsd)." + form1.Name);
-
-                Archivo.SaveAs(NuevaURLParaContenido);
-            }
-
             using (SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True;Connect Timeout=30"))
             {
                 connection.Open();
 
-                using (SqlCommand command = new SqlCommand("CreatePost", connection))
+                using (SqlCommand command = new SqlCommand("CreateFollowers", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
 
-                    command.Parameters.AddWithValue("@UserID", UserID);
-
-                    command.Parameters.AddWithValue("@UserName", UserName);
-
-                    command.Parameters.AddWithValue("@Text", Texto);
-
-                    command.Parameters.AddWithValue("@PublicationDate", DateTime.Now);
-
-                    command.Parameters.AddWithValue("@TipoContenido", "");
-
-                    command.Parameters.AddWithValue("@URLContenido", NuevaURLParaContenido);
+                    command.Parameters.AddWithValue("@FollowerID", UserID);
+                    command.Parameters.AddWithValue("@FollowingID", SugerenceID);
 
                     command.ExecuteNonQuery();
                 }
             }
         }
+
+        [System.Web.Services.WebMethod]
+        public static void QuitarFollow(int SugerenceID)
+        {
+            using (SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True;Connect Timeout=30"))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("DeleteFollowers", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@FollowerID", UserID);
+                    command.Parameters.AddWithValue("@FollowingID", SugerenceID);
+
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        #endregion
+
+        #region Metodos_Secundarios
 
         public static string GenerarNombreAleatorio()
         {
@@ -341,52 +363,105 @@ namespace IDS348_FinalProject
             }
 
             return Fecha_en_Texto + Fecha.Day;
-        }    
-       
-        protected string BuscarPosts(string searchTerm)
+        }
+
+        #endregion
+
+        protected void TwittearAlgo_Click(object sender, EventArgs e)
         {
-            // Conexión a la base de datos
-            string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True;Connect Timeout=30";
+            string NuevaURLParaContenido = string.Empty;
+            //string NombreParaElArchivo;
 
-            StringBuilder htmlResult = new StringBuilder();
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            if (fuPost.HasFiles)
             {
-                // Nombre del stored procedure creado para buscar posts
-                string storedProcedureName = "SearchPosts";
+                //string TipoDeArchivo = fuPost.FileName.Split('.')[fuPost.FileName.Split('.').Length - 1].ToLower();
 
-                using (SqlCommand command = new SqlCommand(storedProcedureName, connection))
+                //do
+                //{
+                //    NombreParaElArchivo = GenerarNombreAleatorio();
+
+                //} while (File.Exists(@"DatosDeLaApp\" + NombreParaElArchivo + "_" + UserName + "." + TipoDeArchivo));
+
+                //NuevaURLParaContenido = @"DatosDeLaApp\" + NombreParaElArchivo + "_" + UserName + "." + TipoDeArchivo;
+
+                //File.Copy(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\\Downloads\aoiMLPAxw(Wdecaq123423KliLNbcGghtXfsd)." + form1.Name, NuevaURLParaContenido);
+
+                //File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\\Downloads\aoiMLPAxw(Wdecaq123423KliLNbcGghtXfsd)." + form1.Name);
+
+                //fuPost.SaveAs(NuevaURLParaContenido);
+            }
+
+            using (SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True;Connect Timeout=30"))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("CreatePost", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
 
-                    // Parámetro para el término de búsqueda
-                    command.Parameters.AddWithValue("@SearchTerm", searchTerm);
+                    command.Parameters.AddWithValue("@UserID", Session["UserID"]);
 
-                    try
-                    {
-                        connection.Open();
+                    command.Parameters.AddWithValue("@Text", textareaTwitt.Value);
 
-                        // Ejecutar el comando y obtener los resultados
-                        SqlDataReader reader = command.ExecuteReader();
+                    command.Parameters.AddWithValue("@PublicationDate", DateTime.Now);
 
-                        // Construir la cadena HTML con los resultados de la búsqueda
-                        while (reader.Read())
-                        {
-                            // Por ejemplo, asumiendo que la columna "Text" contiene el texto de cada post
-                            string postText = reader["Text"].ToString();
-                            htmlResult.Append($"<div>{postText}</div>");
-                        }
+                    command.Parameters.AddWithValue("@TipoContenido", "");
 
-                    }
-                    catch (Exception)
-                    {
+                    command.Parameters.AddWithValue("@URLContenido", NuevaURLParaContenido);
 
-                        // lblMessage.Text = "Error al buscar posts: " + ex.Message;
-                    }
+                    command.ExecuteNonQuery();
                 }
             }
+        }
 
-            return htmlResult.ToString();
+        [System.Web.Services.WebMethod]
+        public static void Twittear(dynamic Archivo, string Texto)
+        {
+            string NuevaURLParaContenido = string.Empty;
+            string NombreParaElArchivo;
+
+            if (Archivo != null)
+            {
+                string TipoDeArchivo = Archivo.FileName.Split('.')[Archivo.FileName.Split('.').Length - 1].ToLower();
+
+                do
+                {
+                    NombreParaElArchivo = GenerarNombreAleatorio();
+
+                } while (File.Exists(@"DatosDeLaApp\" + NombreParaElArchivo + "_" + UserName + "." + TipoDeArchivo));
+
+                NuevaURLParaContenido = @"DatosDeLaApp\" + NombreParaElArchivo + "_" + UserName + "." + TipoDeArchivo;
+
+                //File.Copy(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\\Downloads\aoiMLPAxw(Wdecaq123423KliLNbcGghtXfsd)." + form1.Name, NuevaURLParaContenido);
+
+                //File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\\Downloads\aoiMLPAxw(Wdecaq123423KliLNbcGghtXfsd)." + form1.Name);
+
+                Archivo.SaveAs(NuevaURLParaContenido);
+            }
+
+            using (SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True;Connect Timeout=30"))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("CreatePost", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@UserID", UserID);
+
+                    command.Parameters.AddWithValue("@UserName", UserName);
+
+                    command.Parameters.AddWithValue("@Text", Texto);
+
+                    command.Parameters.AddWithValue("@PublicationDate", DateTime.Now);
+
+                    command.Parameters.AddWithValue("@TipoContenido", "");
+
+                    command.Parameters.AddWithValue("@URLContenido", NuevaURLParaContenido);
+
+                    command.ExecuteNonQuery();
+                }
+            }
         }
     }
 }
