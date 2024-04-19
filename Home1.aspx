@@ -1562,33 +1562,32 @@ body {
       </form>    
         <script src = "https://code.jquery.com/jquery-3.6.0.min.js" ></script>
         <script>
+            $(document).ready(function () {
+                // Reiniciar la variable busquedaRealizada a false al cargar la página
+                var busquedaRealizada = false;
 
-            document.getElementById('ContenedorBuscar').addEventListener('keydown', function (event)
-            {
-                if (event.key === 'Enter')
-                {
-                    event.preventDefault();
+                document.getElementById('ContenedorBuscar').addEventListener('keydown', function (event) {
+                    if (event.key === 'Enter') {
+                        event.preventDefault();
 
-                    $.ajax({
-                        type: "POST",
-                        url: "Home1.aspx/Search",
-                        data: JSON.stringify({search: event.currentTarget.value }),
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (response) {
+                        $.ajax({
+                            type: "POST",
+                            url: "Home1.aspx/Search",
+                            data: JSON.stringify({ search: event.currentTarget.value }),
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (response) {
 
-                            window.location.href = "Busquedas.aspx";
-
-                        },
-                        error: function (error) {
-
-                            return;
-                        }
-                    });
-
-                    
-                }
+                                window.location.href = "Busquedas.aspx";
+                            },
+                            error: function (error) {
+                                return;
+                            }
+                        });
+                    }
+                });
             });
+           
 
             document.getElementById('btnTwittear').addEventListener('click', function (event) {
 

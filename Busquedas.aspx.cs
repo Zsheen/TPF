@@ -53,6 +53,8 @@ namespace IDS348_FinalProject
                     }
                 }
 
+
+
                 using (SqlCommand command = new SqlCommand("SearchPosts", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
