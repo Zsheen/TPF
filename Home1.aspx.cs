@@ -372,16 +372,20 @@ namespace IDS348_FinalProject
             return Fecha_en_Texto + Fecha.Day;
         }
 
-        #endregion
-
         [System.Web.Services.WebMethod]
         public static void Search(string search)
         {
             HttpContext.Current.Session["Search"] = search;
         }
 
+        #endregion
+
+        [System.Web.Services.WebMethod]
+
         public static void Twittear(HttpPostedFileBase Archivo, string Texto)
         {
+            
+
             string NuevaURLParaContenido = string.Empty;
             string NombreParaElArchivo;
 

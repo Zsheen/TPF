@@ -1844,6 +1844,18 @@ body {
                 });
             });
 
+            window.addEventListener('pageshow', function (event) {
+                // Verificamos si la página se está mostrando debido a una navegación hacia atrás
+                if (event.persisted) {
+                    // Recargar la página
+                    window.location.reload();
+                }
+            });
+
+            window.addEventListener('popstate', function (event) {
+                location.reload();
+            });
+
         </script>
   </body>
 </html>
