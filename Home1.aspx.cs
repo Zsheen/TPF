@@ -15,12 +15,6 @@ namespace IDS348_FinalProject
 
         public static int UserID;
 
-        public static string find;
-
-        public static TextWriter textWriter;
-
-        public static HttpResponse response = new HttpResponse(textWriter);
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Convert.ToString(Session["Loged"]) != "True")
@@ -380,8 +374,8 @@ namespace IDS348_FinalProject
 
         #endregion
 
-        [System.Web.Services.WebMethod]
 
+        [System.Web.Services.WebMethod]
         public static void Twittear(HttpPostedFileBase Archivo, string Texto)
         {
             

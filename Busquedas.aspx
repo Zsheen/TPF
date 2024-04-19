@@ -1364,7 +1364,8 @@ body {
 .centro__text {
   position: relative;
   right: 2%;
-  margin-bottom: 35px;
+  margin-bottom: 15px;
+  margin-top: 10px;
 }
 
 .home .centro__img,
@@ -1520,7 +1521,7 @@ body {
                           </div>
                           <div id="MiDivObjetivo" class="centro__pasando">
                               <div id="pasando_up" class="pasando__up">
-                                  <input id="ContenedorBuscar" type="text" class="centro__searchbar" placeholder="Buscar...">
+                                  <input id="ContBuscar" class="der__input" runat="server" type="text" placeholder="Buscar en Twitter">
                               </div>
                           </div>
                           <div id="CentroDTweets" class="centro__tweets" runat="server">
@@ -1550,8 +1551,8 @@ body {
         <script src = "https://code.jquery.com/jquery-3.6.0.min.js" ></script>
         <script>
 
-
-                document.getElementById('ContenedorBuscar').addEventListener('keydown', function (event) {
+            $(document).ready(function () {
+                document.getElementById('ContBuscar').addEventListener('keydown', function (event) {
                     if (event.key === 'Enter') {
                         event.preventDefault();
 
@@ -1562,8 +1563,8 @@ body {
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
                             success: function (response) {
-                                
-                                location.reload(); // Esto recarga la página actual
+                                window.location.href = "Busquedas.aspx";
+                                //location.reload();
                             },
                             error: function (error) {
                                 return;
@@ -1571,28 +1572,9 @@ body {
                         });
                     }
 
-                $(document).ready(function () {
+
                 });
-
-            /*document.getElementById('TwittearAlgo').addEventListener('click', function (event) {
-
-                event.preventDefault();
-
-                $.ajax({
-                    type: "POST",
-                    url: "Home1.aspx/Twittear",
-                    data: JSON.stringify({ Archivo: document.getElementById('fuPost').files[0], Texto: document.getElementById('textareaTwitt').value}),
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        console.log("El método C# se ejecutó con éxito.");
-                    },
-                    error: function (error) {
-
-                        return;
-                    }
-                });
-            });*/
+            });
 
             function Seguir(event) {
 
@@ -1852,18 +1834,6 @@ body {
                 videos.forEach(video => {
                     observer.observe(video);
                 });
-            });
-
-            window.addEventListener('pageshow', function (event) {
-                // Verificamos si la página se está mostrando debido a una navegación hacia atrás
-                if (event.persisted) {
-                    // Recargar la página
-                    window.location.reload();
-                }
-            });
-
-            window.addEventListener('popstate', function (event) {
-                location.reload();
             });
 
         </script>

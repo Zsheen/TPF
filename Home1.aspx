@@ -1364,7 +1364,8 @@ body {
 .centro__text {
   position: relative;
   right: 2%;
-  margin-bottom: 35px;
+  margin-bottom: 15px;
+  margin-top: 10px;
 }
 
 .home .centro__img,
@@ -1563,8 +1564,6 @@ body {
         <script src = "https://code.jquery.com/jquery-3.6.0.min.js" ></script>
         <script>
             $(document).ready(function () {
-                // Reiniciar la variable busquedaRealizada a false al cargar la página
-                var busquedaRealizada = false;
 
                 document.getElementById('ContenedorBuscar').addEventListener('keydown', function (event) {
                     if (event.key === 'Enter') {
@@ -1831,8 +1830,7 @@ body {
 
                         videoElement.play();
                     }
-                    else { 
-                            console.log('Por favor seleccione una imagen o un video.');
+                    else {
                     };
 
                 };
@@ -1875,11 +1873,6 @@ body {
                     observer.observe(video);
                 });
             });
-
-            window.addEventListener('popstate', function (event) {
-                location.reload();
-            });
-
 
         </script>
   </body>

@@ -15,8 +15,6 @@ namespace IDS348_FinalProject
 
         public static int UserID;
 
-        public static string find;
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Convert.ToString(Session["Loged"]) != "True")
@@ -27,6 +25,8 @@ namespace IDS348_FinalProject
             using (SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True;Connect Timeout=30"))
             {
                 connection.Open();
+
+                CentroDTweets.InnerHtml = ""; PersonasDSugerencias.InnerHtml = "";
 
                 using (SqlCommand command = new SqlCommand("ReadUserByUserName", connection))
                 {
@@ -52,8 +52,6 @@ namespace IDS348_FinalProject
                         }
                     }
                 }
-
-
 
                 using (SqlCommand command = new SqlCommand("SearchPosts", connection))
                 {
@@ -196,6 +194,12 @@ namespace IDS348_FinalProject
                     }
                 }
             }
+        }
+
+        [System.Web.Services.WebMethod]
+        public static void Search(string search)
+        {
+            HttpContext.Current.Session["Search"] = search;
         }
     }
 }
