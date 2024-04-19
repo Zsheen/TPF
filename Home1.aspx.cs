@@ -378,8 +378,6 @@ namespace IDS348_FinalProject
         public static void Search(string search)
         {
             HttpContext.Current.Session["Search"] = search;
-
-            //HttpContext.Current.Response.Redirect("Busquedas.aspx");
         }
 
         public static void Twittear(HttpPostedFileBase Archivo, string Texto)

@@ -480,6 +480,7 @@
   <ItemGroup>
     <Content Include="Busquedas.aspx" />
     <Content Include="Database1.mdf" />
+    <Content Include="DatosDeLaApp\Anonimo.jpg" />
     <Content Include="DatosDeLaApp\Chen_ProfilePhoto.PNG" />
     <Content Include="DatosDeLaApp\twitter-logo.png" />
     <Content Include="Global.asax" />

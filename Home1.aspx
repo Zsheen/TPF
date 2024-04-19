@@ -1572,12 +1572,12 @@ body {
                     $.ajax({
                         type: "POST",
                         url: "Home1.aspx/Search",
-                        data: JSON.stringify(event.currentTarget.value),
+                        data: JSON.stringify({search: event.currentTarget.value }),
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
 
-                            console.log("Devolvio OK");
+                            window.location.href = "Busquedas.aspx";
 
                         },
                         error: function (error) {
@@ -1586,7 +1586,7 @@ body {
                         }
                     });
 
-                    window.location.href = "Busquedas.aspx";
+                    
                 }
             });
 
@@ -1875,6 +1875,15 @@ body {
                     observer.observe(video);
                 });
             });
+
+            window.addEventListener('pageshow', function (event) {
+                // Verificamos si la página se está mostrando debido a una navegación hacia atrás
+                if (event.persisted) {
+                    // Recargar la página
+                    window.location.reload();
+                }
+            });
+
 
         </script>
   </body>

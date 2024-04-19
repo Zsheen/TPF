@@ -15,6 +15,8 @@ namespace IDS348_FinalProject
 
         public static int UserID;
 
+        public static string find;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Convert.ToString(Session["Loged"]) != "True")
@@ -55,7 +57,9 @@ namespace IDS348_FinalProject
                 {
                     command.CommandType = CommandType.StoredProcedure;
 
-                    command.Parameters.AddWithValue("@Search", Convert.ToString(Session["Search"]));
+                    command.Parameters.AddWithValue("@Search", Convert.ToString(HttpContext.Current.Session["Search"]));
+
+                    command.Parameters.AddWithValue("@UserID", Convert.ToString(Session["UserID"]));
 
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
@@ -74,11 +78,26 @@ namespace IDS348_FinalProject
                                                                         <h3 class='centro__h3'>{Convert.ToString(reader["Names"])}</h3>
                                                                         <h4 class='centro__h4'>@{Convert.ToString(reader["UserName"])}</h4>
                                                                         <span class='centro__tiempo'> {Home1.Convertir_Fecha_a_Texto(Convert.ToDateTime(reader["PublicationDate"]))} </span>
-                                                                        <input id='{Convert.ToString(reader["UserID"])}' type='button' class='seguir___p' onclick='cambiarColorDeTexto(event);' value='siguiendo' />
-                                                                    </div>
-                                                                    <div class='centro__row'>
-                                                                        <p class='centro__text'>{Convert.ToString(reader["Text"])}</p>
                                                                         ";
+
+                            if (Convert.ToInt32(reader["Followed"]) == 1)
+                            {
+
+                                CentroDTweets.InnerHtml += $@"<input id='{Convert.ToString(reader["UserID"])}' type='button' class='seguir___p' onclick='cambiarColorDeTexto(event);' value='siguiendo' />
+                                                          </div>
+                                                          <div class='centro__row'>
+                                                              <p class='centro__text'>{Convert.ToString(reader["Text"])}</p>
+                                                              ";
+                            }
+
+                            else
+                            {
+                                CentroDTweets.InnerHtml += $@"<input id='{Convert.ToString(reader["UserID"])}' type='button' style='color: #ffffff;' class='seguir___p' onclick='cambiarColorDeTexto(event);' value='seguir' />
+                                                          </div>
+                                                          <div class='centro__row'>
+                                                              <p class='centro__text'>{Convert.ToString(reader["Text"])}</p>
+                                                              ";
+                            }
 
                             string revisar = Convert.ToString(reader["URLContenido"]).Split('.')[Convert.ToString(reader["URLContenido"]).Split('.').Length - 1].ToLower();
 
