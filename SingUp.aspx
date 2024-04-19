@@ -554,7 +554,15 @@
           </ContentTemplate>
       </asp:UpdatePanel>
   </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
     <script>
+
+        $(document).ready(function () {
+            $('#<%=txtTelefono.ClientID%>').mask('+1 (000) 000-0000');
+        });
+
 
         document.getElementById('txtUsername').addEventListener("keydown", function (event) {
 
@@ -570,6 +578,10 @@
 
             if (!(/[0-9]/.test(char))) {
                 event.preventDefault();
+            }
+            
+            if (event.keyCode === 8) {
+                document.getElementById('txtTelefono').value = parseInt(document.getElementById('txtTelefono').value.substring(0, document.getElementById('txtTelefono').length));
             }
         });
 
@@ -650,6 +662,6 @@
 
             }, 4000);
         }
-</script>
+    </script>
 </body>
 </html>

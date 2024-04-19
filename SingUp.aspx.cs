@@ -74,7 +74,7 @@ namespace IDS348_FinalProject
 
                         command.Parameters.AddWithValue("@Passwords", txtPassword.Text);
 
-                        command.Parameters.AddWithValue("@ProfilePhoto", "");
+                        command.Parameters.AddWithValue("@ProfilePhoto", "Anonimo.jpg");
 
                         command.Parameters.AddWithValue("@Email", txtMail.Text);
 
