@@ -33,15 +33,6 @@ namespace IDS348_FinalProject
         protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
-        /// Control UpdatePanel1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
-
-        /// <summary>
         /// Control ProgressHiddenField.
         /// </summary>
         /// <remarks>
@@ -141,13 +132,22 @@ namespace IDS348_FinalProject
         protected global::System.Web.UI.WebControls.DropDownList ddlAño;
 
         /// <summary>
-        /// Control txtBiografia.
+        /// Control lblBiografia.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBiografia;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblBiografia;
+
+        /// <summary>
+        /// Control fuProfilePhoto.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload fuProfilePhoto;
 
         /// <summary>
         /// Control ddlPlaceWhereLives.

@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Chender Marte\\Desktop\\TPF\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1C79EF68-44C3-4ACF-BF04-197ECD895517}|IDS348-FinalProject.csproj|c:\\users\\chender marte\\desktop\\tpf\\busquedas.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{1C79EF68-44C3-4ACF-BF04-197ECD895517}|IDS348-FinalProject.csproj|solutionrelative:busquedas.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+      "AbsoluteMoniker": "D:0:0:{1C79EF68-44C3-4ACF-BF04-197ECD895517}|IDS348-FinalProject.csproj|c:\\users\\chender marte\\desktop\\tpf\\controllers\\mailcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C79EF68-44C3-4ACF-BF04-197ECD895517}|IDS348-FinalProject.csproj|solutionrelative:controllers\\mailcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1C79EF68-44C3-4ACF-BF04-197ECD895517}|IDS348-FinalProject.csproj|c:\\users\\chender marte\\desktop\\tpf\\singup.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{1C79EF68-44C3-4ACF-BF04-197ECD895517}|IDS348-FinalProject.csproj|solutionrelative:singup.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1C79EF68-44C3-4ACF-BF04-197ECD895517}|IDS348-FinalProject.csproj|C:\\Users\\Chender Marte\\Desktop\\TPF\\singup.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{1C79EF68-44C3-4ACF-BF04-197ECD895517}|IDS348-FinalProject.csproj|c:\\users\\chender marte\\desktop\\tpf\\singup.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1C79EF68-44C3-4ACF-BF04-197ECD895517}|IDS348-FinalProject.csproj|solutionrelative:singup.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C79EF68-44C3-4ACF-BF04-197ECD895517}|IDS348-FinalProject.csproj|c:\\users\\chender marte\\desktop\\tpf\\twitter.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C79EF68-44C3-4ACF-BF04-197ECD895517}|IDS348-FinalProject.csproj|solutionrelative:twitter.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -42,40 +42,41 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Busquedas.aspx",
-              "DocumentMoniker": "C:\\Users\\Chender Marte\\Desktop\\TPF\\Busquedas.aspx",
-              "RelativeDocumentMoniker": "Busquedas.aspx",
-              "ToolTip": "C:\\Users\\Chender Marte\\Desktop\\TPF\\Busquedas.aspx",
-              "RelativeToolTip": "Busquedas.aspx",
-              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2024-04-19T22:08:51.361Z",
+              "DocumentIndex": 2,
+              "Title": "Twitter.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\Chender Marte\\Desktop\\TPF\\Twitter.aspx.cs",
+              "RelativeDocumentMoniker": "Twitter.aspx.cs",
+              "ToolTip": "C:\\Users\\Chender Marte\\Desktop\\TPF\\Twitter.aspx.cs",
+              "RelativeToolTip": "Twitter.aspx.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAABMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-21T19:50:13.978Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "SingUp.aspx.cs",
               "DocumentMoniker": "C:\\Users\\Chender Marte\\Desktop\\TPF\\SingUp.aspx.cs",
               "RelativeDocumentMoniker": "SingUp.aspx.cs",
               "ToolTip": "C:\\Users\\Chender Marte\\Desktop\\TPF\\SingUp.aspx.cs",
               "RelativeToolTip": "SingUp.aspx.cs",
-              "ViewState": "AQIAADMAAACA+P////8nwHcAAAAjAAAA",
+              "ViewState": "AQIAAF4AAAAAAAAAAICGPXkAAAA7AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-19T20:19:57.436Z"
+              "WhenOpened": "2024-04-21T15:41:57.836Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "SingUp.aspx",
-              "DocumentMoniker": "C:\\Users\\Chender Marte\\Desktop\\TPF\\SingUp.aspx",
-              "RelativeDocumentMoniker": "SingUp.aspx",
-              "ToolTip": "C:\\Users\\Chender Marte\\Desktop\\TPF\\SingUp.aspx",
-              "RelativeToolTip": "SingUp.aspx",
-              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2024-04-19T20:19:51.677Z",
+              "DocumentIndex": 0,
+              "Title": "MailController.cs",
+              "DocumentMoniker": "C:\\Users\\Chender Marte\\Desktop\\TPF\\Controllers\\MailController.cs",
+              "RelativeDocumentMoniker": "Controllers\\MailController.cs",
+              "ToolTip": "C:\\Users\\Chender Marte\\Desktop\\TPF\\Controllers\\MailController.cs",
+              "RelativeToolTip": "Controllers\\MailController.cs",
+              "ViewState": "AQIAAAkAAADgW2ZmZmYewBUAAACPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-21T19:47:52.859Z",
               "EditorCaption": ""
             }
           ]

@@ -15,6 +15,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using System.Net.PeerToPeer;
+using System.IO;
 
 namespace IDS348_FinalProject
 {
@@ -32,35 +34,20 @@ namespace IDS348_FinalProject
         {
             NotifyIcon notification = new NotifyIcon(); notification.Visible = true;
 
-            txtUsername.Enabled = txtNames.Enabled = txtMail.Enabled = txtPassword.Enabled = txtTelefono.Enabled = ddlDia.Enabled = ddlMes.Enabled = ddlAño.Enabled = txtBiografia.Enabled = ddlPlaceWhereLives.Enabled = ddlSex.Enabled = false;
+            txtUsername.Enabled = txtNames.Enabled = txtMail.Enabled = txtPassword.Enabled = txtTelefono.Enabled = ddlDia.Enabled = ddlMes.Enabled = ddlAño.Enabled = fuProfilePhoto.Enabled = ddlPlaceWhereLives.Enabled = ddlSex.Enabled = false;
 
             try
             {
-                MailMessage mensaje = new MailMessage();
+                string NuevaURLParaContenido = "Anonimo.jpg";
 
-                mensaje.From = new MailAddress("twitterproyetintec@hotmail.com", "Twitter", System.Text.Encoding.UTF8); ;
+                if (fuProfilePhoto.HasFiles)
+                {
+                    string TipoDeArchivo = fuProfilePhoto.FileName.Split('.')[fuProfilePhoto.FileName.Split('.').Length - 1].ToLower();
 
-                mensaje.To.Add(txtMail.Text);
+                    NuevaURLParaContenido = txtUsername.Text + "_" + "ProfilePhoto." + TipoDeArchivo;
+                }
 
-                mensaje.Subject = "Creación de usuario";
-
-                string intro = $"Se a creado una cuenta de Twitter a su nombre bajo el nombre de usuario {txtUsername.Text}";
-
-                mensaje.Body = $"<html><body><p>{intro}</p></body></html>";
-
-                mensaje.IsBodyHtml = true;
-
-                mensaje.Priority = MailPriority.Normal;
-
-                SmtpClient client = new SmtpClient("smtp.office365.com", 587);
-
-                client.Credentials = new NetworkCredential("twitterproyetintec@hotmail.com", ConfigurationManager.AppSettings["EmailPassword"]);
-
-                client.EnableSsl = true;
-
-                //client.Send(mensaje);
-
-                using (SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True;Connect Timeout=30"))
+                using (SqlConnection connection = new SqlConnection($@"{ConfigurationManager.AppSettings["🌌"]}"))
                 {
                     connection.Open();
 
@@ -74,7 +61,7 @@ namespace IDS348_FinalProject
 
                         command.Parameters.AddWithValue("@Passwords", txtPassword.Text);
 
-                        command.Parameters.AddWithValue("@ProfilePhoto", "Anonimo.jpg");
+                        command.Parameters.AddWithValue("@ProfilePhoto", NuevaURLParaContenido);
 
                         command.Parameters.AddWithValue("@Email", txtMail.Text);
 
@@ -82,7 +69,7 @@ namespace IDS348_FinalProject
 
                         command.Parameters.AddWithValue("@Birthday", new DateTime(Convert.ToInt32(ddlAño.SelectedValue), Convert.ToInt32(ddlMes.SelectedValue), Convert.ToInt32(ddlDia.SelectedValue)));
 
-                        command.Parameters.AddWithValue("@Biography", txtBiografia.Text);
+                        command.Parameters.AddWithValue("@Biography", " ");
 
                         command.Parameters.AddWithValue("@PlaceWhereLives", ddlPlaceWhereLives.SelectedValue);
 
@@ -107,33 +94,62 @@ namespace IDS348_FinalProject
                         }
                     }
                 }
+
+                MailMessage mensaje = new MailMessage();
+
+                mensaje.From = new MailAddress(ConfigurationManager.AppSettings["Email"], "Twitter", System.Text.Encoding.UTF8); ;
+
+                mensaje.To.Add(txtMail.Text);
+
+                mensaje.Subject = "Creación de usuario";
+
+                string intro = $"Se a creado una cuenta de Twitter a nombre de este correosu nombre bajo el nombre de usuario {txtUsername.Text}";
+
+                mensaje.Body = $"<html><body><p>{intro}</p></body></html>";
+
+                mensaje.IsBodyHtml = true;
+
+                mensaje.Priority = MailPriority.High;
+
+                SmtpClient client = new SmtpClient("smtp.office365.com", 587);
+
+                client.Credentials = new NetworkCredential(ConfigurationManager.AppSettings["Email"], ConfigurationManager.AppSettings["EmailPassword"]);
+
+                client.EnableSsl = true;
+
+                //client.Send(mensaje);
+
+                if (NuevaURLParaContenido != "Anonimo.jpg")
+                {
+                    fuProfilePhoto.SaveAs(MapPath("DatosDeLaApp") + "\\" + NuevaURLParaContenido);
+                }
             }
 
-            catch (SqlException)
+            catch (SqlException ex)
             {
                 notification.Icon = SystemIcons.Error;
                 notification.BalloonTipTitle = "Nombre de usuario";
-                notification.BalloonTipText = "el nombre de usuario o correo que ingreso ya esta en uso";
+                notification.BalloonTipText = ex.Message;
                 notification.ShowBalloonTip(4000);
             }
 
-            catch (FormatException)
+            catch (FormatException ex)
             {
                 notification.Icon = SystemIcons.Error;
                 notification.BalloonTipTitle = "Correo";
-                notification.BalloonTipText = "favor ingrese un correo valido";
+                notification.BalloonTipText = ex.Message;
                 notification.ShowBalloonTip(4000);
             }
 
-            catch (SmtpException)
+            catch (SmtpException ex)
             {
                 notification.Icon = SystemIcons.Error;
                 notification.BalloonTipTitle = "Correo";
-                notification.BalloonTipText = "hubo un error al procesar su dirección de correo, favor reintentar";
+                notification.BalloonTipText = ex.Message;
                 notification.ShowBalloonTip(4000);
             }
 
-            txtUsername.Enabled = txtNames.Enabled = txtMail.Enabled = txtPassword.Enabled = txtTelefono.Enabled = ddlDia.Enabled = ddlMes.Enabled = ddlAño.Enabled = txtBiografia.Enabled = ddlPlaceWhereLives.Enabled = ddlSex.Enabled = true;
+            txtUsername.Enabled = txtNames.Enabled = txtMail.Enabled = txtPassword.Enabled = txtTelefono.Enabled = ddlDia.Enabled = ddlMes.Enabled = ddlAño.Enabled = fuProfilePhoto.Enabled = ddlPlaceWhereLives.Enabled = ddlSex.Enabled = true;
         }
     }
 }

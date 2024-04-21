@@ -262,13 +262,20 @@
 #form1{
     top: 80px;
 }
+
+.noclick {
+    pointer-events: none;
+}
+
+.noclick > *{
+ pointer-events: auto;
+}
+
   </style>
 </head>
 <body>
   <form id="form1" runat="server">
       <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-      <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-          <ContentTemplate>
               <asp:HiddenField ID="ProgressHiddenField" runat="server"/>
               <div id="rogressBar" runat="server">
                   <asp:UpdateProgress ID="ProgressBar" runat="server"></asp:UpdateProgress>
@@ -490,10 +497,10 @@
                         </asp:DropDownList>
                     </div>
                 </div>
-                <div class="biografia">
-                    <label for="biografia">biografia</label> <br />
+                <div class="biografia" id="divBiografia">
+                    <label for="fotoperfil" class="noclick">Foto de perfil</label> <br />
                     <div class="input-box input-password">
-                        <asp:TextBox type="biografia" runat="server" id="txtBiografia" oninput="userInputChanged();"/>
+                        <label for="fuProfilePhoto" id="lblBiografia" runat="server" class="noclick">Subir archivo</label><asp:FileUpload id="fuProfilePhoto" style="display: none;" onchange="userInputChanged();" runat="server" accept="image/*"/>
                     </div>
                 </div>
                 <div class="placewherelives">
@@ -551,8 +558,6 @@
                     <asp:Button id="btnRegistrarse" Text="Registrarse" runat="server" Enabled="False" OnClick="btnEntrar_Click" OnClientClick="mostrarProgreso();"/>
                 </div>
             </section>
-          </ContentTemplate>
-      </asp:UpdatePanel>
   </form>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
@@ -562,7 +567,6 @@
         $(document).ready(function () {
             $('#<%=txtTelefono.ClientID%>').mask('+1 (000) 000-0000');
         });
-
 
         document.getElementById('txtUsername').addEventListener("keydown", function (event) {
 
@@ -584,8 +588,6 @@
                 document.getElementById('txtTelefono').value = parseInt(document.getElementById('txtTelefono').value.substring(0, document.getElementById('txtTelefono').length));
             }
         });
-
-
 
         document.getElementById('txtMail').addEventListener("keydown", function (event) {
 
@@ -614,13 +616,24 @@
             }
         });
 
-        document.getElementById('txtBiografia').addEventListener("keydown", function (event) {
+        document.getElementById('fuProfilePhoto').addEventListener("change", function (event) {
 
-            var char = event.key;
-
-            if (!(/[a-zA-Z\s]/.test(char))) {
-                event.preventDefault();
+            if ((document.getElementById('fuProfilePhoto').files && document.getElementById('fuProfilePhoto').files[0]))
+            {
+                document.getElementById('<%= lblBiografia.ClientID %>').innerText = "Archivo subido";
             }
+
+            else
+            {
+                document.getElementById('<%= lblBiografia.ClientID %>').innerText = "Subir archivo";
+            }
+        });
+
+        document.getElementById('divBiografia').addEventListener("click", function (event) {
+
+            
+            document.getElementById('<%= fuProfilePhoto.ClientID %>').click();
+            
         });
 
         function userInputChanged() {
@@ -629,11 +642,10 @@
             var MailText = document.getElementById('<%= txtMail.ClientID %>').value;
             var PasswordText = document.getElementById('<%= txtPassword.ClientID %>').value;
             var TelefonoText = document.getElementById('<%= txtTelefono.ClientID %>').value;
-            var BiografiaText = document.getElementById('<%= txtBiografia.ClientID %>').value;
 
             var fechaEspecifica = new Date(document.getElementById('<%= ddlAño.ClientID %>').value, document.getElementById('<%= ddlMes.ClientID %>').value - 1, document.getElementById('<%= ddlDia.ClientID %>').value, 0, 0, 0);
 
-            if (UserText.trim() === '' || PasswordText.trim() === '' || NamesText.trim() === '' || MailText.trim() === '' || TelefonoText.trim() === '' || BiografiaText.trim() === '' || fechaEspecifica > new Date() || !MailText.includes("@") || !MailText.includes(".")) {
+            if (UserText.trim() === '' || PasswordText.trim() === '' || NamesText.trim() === '' || MailText.trim() === '' || TelefonoText.trim() === '' || BiografiaText.trim() === '' || fechaEspecifica > new Date() || !MailText.includes("@") || !MailText.includes(".") || (document.getElementById('fuProfilePhoto').files && document.getElementById('fuProfilePhoto').files[0])) {
                 document.getElementById('<%= btnRegistrarse.ClientID %>').disabled = true;
             }
 

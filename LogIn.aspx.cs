@@ -1,5 +1,6 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity.Core.Objects;
 using System.Data.SqlClient;
@@ -24,7 +25,7 @@ namespace IDS348_FinalProject
 
         protected void btnEntrar_Click(object sender, EventArgs e)
         {
-            using (SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True;Connect Timeout=30"))
+            using (SqlConnection connection = new SqlConnection($@"{ConfigurationManager.AppSettings["🌌"]}"))
             {
                 connection.Open();
 

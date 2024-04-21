@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Threading.Tasks;
 using System.Web.UI.HtmlControls;
 using System.Web;
+using System.Configuration;
 
 namespace IDS348_FinalProject
 {
@@ -22,7 +23,13 @@ namespace IDS348_FinalProject
                 Response.Redirect("Twitter.aspx");
             }
 
-            using (SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True;Connect Timeout=30"))
+            CentroDTweets.InnerHtml = "";
+
+            PersonasDSugerencias.InnerHtml = "";
+
+            textareaTwitt.Value = "";
+
+            using (SqlConnection connection = new SqlConnection($@"{ConfigurationManager.AppSettings["🌌"]}"))
             {
                 connection.Open();
 
@@ -90,7 +97,7 @@ namespace IDS348_FinalProject
 
                             else if (revisar == "mp4" || revisar == "avi" || revisar == "mov" || revisar == "wmv")
                             {
-                                CentroDTweets.InnerHtml += $@"<video class='centro__vid' muted controls>
+                                CentroDTweets.InnerHtml += $@"<video class='centro__vid' onended='ReiniciarVideo(event);' onclick='Pausar_Reproducir(event);'>
                                                                <source class='centro__vid' src='{Contenido}' type='video/mp4'>Tu navegador no admite el elemento de video.
                                                              </video>
                                                          ";
@@ -125,7 +132,7 @@ namespace IDS348_FinalProject
 
                             else
                             {
-                                CentroDTweets.InnerHtml += $@"<svg class='centro__svg' id='{Convert.ToString(reader["PostID"])}' style='fill: lightgray' onclick='cambiarColorDeFondo(event);' viewBox='0 0 24 24'><g><path d='M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z'></path></g></svg>
+                                CentroDTweets.InnerHtml += $@"<svg class='centro__svg' id='{Convert.ToString(reader["PostID"])}' style='fill: #1da1f2' onclick='cambiarColorDeFondo(event);' viewBox='0 0 24 24'><g><path d='M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z'></path></g></svg>
                                                                   <span id='sDLikes' class='centro__numero'> {Convert.ToInt64(reader["LikesCount"])} </span>
                                                                   </li>
                                                                   <li class='centro__li'>
@@ -374,18 +381,14 @@ namespace IDS348_FinalProject
 
         #endregion
 
-
-        [System.Web.Services.WebMethod]
-        public static void Twittear(HttpPostedFileBase Archivo, string Texto)
+        protected void btnTwittear_Click(object sender, EventArgs e)
         {
-            
-
             string NuevaURLParaContenido = string.Empty;
             string NombreParaElArchivo;
 
-            if (Archivo != null)
+            if (fuPost.HasFiles)
             {
-                string TipoDeArchivo = Archivo.FileName.Split('.')[Archivo.FileName.Split('.').Length - 1].ToLower();
+                string TipoDeArchivo = fuPost.FileName.Split('.')[fuPost.FileName.Split('.').Length - 1].ToLower();
 
                 do
                 {
@@ -395,7 +398,7 @@ namespace IDS348_FinalProject
 
                 NuevaURLParaContenido = NombreParaElArchivo + "_" + UserName + "." + TipoDeArchivo;
 
-                Archivo.SaveAs(NuevaURLParaContenido);
+                fuPost.SaveAs(MapPath("DatosDeLaApp") + "\\" + NuevaURLParaContenido);
             }
 
             using (SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True;Connect Timeout=30"))
@@ -408,9 +411,7 @@ namespace IDS348_FinalProject
 
                     command.Parameters.AddWithValue("@UserID", UserID);
 
-                    command.Parameters.AddWithValue("@UserName", UserName);
-
-                    command.Parameters.AddWithValue("@Text", Texto);
+                    command.Parameters.AddWithValue("@Text", textareaTwitt.Value);
 
                     command.Parameters.AddWithValue("@PublicationDate", DateTime.Now);
 

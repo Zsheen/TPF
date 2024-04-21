@@ -706,8 +706,8 @@ body {
 }
 
 .home .user__img {
-  width: 3em;
-  height: 3em;
+  width: 5em;
+  height: 4em;
   border-radius: 50%;
   margin: 0 0.7em 0 0;
 }
@@ -1122,7 +1122,7 @@ body {
 .home .centro__svg {
   width: 1.9em;
   height: 1.9em;
-  fill: lightgray;
+  fill: #1da1f2;
   -webkit-transition: all 0.8s ease;
   transition: all 0.8s ease;
   padding: 0.2em;
@@ -1457,9 +1457,7 @@ body {
     </head>
     <body class="home" runat="server">
       <form id="form1" runat="server">
-          <asp:ScriptManager ID="ScriptManager1" runat="server" AllowCustomErrorsRedirect="False" ViewStateMode="Enabled"></asp:ScriptManager>
-          <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional" ViewStateMode="Enabled">
-              <ContentTemplate> 
+          <asp:FileUpload id="fuPost"  runat="server" style="display: none;" accept="image/*,video/*" onchange="habilitarTwittear()" />
                   <div class="columna izq">
                       <h1 class="izq__h1">
                           <a class="izq__a  " href="#" title="Twitter">
@@ -1513,7 +1511,7 @@ body {
                           <svg class="user__svg" viewBox="0 0 24 24"><g><path d="M3 12c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm9 2c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm7 0c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"></path></g></svg>
                       </div>
                   </div>                  
-                  <div class="centrado">
+                  <div id="DivCentro" class="centrado">
                       <div class="columna centro">
                           <div class="centro__titular">
                               <h2 class="centro__h2">Inicio</h2>
@@ -1523,16 +1521,16 @@ body {
                               <div id="pasando_up" class="pasando__up">
                                   <div id="AquiSeCargaraLaFotoDelPost" class="divFotoPost">
                                   </div>
-                                  <textarea id="textareaTwitt" runat="server" class="pasando__textarea" placeholder="¿Qué está pasando?"></textarea>
+                                  <textarea id="textareaTwitt" runat="server" class="pasando__textarea" placeholder="¿Qué está pasando?" oninput="habilitarTwittear()"></textarea>
                               </div>
                               <div id="pasando_inf" class="pasando__inf">
                                   <ul id="pasando_ul" class="pasando__ul">
                                       <li id="pasando_li" class="pasando__li">
-                                          <asp:FileUpload id="fuPost"  runat="server" style="display: none;" accept="image/*,video/*" />
+                                          
                                           <svg class="pasando__icon" id="svgUpload" viewBox="0 0 24 24"><g><path id="Path_Upload" d="M19.75 2H4.25C3.01 2 2 3.01 2 4.25v15.5C2 20.99 3.01 22 4.25 22h15.5c1.24 0 2.25-1.01 2.25-2.25V4.25C22 3.01 20.99 2 19.75 2zM4.25 3.5h15.5c.413 0 .75.337.75.75v9.676l-3.858-3.858c-.14-.14-.33-.22-.53-.22h-.003c-.2 0-.393.08-.532.224l-4.317 4.384-1.813-1.806c-.14-.14-.33-.22-.53-.22-.193-.03-.395.08-.535.227L3.5 17.642V4.25c0-.413.337-.75.75-.75zm-.744 16.28l5.418-5.534 6.282 6.254H4.25c-.402 0-.727-.322-.744-.72zm16.244.72h-2.42l-5.007-4.987 3.792-3.85 4.385 4.384v3.703c0 .413-.337.75-.75.75z"></path><circle cx="8.868" cy="8.309" r="1.542"></circle></g></svg>
                                       </li>
                                   </ul>
-                                  <asp:Button ID="btnTwittear" CssClass="pasando__twittear" runat="server" Text="Twittear" Enabled="false"></asp:Button>
+                                  <asp:Button ID="btnTwittear" CssClass="pasando__twittear" runat="server" Text="Twittear" Enabled="false" OnClick="btnTwittear_Click"></asp:Button>
                                </div>
                           </div>
                           <div id="CentroDTweets" class="centro__tweets" runat="server">
@@ -1558,8 +1556,6 @@ body {
                           <li class="der__li">© 2024 Twitter, Inc.</li>
                       </ul>
                   </div>
-              </ContentTemplate>
-          </asp:UpdatePanel>
       </form>    
         <script src = "https://code.jquery.com/jquery-3.6.0.min.js" ></script>
         <script>
@@ -1586,32 +1582,8 @@ body {
                     }
                 });
             });
-           
 
-            document.getElementById('btnTwittear').addEventListener('click', function (event) {
-
-                event.preventDefault();
-
-                var formData = new FormData();
-                formData.append('Archivo', document.getElementById('fuPost').files[0]);
-                formData.append('Texto', document.getElementById('textareaTwitt').value);
-
-                $.ajax({
-                    type: "POST",
-                    url: "Home1.aspx/Twittear",
-                    data: formData,
-                    contentType: false,
-                    processData: false,
-                    success: function (response) {
-
-                        console.log("El método de C# devolvio OK");
-                    },
-                    error: function (error) {
-
-                        return;
-                    }
-                });
-            });
+            // #region Follows: Funciones para los follows
 
             function Seguir(event) {
 
@@ -1712,9 +1684,13 @@ body {
                 }
             };
 
+            // #endregion
+
+            // #region Likes: Funciones para los Likes
+
             function cambiarColorDeFondo(event) {
 
-                if (event.currentTarget.style.fill === "lightgray") {
+                if (event.currentTarget.style.fill === 'rgb(29, 161, 242)') {
 
                         $.ajax({
                             type: "POST",
@@ -1752,7 +1728,7 @@ body {
                             }
                         });
 
-                    event.currentTarget.style.fill = "lightgray";
+                        event.currentTarget.style.fill = '#1da1f2';
 
                         event.target.nextElementSibling.innerText = ' ' + (parseInt(event.target.nextElementSibling.innerText.trim()) - 1) + ' ';
                     }
@@ -1761,6 +1737,10 @@ body {
             $(document).ready(function () {
 
             });
+
+            // #endregion
+
+            // #region Post: Funciones para los posts
 
             document.getElementById('svgUpload').addEventListener('click', function () {
 
@@ -1836,43 +1816,81 @@ body {
                 };
             });
 
-            document.getElementById('textareaTwitt').addEventListener("input", function () {
+            function habilitarTwittear() {
 
-                if (this.value.trim() !== "" || (document.getElementById('fuPost').files && document.getElementById('fuPost').files[0])) {
+                if (document.getElementById('textareaTwitt').value.trim() !== "" || (document.getElementById('fuPost').files && document.getElementById('fuPost').files[0])) {
                     document.getElementById('btnTwittear').disabled = false;
                 }
                 else {
                     document.getElementById('btnTwittear').disabled = true;
                 }
-            });
+
+            };
+
+            // #endregion
+
+            // #region Videos: Funciones para los videos
+
+            function ReiniciarVideo(event) {
+
+                event.currentTarget.currentTime = 0
+
+                event.currentTarget.play();
+            };
+
+            function Pausar_Reproducir(event){
+
+                if (!event.currentTarget.paused) {
+                    event.currentTarget.pause();
+                } else {
+                    event.currentTarget.play();
+                }
+            };
 
             document.addEventListener('DOMContentLoaded', function () {
-
                 const videos = document.querySelectorAll('.centro__vid');
+                let currentMainVideo = null; // Esto almacenará el video principal que se está reproduciendo
 
                 const observer = new IntersectionObserver(entries => {
+                    let maxRatio = 0; // Variable para encontrar el máximo intersectionRatio
+                    let mainVideo = null; // Variable para encontrar el video con mayor intersectionRatio visible
 
-                    entries.forEach(entry =>
-                    {
+                    // Iterar sobre cada entrada para encontrar la de mayor visibilidad
+                    entries.forEach(entry => {
                         const video = entry.target;
 
-                        if (entry.isIntersecting)
-                        {
-                            video.currentTime = 0; video.play();
-
+                        if (entry.isIntersecting && entry.intersectionRatio > maxRatio) {
+                            maxRatio = entry.intersectionRatio;
+                            mainVideo = video;
                         }
+                    });
 
-                        else
-                        {
+                    // Actualizar el video principal
+                    if (mainVideo) {
+                        if (currentMainVideo && currentMainVideo !== mainVideo) {
+                            currentMainVideo.pause();
+                            currentMainVideo.currentTime = 0; // Reiniciar el tiempo del video previo si deseas
+                        }
+                        currentMainVideo = mainVideo;
+                        currentMainVideo.play();
+                    }
+
+                    // Asegurarse de pausar todos los videos no principales
+                    videos.forEach(video => {
+                        if (video !== currentMainVideo) {
                             video.pause();
                         }
                     });
+                }, {
+                    threshold: 0.51  // Este valor es configurable según tus necesidades
                 });
 
                 videos.forEach(video => {
                     observer.observe(video);
                 });
             });
+
+            // #endregion
 
         </script>
   </body>

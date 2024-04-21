@@ -823,3 +823,7 @@ C:\Users\herde\Source\Repos\TPF\obj\Debug\IDS348-FinalProject.csproj.CoreCompile
 C:\Users\herde\Source\Repos\TPF\obj\Debug\IDS348-F.A6B805B3.Up2Date
 C:\Users\herde\Source\Repos\TPF\obj\Debug\IDS348-FinalProject.dll
 C:\Users\herde\Source\Repos\TPF\obj\Debug\IDS348-FinalProject.pdb
+C:\Users\Chender Marte\Desktop\TPF\bin\Microsoft.Rest.ClientRuntime.Azure.dll
+C:\Users\Chender Marte\Desktop\TPF\bin\Microsoft.Rest.ClientRuntime.dll
+C:\Users\Chender Marte\Desktop\TPF\bin\Microsoft.Rest.ClientRuntime.xml
+C:\Users\Chender Marte\Desktop\TPF\bin\Microsoft.Rest.ClientRuntime.Azure.xml

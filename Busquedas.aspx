@@ -1122,7 +1122,7 @@ body {
 .home .centro__svg {
   width: 1.9em;
   height: 1.9em;
-  fill: lightgray;
+  fill: #1da1f2;
   -webkit-transition: all 0.8s ease;
   transition: all 0.8s ease;
   padding: 0.2em;
@@ -1551,7 +1551,6 @@ body {
         <script src = "https://code.jquery.com/jquery-3.6.0.min.js" ></script>
         <script>
 
-
             $(document).ready(function () {
                 document.getElementById('ContBuscar').addEventListener('keydown', function (event) {
                     if (event.key === 'Enter') {
@@ -1576,6 +1575,8 @@ body {
 
                 });
             });
+
+            // #region Follows: Funciones para los follows
 
             function Seguir(event) {
 
@@ -1676,9 +1677,13 @@ body {
                 }
             };
 
+            // #endregion
+
+            // #region Likes: Funciones para los Likes
+
             function cambiarColorDeFondo(event) {
 
-                if (event.currentTarget.style.fill === "lightgray") {
+                if (event.currentTarget.style.fill === 'rgb(29, 161, 242)') {
 
                         $.ajax({
                             type: "POST",
@@ -1716,7 +1721,7 @@ body {
                             }
                         });
 
-                    event.currentTarget.style.fill = "lightgray";
+                    event.currentTarget.style.fill = '#1da1f2';
 
                         event.target.nextElementSibling.innerText = ' ' + (parseInt(event.target.nextElementSibling.innerText.trim()) - 1) + ' ';
                     }
@@ -1725,6 +1730,8 @@ body {
             $(document).ready(function () {
 
             });
+
+            // #endregion
 
             document.getElementById('svgUpload').addEventListener('click', function () {
 
