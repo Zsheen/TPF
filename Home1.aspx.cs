@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Web.UI.HtmlControls;
 using System.Web;
 using System.Configuration;
+using System.Windows.Forms;
+using System.Drawing;
 
 namespace IDS348_FinalProject
 {
@@ -383,6 +385,8 @@ namespace IDS348_FinalProject
 
         protected void btnTwittear_Click(object sender, EventArgs e)
         {
+            NotifyIcon notification = new NotifyIcon(); notification.Visible = true;
+
             string NuevaURLParaContenido = string.Empty;
             string NombreParaElArchivo;
 
@@ -397,29 +401,47 @@ namespace IDS348_FinalProject
                 } while (File.Exists($@"DatosDeLaApp\\{NombreParaElArchivo}_{UserName}.{TipoDeArchivo}"));
 
                 NuevaURLParaContenido = NombreParaElArchivo + "_" + UserName + "." + TipoDeArchivo;
-
-                fuPost.SaveAs(MapPath("DatosDeLaApp") + "\\" + NuevaURLParaContenido);
             }
 
-            using (SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True;Connect Timeout=30"))
+            using (SqlConnection connection = new SqlConnection($@"{ConfigurationManager.AppSettings["🌌"]}"))
             {
                 connection.Open();
 
-                using (SqlCommand command = new SqlCommand("CreatePost", connection))
+                using (var transaction = connection.BeginTransaction())
                 {
-                    command.CommandType = CommandType.StoredProcedure;
+                    try
+                    {
+                        using (SqlCommand command = new SqlCommand("CreatePost", connection))
+                        {
+                            command.CommandType = CommandType.StoredProcedure;
 
-                    command.Parameters.AddWithValue("@UserID", UserID);
+                            command.Parameters.AddWithValue("@UserID", UserID);
 
-                    command.Parameters.AddWithValue("@Text", textareaTwitt.Value);
+                            command.Parameters.AddWithValue("@Text", textareaTwitt.Value);
 
-                    command.Parameters.AddWithValue("@PublicationDate", DateTime.Now);
+                            command.Parameters.AddWithValue("@PublicationDate", DateTime.Now);
 
-                    command.Parameters.AddWithValue("@TipoContenido", "");
+                            command.Parameters.AddWithValue("@TipoContenido", "");
 
-                    command.Parameters.AddWithValue("@URLContenido", NuevaURLParaContenido);
+                            command.Parameters.AddWithValue("@URLContenido", NuevaURLParaContenido);
 
-                    command.ExecuteNonQuery();
+                            command.ExecuteNonQuery();
+                        }
+
+                        fuPost.SaveAs(MapPath("DatosDeLaApp") + "\\" + NuevaURLParaContenido);
+
+                        transaction.Commit();
+                    }
+
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+
+                        notification.Icon = SystemIcons.Error;
+                        notification.BalloonTipTitle = Convert.ToString(ex.InnerException);
+                        notification.BalloonTipText = ex.Message;
+                        notification.ShowBalloonTip(4000);
+                    }
                 }
             }
         }

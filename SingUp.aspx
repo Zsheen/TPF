@@ -493,7 +493,6 @@
                             <asp:ListItem Text="1902" Value="1902"></asp:ListItem>
                             <asp:ListItem Text="1901" Value="1901"></asp:ListItem>
                             <asp:ListItem Text="1900" Value="1900"></asp:ListItem>
-
                         </asp:DropDownList>
                     </div>
                 </div>
@@ -564,6 +563,8 @@
 
     <script>
 
+        // #region Validaciones
+
         $(document).ready(function () {
             $('#<%=txtTelefono.ClientID%>').mask('+1 (000) 000-0000');
         });
@@ -615,6 +616,8 @@
                 event.preventDefault();
             }
         });
+
+        // #endregion
 
         document.getElementById('fuProfilePhoto').addEventListener("change", function (event) {
 

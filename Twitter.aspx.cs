@@ -1,5 +1,4 @@
-﻿using IDS348_FinalProject.Controllers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,9 +11,6 @@ namespace IDS348_FinalProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            MailController mailController = new MailController();
-
-            mailController.SendConfirmationEmail("chenderamirez@gmail.com");
         }
     }
 }
