@@ -1816,27 +1816,58 @@ body {
                 }
             });
 
-            document.addEventListener('DOMContentLoaded', function () {
+            function ReiniciarVideo(event) {
 
+                event.currentTarget.currentTime = 0
+
+                event.currentTarget.play();
+            };
+
+            function Pausar_Reproducir(event) {
+
+                if (!event.currentTarget.paused) {
+                    event.currentTarget.pause();
+                } else {
+                    event.currentTarget.play();
+                }
+            };
+
+            document.addEventListener('DOMContentLoaded', function () {
                 const videos = document.querySelectorAll('.centro__vid');
+                let currentMainVideo = null; // Esto almacenará el video principal que se está reproduciendo
 
                 const observer = new IntersectionObserver(entries => {
+                    let maxRatio = 0; // Variable para encontrar el máximo intersectionRatio
+                    let mainVideo = null; // Variable para encontrar el video con mayor intersectionRatio visible
 
-                    entries.forEach(entry =>
-                    {
+                    // Iterar sobre cada entrada para encontrar la de mayor visibilidad
+                    entries.forEach(entry => {
                         const video = entry.target;
 
-                        if (entry.isIntersecting)
-                        {
-                            video.currentTime = 0; video.play();
-
+                        if (entry.isIntersecting && entry.intersectionRatio > maxRatio) {
+                            maxRatio = entry.intersectionRatio;
+                            mainVideo = video;
                         }
+                    });
 
-                        else
-                        {
+                    // Actualizar el video principal
+                    if (mainVideo) {
+                        if (currentMainVideo && currentMainVideo !== mainVideo) {
+                            currentMainVideo.pause();
+                            currentMainVideo.currentTime = 0; // Reiniciar el tiempo del video previo si deseas
+                        }
+                        currentMainVideo = mainVideo;
+                        currentMainVideo.play();
+                    }
+
+                    // Asegurarse de pausar todos los videos no principales
+                    videos.forEach(video => {
+                        if (video !== currentMainVideo) {
                             video.pause();
                         }
                     });
+                }, {
+                    threshold: 0.51  // Este valor es configurable según tus necesidades
                 });
 
                 videos.forEach(video => {

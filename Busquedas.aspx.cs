@@ -29,11 +29,11 @@ namespace IDS348_FinalProject
 
                 CentroDTweets.InnerHtml = ""; PersonasDSugerencias.InnerHtml = "";
 
-                using (SqlCommand command = new SqlCommand("ReadUserByUserName", connection))
+                using (SqlCommand command = new SqlCommand("ReadUserByParameter", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
 
-                    command.Parameters.AddWithValue("@UserName", Convert.ToString(Session["UserName"]));
+                    command.Parameters.AddWithValue("@SearchParameter", Convert.ToString(Session["UserName"]));
 
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
@@ -110,7 +110,7 @@ namespace IDS348_FinalProject
 
                             else if (revisar == "mp4" || revisar == "avi" || revisar == "mov" || revisar == "wmv")
                             {
-                                CentroDTweets.InnerHtml += $@"<video class='centro__vid' muted controls>
+                                CentroDTweets.InnerHtml += $@"<video class='centro__vid' onended='ReiniciarVideo(event);' onclick='Pausar_Reproducir(event);'>
                                                                <source class='centro__vid' src='{Contenido}' type='video/mp4'>Tu navegador no admite el elemento de video.
                                                              </video>
                                                          ";

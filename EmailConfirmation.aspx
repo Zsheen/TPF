@@ -139,8 +139,8 @@
     .biografia:focus-within,
     .placewherelives:focus-within,
     .sex:focus-within{
-      color: var(--username-password-focus-color);
-      border-color: var(--username-password-focus-border-color);
+      color: rgb(29, 161, 242);
+      border-color: rgb(29, 161, 242);
     }
 
     .entrar {

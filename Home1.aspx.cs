@@ -35,11 +35,11 @@ namespace IDS348_FinalProject
             {
                 connection.Open();
 
-                using (SqlCommand command = new SqlCommand("ReadUserByUserName", connection))
+                using (SqlCommand command = new SqlCommand("ReadUserByParameter", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
 
-                    command.Parameters.AddWithValue("@UserName", Convert.ToString(Session["UserName"]));
+                    command.Parameters.AddWithValue("@SearchParameter", Convert.ToString(Session["UserName"]));
 
                     using (SqlDataReader reader = command.ExecuteReader())
                     {

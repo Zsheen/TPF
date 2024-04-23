@@ -22,6 +22,11 @@ namespace IDS348_FinalProject
         protected void Page_Load(object sender, EventArgs e)
         {
             user.Enabled = password.Enabled = true;
+
+            if (user.Text == string.Empty & password.Text == string.Empty)
+            {
+                btnEntrar.Enabled = false;
+            }
         }
 
         protected void btnEntrar_Click(object sender, EventArgs e)
@@ -34,11 +39,11 @@ namespace IDS348_FinalProject
             {
                 connection.Open();
 
-                using (SqlCommand command = new SqlCommand("ReadUserByUserName", connection))
+                using (SqlCommand command = new SqlCommand("ReadUserByParameter", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
 
-                    command.Parameters.AddWithValue("@UserName", user.Text);
+                    command.Parameters.AddWithValue("@SearchParameter", user.Text);
 
                     using (SqlDataReader reader = command.ExecuteReader())
                     {

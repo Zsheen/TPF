@@ -202,6 +202,14 @@
         height: 5px;
         background-color: deepskyblue !important;
     }
+
+    #form1 {
+    pointer-events: none;
+}
+
+#form1 > *{
+    pointer-events: auto;
+}
   </style>
 </head>
 <body>
@@ -223,20 +231,20 @@
                 <div class="username">
                     <label for="user">Usuario o e-mail</label> <br />
                     <div class="input-box input-user">
-                        <asp:TextBox oninput="userInputChanged()" type="username" name="user" id="user" runat="server" AutoPostBack="True" />
+                        <asp:TextBox oninput="userInputChanged()" type="username" name="user" id="user" runat="server"/>
                     </div>
                 </div>
                 <div class="password">
-                    <label for="password">Contraseña</label> <br />
+                    <label for="password">Contrase&ntilde;a</label> <br />
                     <div class="input-box input-password">
-                        <asp:TextBox oninput="userInputChanged()" type="password" name="password" runat="server" id="password" AutoPostBack="True" />
+                        <asp:TextBox oninput="userInputChanged()" type="password" name="password" runat="server" id="password"/>
                     </div>
                 </div>
                 <div class="entrar">
                     <asp:Button id="btnEntrar" Text="Entrar" runat="server" Enabled="False" OnClick="btnEntrar_Click" OnClientClick="mostrarProgreso();"/>
                 </div>
                 <footer class="singup">
-                    <a href="#" >&iquest;Olvidaste tu contrase&ntilde;a?</a>
+                    <a href="CambiarContrase&ntilde;a.aspx" >&iquest;Olvidaste tu contrase&ntilde;a?</a>
                     <span class="dot"></span>
                     <a href="SingUp.aspx">Reg&iacute;strate</a>
                 </footer>

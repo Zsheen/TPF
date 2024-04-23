@@ -22,7 +22,12 @@ namespace IDS348_FinalProject
 
             lblEmail.InnerText = Convert.ToString(Session["Email"]);
 
-            lblInformation.InnerText = $"Hemos enviado por correo electrónico a {Convert.ToString(Session["Email"])} el código que hace falta para iniciar sesión";
+            if (Convert.ToString(Session["PaginaAnterior"]) == "CambiarContraseña.aspx")
+            {
+                lblInformation.InnerText = $"Hemos enviado por correo electrónico a {Convert.ToString(Session["Email"])} el código que hace falta para restablecer su contraseña";
+            }
+
+            else { lblInformation.InnerText = $"Hemos enviado por correo electrónico a {Convert.ToString(Session["Email"])} el código que hace falta para iniciar sesión"; }
 
             aBack.HRef = Convert.ToString(Session["PaginaAnterior"]);
         }
@@ -35,23 +40,35 @@ namespace IDS348_FinalProject
                 {
                     connection.Open();
 
-                    using (SqlCommand command = new SqlCommand("UpdateUserVerified", connection))
+                    if (Convert.ToString(Session["PaginaAnterior"]) == "CambiarContraseña.aspx")
                     {
-                        command.CommandType = CommandType.StoredProcedure;
+                        Session.Remove("CodeConfirmation"); Session.Remove("PaginaAnterior"); Session.Remove("Confirmation");
 
-                        command.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
+                        Session["ChangePassword"] = "True";
 
-                        command.Parameters.AddWithValue("@Verified", 'V');
+                        Response.Redirect("NuevaContraseña.aspx");
+                    }
 
-                        command.ExecuteNonQuery();
+                    else
+                    {
+                        using (SqlCommand command = new SqlCommand("UpdateUser", connection))
+                        {
+                            command.CommandType = CommandType.StoredProcedure;
 
-                        Session["Confirmation"] = "False";
+                            command.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
 
-                        Session.Remove("Confirmation"); Session.Remove("Email"); Session.Remove("CodeConfirmation"); Session.Remove("PaginaAnterior"); Session.Remove("PaginaAnterior");
+                            command.Parameters.AddWithValue("@Verified", 'V');
 
-                        Session["Loged"] = "True";
+                            command.ExecuteNonQuery();
 
-                        Response.Redirect("Home1.aspx");
+                            Session["Confirmation"] = "False";
+
+                            Session.Remove("Email"); Session.Remove("CodeConfirmation"); Session.Remove("PaginaAnterior"); Session.Remove("Confirmation");
+
+                            Session["Loged"] = "True";
+
+                            Response.Redirect("Home1.aspx");
+                        }
                     }
                 }
             }

@@ -1,22 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Data.Entity.Core.Objects;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
 using System.Net.Mail;
 using System.Net;
-using System.Security.Cryptography;
-using System.Web;
-using System.Web.Services;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
-using System.Net.PeerToPeer;
-using System.IO;
 
 namespace IDS348_FinalProject
 {
