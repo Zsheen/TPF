@@ -25,6 +25,7 @@ namespace IDS348_FinalProject
         {
             // Crear una variable de sesión y asignarle un valor inicial
             HttpContext.Current.Session["Loged"] = "False";
+            HttpContext.Current.Session["Confirmation"] = "False";
         }
     }
 }

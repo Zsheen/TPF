@@ -1,7 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SingUp.aspx.cs" Inherits="IDS348_FinalProject.SingUp" %>
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -648,7 +647,7 @@
 
             var fechaEspecifica = new Date(document.getElementById('<%= ddlAño.ClientID %>').value, document.getElementById('<%= ddlMes.ClientID %>').value - 1, document.getElementById('<%= ddlDia.ClientID %>').value, 0, 0, 0);
 
-            if (UserText.trim() === '' || PasswordText.trim() === '' || NamesText.trim() === '' || MailText.trim() === '' || TelefonoText.trim() === '' || BiografiaText.trim() === '' || fechaEspecifica > new Date() || !MailText.includes("@") || !MailText.includes(".") || (document.getElementById('fuProfilePhoto').files && document.getElementById('fuProfilePhoto').files[0])) {
+            if (UserText.trim() === '' || PasswordText.trim() === '' || NamesText.trim() === '' || MailText.trim() === '' || TelefonoText.trim() === '' || fechaEspecifica > new Date() || !MailText.includes("@") || !MailText.includes(".")) {
                 document.getElementById('<%= btnRegistrarse.ClientID %>').disabled = true;
             }
 

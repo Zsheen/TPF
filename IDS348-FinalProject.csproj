@@ -486,10 +486,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Busquedas.aspx" />
+    <Content Include="CambiarContraseña.aspx" />
     <Content Include="Database1.mdf" />
     <Content Include="DatosDeLaApp\Anonimo.jpg" />
     <Content Include="DatosDeLaApp\Chen_ProfilePhoto.PNG" />
     <Content Include="DatosDeLaApp\twitter-logo.png" />
+    <Content Include="EmailConfirmation.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Home1.aspx" />
     <Content Include="LogIn.aspx" />
@@ -506,6 +508,20 @@
     </Compile>
     <Compile Include="Busquedas.aspx.designer.cs">
       <DependentUpon>Busquedas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CambiarContraseña.aspx.cs">
+      <DependentUpon>CambiarContraseña.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CambiarContraseña.aspx.designer.cs">
+      <DependentUpon>CambiarContraseña.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmailConfirmation.aspx.cs">
+      <DependentUpon>EmailConfirmation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmailConfirmation.aspx.designer.cs">
+      <DependentUpon>EmailConfirmation.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
