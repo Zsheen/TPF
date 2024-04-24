@@ -706,8 +706,8 @@ body {
 }
 
 .home .user__img {
-  width: 3em;
-  height: 3em;
+  width: 5em;
+  height: 4em;
   border-radius: 50%;
   margin: 0 0.7em 0 0;
 }
@@ -1454,6 +1454,7 @@ body {
 }
 
 </style>
+        <link rel="icon" type="image/x-icon" href="DatosDeLaApp\twitter-logo.png">
     </head>
     <body class="home" runat="server">
       <form id="form1" runat="server">
@@ -1732,89 +1733,6 @@ body {
             });
 
             // #endregion
-
-            document.getElementById('svgUpload').addEventListener('click', function () {
-
-                if (document.getElementById('ArchivoDelPost') === null) {
-
-                    document.getElementById('<//%= fuPost.ClientID %>').click();
-                }
-
-                else {
-
-                    document.getElementById('ArchivoDelPost').remove();
-
-                    document.getElementById('AquiSeCargaraLaFotoDelPost').style.display = 'none';
-
-                    document.getElementById('<//%= fuPost.ClientID %>').click();
-                }
-            });
-
-            document.getElementById('fuPost').addEventListener('change', function (event) {
-
-                event.preventDefault();
-
-                if (this.files && this.files[0] && document.getElementById('ArchivoDelPost') === null) {
-
-                    const divElement = document.getElementById('AquiSeCargaraLaFotoDelPost');
-
-                    divElement.style.marginBottom = '11px'; divElement.style.marginLeft = '18px'; divElement.style.display = 'block';
-
-                    var reader = new FileReader();
-
-                    if (event.target.files[0].type.startsWith('image/')) {
-
-                        const imageElement = document.createElement('img');
-
-                        imageElement.id = "ArchivoDelPost"; imageElement.style.left = "50px"; imageElement.height = 200;
-
-                        imageElement.runnat = "server";
-
-                        reader.onload = function (e) {
-
-                            imageElement.src = e.target.result; 
-                        }
-
-                        reader.readAsDataURL(this.files[0]);
-
-                        divElement.appendChild(imageElement);
-                    }
-
-                    else if (event.target.files[0].type.startsWith('video/')) {
-
-                        const videoElement = document.createElement('video');
-
-                        videoElement.id = "ArchivoDelPost"; videoElement.style.left = "50px"; videoElement.height = 200; videoElement.controls = true;
-
-                        videoElement.runnat = "server";
-
-                        reader.onload = function (e) {
-
-                            videoElement.src = e.target.result;
-                        }
-
-                        reader.readAsDataURL(this.files[0]);
-
-                        divElement.appendChild(videoElement);
-
-                        videoElement.play();
-                    }
-                    else { 
-                            console.log('Por favor seleccione una imagen o un video.');
-                    };
-
-                };
-            });
-
-            document.getElementById('textareaTwitt').addEventListener("input", function () {
-
-                if (this.value.trim() !== "" || (document.getElementById('fuPost').files && document.getElementById('fuPost').files[0])) {
-                    document.getElementById('TwittearAlgo').disabled = false;
-                }
-                else {
-                    document.getElementById('TwittearAlgo').disabled = true;
-                }
-            });
 
             function ReiniciarVideo(event) {
 

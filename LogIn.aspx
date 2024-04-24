@@ -211,6 +211,7 @@
     pointer-events: auto;
 }
   </style>
+    <link rel="icon" type="image/x-icon" href="DatosDeLaApp\twitter-logo.png">
 </head>
 <body>
   <form id="form1" runat="server">
