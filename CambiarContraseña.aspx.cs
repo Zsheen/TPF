@@ -18,7 +18,16 @@ namespace IDS348_FinalProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                Response.Cache.SetExpires(DateTime.UtcNow.AddSeconds(-1));
+                Response.Cache.SetNoStore();
+            }
 
+            else if (Request.Headers["Cache-Control"] != "max-age=0") { Response.Redirect(Request.Url.AbsoluteUri); }
+
+            Session["Confirmation"] = "False";
         }
 
         protected void btnSiguiente_Click(object sender, EventArgs e)

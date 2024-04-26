@@ -1560,6 +1560,7 @@ body {
       </form>    
         <script src = "https://code.jquery.com/jquery-3.6.0.min.js" ></script>
         <script>
+
             $(document).ready(function () {
 
                 document.getElementById('ContenedorBuscar').addEventListener('keydown', function (event) {
@@ -1573,7 +1574,6 @@ body {
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
                             success: function (response) {
-
                                 window.location.href = "Busquedas.aspx";
                             },
                             error: function (error) {
@@ -1700,7 +1700,6 @@ body {
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
                             success: function (response) {
-                                console.log("El método C# se ejecutó con éxito.");
                             },
                             error: function (error) {
 
@@ -1721,7 +1720,6 @@ body {
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
                             success: function (response) {
-                                console.log("El método C# se ejecutó con éxito.");
                             },
                             error: function (error) {
 
@@ -1850,13 +1848,12 @@ body {
 
             document.addEventListener('DOMContentLoaded', function () {
                 const videos = document.querySelectorAll('.centro__vid');
-                let currentMainVideo = null; // Esto almacenará el video principal que se está reproduciendo
+                let currentMainVideo = null;
 
                 const observer = new IntersectionObserver(entries => {
-                    let maxRatio = 0; // Variable para encontrar el máximo intersectionRatio
-                    let mainVideo = null; // Variable para encontrar el video con mayor intersectionRatio visible
+                    let maxRatio = 0;
+                    let mainVideo = null;
 
-                    // Iterar sobre cada entrada para encontrar la de mayor visibilidad
                     entries.forEach(entry => {
                         const video = entry.target;
 
@@ -1866,24 +1863,22 @@ body {
                         }
                     });
 
-                    // Actualizar el video principal
                     if (mainVideo) {
                         if (currentMainVideo && currentMainVideo !== mainVideo) {
                             currentMainVideo.pause();
-                            currentMainVideo.currentTime = 0; // Reiniciar el tiempo del video previo si deseas
+                            currentMainVideo.currentTime = 0;
                         }
                         currentMainVideo = mainVideo;
                         currentMainVideo.play();
                     }
 
-                    // Asegurarse de pausar todos los videos no principales
                     videos.forEach(video => {
                         if (video !== currentMainVideo) {
                             video.pause();
                         }
                     });
                 }, {
-                    threshold: 0.51  // Este valor es configurable según tus necesidades
+                    threshold: 0.51
                 });
 
                 videos.forEach(video => {

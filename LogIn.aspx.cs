@@ -27,6 +27,8 @@ namespace IDS348_FinalProject
             {
                 btnEntrar.Enabled = false;
             }
+
+            Session["Confirmation"] = "False";
         }
 
         protected void btnEntrar_Click(object sender, EventArgs e)

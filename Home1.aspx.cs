@@ -14,12 +14,17 @@ namespace IDS348_FinalProject
 {
     public partial class Home1 : System.Web.UI.Page
     {
-        public static string UserName;
-
-        public static int UserID;
-
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                Response.Cache.SetExpires(DateTime.UtcNow.AddSeconds(-1));
+                Response.Cache.SetNoStore();
+            }
+
+            else if (Request.Headers["Cache-Control"] != "max-age=0") { Response.Redirect(Request.Url.AbsoluteUri); }
+
             if (Convert.ToString(Session["Loged"]) != "True")
             {
                 Response.Redirect("Twitter.aspx");
@@ -52,10 +57,6 @@ namespace IDS348_FinalProject
                             userPlaceholder.InnerText = $"@{Convert.ToString(reader["UserName"])}";
 
                             nombrePlaceholder.InnerText = Convert.ToString(reader["Names"]);
-
-                            UserID = Convert.ToInt32(Session["UserID"]);
-
-                            UserName = Convert.ToString(Session["UserName"]);
                         }
                     }
                 }
@@ -201,7 +202,7 @@ namespace IDS348_FinalProject
                 {
                     command.CommandType = CommandType.StoredProcedure;
 
-                    command.Parameters.AddWithValue("@UserID", UserID);
+                    command.Parameters.AddWithValue("@UserID", Convert.ToInt32(HttpContext.Current.Session["UserID"]));
                     command.Parameters.AddWithValue("@LikedEntityID", LikedEntityID);
                     command.Parameters.AddWithValue("@LikedEntityType", LikedEntityType);
 
@@ -221,7 +222,7 @@ namespace IDS348_FinalProject
                 {
                     command.CommandType = CommandType.StoredProcedure;
 
-                    command.Parameters.AddWithValue("@UserID", UserID);
+                    command.Parameters.AddWithValue("@UserID", Convert.ToInt32(HttpContext.Current.Session["UserID"]));
                     command.Parameters.AddWithValue("@LikedEntityID", LikedEntityID);
                     command.Parameters.AddWithValue("@LikedEntityType", LikedEntityType);
 
@@ -245,7 +246,7 @@ namespace IDS348_FinalProject
                 {
                     command.CommandType = CommandType.StoredProcedure;
 
-                    command.Parameters.AddWithValue("@FollowerID", UserID);
+                    command.Parameters.AddWithValue("@FollowerID", Convert.ToInt32(HttpContext.Current.Session["UserID"]));
                     command.Parameters.AddWithValue("@FollowingID", SugerenceID);
 
                     command.ExecuteNonQuery();
@@ -264,7 +265,7 @@ namespace IDS348_FinalProject
                 {
                     command.CommandType = CommandType.StoredProcedure;
 
-                    command.Parameters.AddWithValue("@FollowerID", UserID);
+                    command.Parameters.AddWithValue("@FollowerID", Convert.ToInt32(HttpContext.Current.Session["UserID"]));
                     command.Parameters.AddWithValue("@FollowingID", SugerenceID);
 
                     command.ExecuteNonQuery();
@@ -398,9 +399,9 @@ namespace IDS348_FinalProject
                 {
                     NombreParaElArchivo = GenerarNombreAleatorio();
 
-                } while (File.Exists($@"DatosDeLaApp\\{NombreParaElArchivo}_{UserName}.{TipoDeArchivo}"));
+                } while (File.Exists($@"DatosDeLaApp\\{NombreParaElArchivo}_{Convert.ToString(HttpContext.Current.Session["UserName"])}.{TipoDeArchivo}"));
 
-                NuevaURLParaContenido = NombreParaElArchivo + "_" + UserName + "." + TipoDeArchivo;
+                NuevaURLParaContenido = NombreParaElArchivo + "_" + Convert.ToString(HttpContext.Current.Session["UserName"]) + "." + TipoDeArchivo;
             }
 
             using (SqlConnection connection = new SqlConnection($@"{ConfigurationManager.AppSettings["🌌"]}"))
@@ -411,11 +412,11 @@ namespace IDS348_FinalProject
                 {
                     try
                     {
-                        using (SqlCommand command = new SqlCommand("CreatePost", connection))
+                        using (SqlCommand command = new SqlCommand("CreatePost", connection, transaction))
                         {
                             command.CommandType = CommandType.StoredProcedure;
 
-                            command.Parameters.AddWithValue("@UserID", UserID);
+                            command.Parameters.AddWithValue("@UserID", Convert.ToInt32(HttpContext.Current.Session["UserID"]));
 
                             command.Parameters.AddWithValue("@Text", textareaTwitt.Value);
 

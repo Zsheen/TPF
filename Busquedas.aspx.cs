@@ -12,13 +12,18 @@ namespace IDS348_FinalProject
 {
     public partial class Busquedas : System.Web.UI.Page
     {
-        public static string UserName;
-
-        public static int UserID;
-
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Convert.ToString(Session["Loged"]) != "True")
+            if (!IsPostBack)
+            {
+                Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                Response.Cache.SetExpires(DateTime.UtcNow.AddSeconds(-1));
+                Response.Cache.SetNoStore();
+            }
+
+            else if (Request.Headers["Cache-Control"] != "max-age=0") { Response.Redirect(Request.Url.AbsoluteUri); }
+
+            if (Convert.ToString(Session["Loged"]) != "True" || Convert.ToString(Session["Search"]) == string.Empty)
             {
                 Response.Redirect("Twitter.aspx");
             }
@@ -46,10 +51,6 @@ namespace IDS348_FinalProject
                             userPlaceholder.InnerText = $"@{Convert.ToString(reader["UserName"])}";
 
                             nombrePlaceholder.InnerText = Convert.ToString(reader["Names"]);
-
-                            UserID = Convert.ToInt32(Session["UserID"]);
-
-                            UserName = Convert.ToString(Session["UserName"]);
                         }
                     }
                 }

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Net.Mail;
 using System.Net;
 using System.Windows.Forms;
+using System.Web;
 
 namespace IDS348_FinalProject
 {
@@ -13,10 +14,7 @@ namespace IDS348_FinalProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (txtUsername.Text != string.Empty & txtPassword.Text != string.Empty)
-            {
-                btnRegistrarse.Enabled = true;
-            }
+            Session["Confirmation"] = "False";
         }
 
         protected void btnEntrar_Click(object sender, EventArgs e)

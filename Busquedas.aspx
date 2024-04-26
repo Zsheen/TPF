@@ -1552,9 +1552,12 @@ body {
         <script src = "https://code.jquery.com/jquery-3.6.0.min.js" ></script>
         <script>
 
-            $(document).ready(function () {
-                document.getElementById('ContBuscar').addEventListener('keydown', function (event) {
-                    if (event.key === 'Enter') {
+            $(document).ready(function ()
+            {
+                document.getElementById('ContBuscar').addEventListener('keydown', function (event)
+                {
+                    if (event.key === 'Enter')
+                    {
                         event.preventDefault();
 
                         $.ajax({
@@ -1565,15 +1568,10 @@ body {
                             dataType: "json",
                             success: function (response) {
                                 window.location.href = "Busquedas.aspx";
-                                //location.reload();
                             },
-                            error: function (error) {
-                                return;
-                            }
+                            error: function (error) { return; }
                         });
                     }
-
-
                 });
             });
 
@@ -1589,13 +1587,12 @@ body {
                         data: JSON.stringify({ SugerenceID: event.currentTarget.id}),
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
-                        success: function (response) {
+                        success: function (response)
+                        {
+                            
 
                         },
-                        error: function (error) {
-
-                            return;
-                        }
+                        error: function (error) { return; }
                     });
 
                     event.currentTarget.value = "siguiendo";
@@ -1617,14 +1614,12 @@ body {
                         data: JSON.stringify({ SugerenceID: event.currentTarget.id }),
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
-                        success: function (response) {
-
+                        success: function (response)
+                        {
+                            
                         },
-                        error: function (error) {
-
-                            return;
-                        }
-                    });
+                        error: function (error) { return; }
+                    });  
 
                     event.currentTarget.value = "seguir";
 
@@ -1638,41 +1633,40 @@ body {
                 }
             };
 
-            function cambiarColorDeTexto(event) {
-
-                if (event.currentTarget.value === "siguiendo") {
-
+            function cambiarColorDeTexto(event)
+            {
+                if (event.currentTarget.value === "siguiendo")
+                {
                     $.ajax({
                         type: "POST",
                         url: "Home1.aspx/QuitarFollow",
                         data: JSON.stringify({ SugerenceID: event.currentTarget.id }),
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
-                        success: function (response) {
+                        success: function (response)
+                        {
+                            
                         },
-                        error: function (error) {
-
-                            return;
-                        }
+                        error: function (error) { return; }
                     });
 
                     event.currentTarget.style.color = "#ffffff"; event.currentTarget.value = "seguir";
                 }
 
-                else if (event.currentTarget.value === "seguir") {
+                else if (event.currentTarget.value === "seguir")
+                {
                     $.ajax({
                         type: "POST",
                         url: "Home1.aspx/DarFollow",
                         data: JSON.stringify({ SugerenceID: event.currentTarget.id }),
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
-                        success: function (response) {
+                        success: function (response)
+                        {
+                            
                         },
-                        error: function (error) {
-
-                            return;
-                        }
-                    });
+                        error: function (error) { return; }
+                    });   
 
                     event.currentTarget.style.color = "#1da1f2"; event.currentTarget.value = "siguiendo";
                 }
@@ -1686,46 +1680,43 @@ body {
 
                 if (event.currentTarget.style.fill === 'rgb(29, 161, 242)') {
 
-                        $.ajax({
-                            type: "POST",
-                            url: "Home1.aspx/DarLike",
-                            data: JSON.stringify({ LikedEntityID: event.currentTarget.id, LikedEntityType: 'Post' }),
-                            contentType: "application/json; charset=utf-8",
-                            dataType: "json",
-                            success: function (response) {
-                                console.log("El método C# se ejecutó con éxito.");
-                            },
-                            error: function (error) {
+                    $.ajax({
+                        type: "POST",
+                        url: "Home1.aspx/DarLike",
+                        data: JSON.stringify({ LikedEntityID: event.currentTarget.id, LikedEntityType: 'Post' }),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response)
+                        {
+                            
+                        },
+                        error: function (error) { return; }
+                    });
 
-                                return;
-                            }
-                        });
+                    event.currentTarget.style.fill = "red";
 
-                        event.currentTarget.style.fill = "red";
+                    event.target.nextElementSibling.innerText = ' ' + (parseInt(event.target.nextElementSibling.innerText.trim()) + 1) + ' ';
+                }
 
-                        event.target.nextElementSibling.innerText = ' ' + (parseInt(event.target.nextElementSibling.innerText.trim()) + 1) + ' ';
-                    }
-
-                    else if (event.currentTarget.style.fill === "red") {
-                        $.ajax({
-                            type: "POST",
-                            url: "Home1.aspx/QuitarLike",
-                            data: JSON.stringify({ LikedEntityID: event.currentTarget.id, LikedEntityType: 'Post' }),
-                            contentType: "application/json; charset=utf-8",
-                            dataType: "json",
-                            success: function (response) {
-                                console.log("El método C# se ejecutó con éxito.");
-                            },
-                            error: function (error) {
-
-                                return;
-                            }
-                        });
+                else if (event.currentTarget.style.fill === "red")
+                {
+                    $.ajax({
+                        type: "POST",
+                        url: "Home1.aspx/QuitarLike",
+                        data: JSON.stringify({ LikedEntityID: event.currentTarget.id, LikedEntityType: 'Post' }),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response)
+                        {
+                            
+                        },
+                        error: function (error) { return; }
+                    });
 
                     event.currentTarget.style.fill = '#1da1f2';
 
-                        event.target.nextElementSibling.innerText = ' ' + (parseInt(event.target.nextElementSibling.innerText.trim()) - 1) + ' ';
-                    }
+                    event.target.nextElementSibling.innerText = ' ' + (parseInt(event.target.nextElementSibling.innerText.trim()) - 1) + ' ';
+                }
             };
 
             $(document).ready(function () {
