@@ -11,11 +11,14 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using System.Web.UI.WebControls;
 
 namespace IDS348_FinalProject
 {
     public partial class Home1 : System.Web.UI.Page
     {
+        public static string RutaDeDatosDeLaApp;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -32,7 +35,9 @@ namespace IDS348_FinalProject
                 Response.Redirect("Twitter.aspx");
             }
 
-            CentroDTweets.InnerHtml = ""; PersonasDSugerencias.InnerHtml = ""; textareaTwitt.Value = "";
+            CentroDTweets.InnerHtml = ""; PersonasDSugerencias.InnerHtml = "";
+
+            RutaDeDatosDeLaApp = MapPath("DatosDeLaApp");
 
             using (SqlConnection connection = new SqlConnection($@"{ConfigurationManager.AppSettings["🌌"]}"))
             {
@@ -434,26 +439,27 @@ namespace IDS348_FinalProject
             NotifyIcon notification = new NotifyIcon(); notification.Visible = true;
 
             string NuevaURLParaContenido = string.Empty;
-            string NombreParaElArchivo;
 
             if (fuPost.HasFiles)
             {
-                string TipoDeArchivo = fuPost.FileName.Split('.')[fuPost.FileName.Split('.').Length - 1].ToLower();
+                string NombreParaElArchivo;
+
+                string TipoDeArchivo = Path.GetExtension(fuPost.FileName).ToLower();
 
                 do
                 {
                     NombreParaElArchivo = GenerarNombreAleatorio();
 
-                } while (File.Exists($@"DatosDeLaApp\\{NombreParaElArchivo}_{Convert.ToString(HttpContext.Current.Session["UserName"])}.{TipoDeArchivo}"));
+                } while (File.Exists($@"DatosDeLaApp\\{NombreParaElArchivo}_{Convert.ToString(HttpContext.Current.Session["UserName"])}{TipoDeArchivo}"));
 
-                NuevaURLParaContenido = NombreParaElArchivo + "_" + Convert.ToString(HttpContext.Current.Session["UserName"]) + "." + TipoDeArchivo;
+                NuevaURLParaContenido = NombreParaElArchivo + "_" + Convert.ToString(HttpContext.Current.Session["UserName"]) + TipoDeArchivo;
             }
 
             using (SqlConnection connection = new SqlConnection($@"{ConfigurationManager.AppSettings["🌌"]}"))
             {
                 connection.Open();
 
-                using (var transaction = connection.BeginTransaction())
+                using (SqlTransaction transaction = connection.BeginTransaction())
                 {
                     try
                     {
