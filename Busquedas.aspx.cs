@@ -48,14 +48,28 @@ namespace IDS348_FinalProject
 
                             imgFotoInferior.ImageUrl = Convert.ToString(Session["URLProfilePhoto"]);
 
-                            userPlaceholder.InnerText = $"@{Convert.ToString(reader["UserName"])}";
+                            if (Convert.ToString(reader["UserName"]).Length > 13)
+                            {
+                                userPlaceholder.InnerText = $"@{Convert.ToString(reader["UserName"]).Substring(0, 13)}...";
+                            }
+                            else
+                            {
+                                userPlaceholder.InnerText = $"@{Convert.ToString(reader["UserName"])}";
+                            }
 
-                            nombrePlaceholder.InnerText = Convert.ToString(reader["Names"]);
+                            if (Convert.ToString(reader["Names"]).Length > 12)
+                            {
+                                nombrePlaceholder.InnerText = Convert.ToString(reader["Names"]).Substring(0, 11) + "...";
+                            }
+                            else
+                            {
+                                nombrePlaceholder.InnerText = Convert.ToString(reader["Names"]);
+                            }
                         }
                     }
                 }
 
-                List<GetPostByFollowing> Posts = new List<GetPostByFollowing>();
+                List<SearchPost> Posts = new List<SearchPost>();
 
                 using (SqlCommand command = new SqlCommand("SearchPosts", connection))
                 {
@@ -69,12 +83,12 @@ namespace IDS348_FinalProject
                     {
                         while (reader.Read())
                         {
-                            Posts.Add(new GetPostByFollowing { PostID = Convert.ToInt32(reader["PostID"]), UserID = Convert.ToInt32(reader["UserID"]), Text = Convert.ToString(reader["Text"]), PublicationDate = Convert.ToDateTime(reader["PublicationDate"]), TipoContenido = Convert.ToString(reader["TipoContenido"]), URLContenido = Convert.ToString(reader["URLContenido"]), UserName = Convert.ToString(reader["UserName"]), Names = Convert.ToString(reader["Names"]), ProfilePhoto = Convert.ToString(reader["ProfilePhoto"]), LikesCount = Convert.ToInt32(reader["LikesCount"]), CommentsCount = Convert.ToInt32(reader["CommentsCount"]), UserLiked = Convert.ToInt16(reader["UserLiked"]) });
+                            Posts.Add(new SearchPost { PostID = Convert.ToInt32(reader["PostID"]), UserID = Convert.ToInt32(reader["UserID"]), Text = Convert.ToString(reader["Text"]), PublicationDate = Convert.ToDateTime(reader["PublicationDate"]), TipoContenido = Convert.ToString(reader["TipoContenido"]), URLContenido = Convert.ToString(reader["URLContenido"]), UserName = Convert.ToString(reader["UserName"]), Names = Convert.ToString(reader["Names"]), ProfilePhoto = Convert.ToString(reader["ProfilePhoto"]), LikesCount = Convert.ToInt32(reader["LikesCount"]), CommentsCount = Convert.ToInt32(reader["CommentsCount"]), UserLiked = Convert.ToInt16(reader["UserLiked"]), Followed = Convert.ToInt32(reader["Followed"]) });
                         }
                     }
                 }
 
-                foreach (GetPostByFollowing post in Posts)
+                foreach (SearchPost post in Posts)
                 {
 
                     string URLDeSuFoto = $"DatosDeLaApp\\{post.ProfilePhoto}";
@@ -89,12 +103,25 @@ namespace IDS348_FinalProject
                                                                     <div class='centro__row centro__row--user'>
                                                                         <h3 class='centro__h3'>{post.Names}</h3>
                                                                         <h4 class='centro__h4'>@{post.UserName}</h4>
-                                                                        <span class='centro__tiempo'> {Home1.Convertir_Fecha_a_Texto(post.PublicationDate)} </span>
-                                                                        <input id='{post.UserID}' type='button' class='seguir___p' onclick='cambiarColorDeTexto(event);' value='siguiendo' />
-                                                                    </div>
-                                                                    <div class='centro__row'>
-                                                                        <p class='centro__text'>{post.Text}</p>
-                                                                        ";
+                                                                        <span class='centro__tiempo'> {Home1.Convertir_Fecha_a_Texto(post.PublicationDate)} </span>";
+
+                    if (post.Followed == 1)
+                    {
+
+                        CentroDTweets.InnerHtml += $@"<input id='{post.UserID}' type='button' class='seguir___p' onclick='cambiarColorDeTexto(event);' value='siguiendo' />
+                                                          ";
+                    }
+
+                    else
+                    {
+                        CentroDTweets.InnerHtml += $@"<input id='{post.UserID}' type='button' style='color: #ffffff;' class='seguir___p' onclick='cambiarColorDeTexto(event);' value='seguir' />
+                                                          ";
+                    }
+
+                    CentroDTweets.InnerHtml += $@"</div>
+                                                  <div class='centro__row'>
+                                                      <p class='centro__text'>{post.Text}</p>
+                                                      ";
 
                     string revisar = post.URLContenido.Split('.')[post.URLContenido.Split('.').Length - 1].ToLower();
 
@@ -185,9 +212,9 @@ namespace IDS348_FinalProject
                         {
                             string UserName = Convert.ToString(reader["UserName"]); string Names = Convert.ToString(reader["Names"]);
 
-                            if (UserName.Length > 12) { UserName = UserName.Substring(0, 13) + "..."; }
+                            if (UserName.Length > 13) { UserName = UserName.Substring(0, 13) + "..."; }
 
-                            if (Names.Length > 12) { Names = Names.Substring(0, 13) + "..."; }
+                            if (Names.Length > 12) { Names = Names.Substring(0, 11) + "..."; }
 
                             PersonasDSugerencias.InnerHtml += $@"<li class='seguir__li'>
                                                                      <img class='seguir__user' src='DatosDeLaApp\\{Convert.ToString(reader["ProfilePhoto"])}' alt='User'>
@@ -211,5 +238,34 @@ namespace IDS348_FinalProject
         {
             HttpContext.Current.Session["Search"] = search;
         }
+    }
+
+    public class SearchPost
+    {
+        public int PostID { get; set; }
+
+        public int UserID { get; set; }
+
+        public string Text { get; set; }
+
+        public DateTime PublicationDate { get; set; }
+
+        public string TipoContenido { get; set; }
+
+        public string URLContenido { get; set; }
+
+        public string UserName { get; set; }
+
+        public string Names { get; set; }
+
+        public string ProfilePhoto { get; set; }
+
+        public int LikesCount { get; set; }
+
+        public int CommentsCount { get; set; }
+
+        public int UserLiked { get; set; }
+
+        public int Followed {  get; set; }
     }
 }

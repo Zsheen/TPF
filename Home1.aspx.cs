@@ -57,9 +57,23 @@ namespace IDS348_FinalProject
 
                             imgFotoInferior.ImageUrl = Convert.ToString(Session["URLProfilePhoto"]);
 
-                            userPlaceholder.InnerText = $"@{Convert.ToString(reader["UserName"])}";
+                            if (Convert.ToString(reader["UserName"]).Length > 13)
+                            {
+                                userPlaceholder.InnerText = $"@{Convert.ToString(reader["UserName"]).Substring(0, 13)}...";
+                            }
+                            else
+                            { 
+                                userPlaceholder.InnerText = $"@{Convert.ToString(reader["UserName"])}";
+                            }
 
-                            nombrePlaceholder.InnerText = Convert.ToString(reader["Names"]);
+                            if (Convert.ToString(reader["Names"]).Length > 12)
+                            {
+                                nombrePlaceholder.InnerText = Convert.ToString(reader["Names"]).Substring(0, 11) + "...";
+                            }
+                            else
+                            {
+                                nombrePlaceholder.InnerText = Convert.ToString(reader["Names"]);
+                            }
                         }
                     }
                 }
@@ -192,9 +206,9 @@ namespace IDS348_FinalProject
                         {
                             string UserName = Convert.ToString(reader["UserName"]); string Names = Convert.ToString(reader["Names"]);
 
-                            if (UserName.Length > 12) { UserName = UserName.Substring(0, 13) + "..."; }
+                            if (UserName.Length > 13) { UserName = UserName.Substring(0, 13) + "..."; }
 
-                            if (Names.Length > 12) { Names = Names.Substring(0, 13) + "..."; }
+                            if (Names.Length > 12) { Names = Names.Substring(0, 11) + "..."; }
 
                             PersonasDSugerencias.InnerHtml += $@"<li class='seguir__li'>
                                                                      <img class='seguir__user' src='DatosDeLaApp\\{Convert.ToString(reader["ProfilePhoto"])}' alt='User'>
