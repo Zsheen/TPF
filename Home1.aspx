@@ -1180,6 +1180,7 @@ body {
 
 .home .centro__pasando .pasando__textarea:focus {
   border-color: #1da1f2;
+  box-shadow: 0 0 5px #1da1f2;
 }
 
 .home .centro__pasando .pasando__textarea::-webkit-input-placeholder {
@@ -1452,10 +1453,10 @@ body {
     height: 50%;
 }
 
-.pasando_textarea:focus {
+.psndtextarea:focus-within, .psndtextarea:focus-visible, .psndtextarea:focus {
   border-color: #1da1f2;
+  box-shadow: 0 0 5px #1da1f2;
 }
-
 </style>
         <link rel="icon" type="image/x-icon" href="DatosDeLaApp\twitter-logo.png">
     </head>
@@ -1692,32 +1693,32 @@ body {
 
             // #region Comments: Funciones para los comentarios
 
-            function AgregarComentario(event) {
+            function AgregarComentario(event)
+            {
+                if (event.key === 'Enter')
+                {
+                    event.preventDefault();
 
-                    if (event.key === 'Enter') {
-                        event.preventDefault();
+                    $.ajax(
+                    {
+                        type: "POST",
+                        url: "Home1.aspx/AgregarComentario",
+                            data: JSON.stringify({ PostID: event.currentTarget.id.slice(0, -1), Text: encodeURIComponent(event.currentTarget.value) }),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) { },
+                        error: function (error) { return; }
+                    });
 
-                        $.ajax({
-                            type: "POST",
-                            url: "Home1.aspx/AgregarComentario",
-                            data: JSON.stringify({ PostID: event.currentTarget.id.slice(0, -1), Text: event.currentTarget.value }),
-                            contentType: "application/json; charset=utf-8",
-                            dataType: "json",
-                            success: function (response) {
-                            },
-                            error: function (error) { return; }
-                        });
+                    document.getElementById(event.currentTarget.id.slice(0, -1) + 'c').innerHTML += "<div style='position: relative; width: 100%; display: flex; margin-bottom: 35px; border-top: 1px dashed #38444d;'>" +
+                                                                                                        "<img style = 'height: 3em; width: 3em; position: relative; left: 5%; top: 5px;' class='centro__user' src = '" + document.getElementById('imgFotoInferior').src + "' alt = 'Foto del usuario' >" +
+                                                                                                        "<asp:TextBox style='position: relative; left: 4.7%; width: 74.8%; height: 50px; top: 15px; border-radius: 0.6em; color: white; border: 1px solid transparent; padding: 1em;' class='psndtextarea' disabled><span style='font-weight: bold;'>" + document.getElementById('userPlaceholder').innerText.substring(1) + " </span>" + event.currentTarget.value + "</asp:TextBox>" +
+                                                                                                    "</div>";
 
-                        document.getElementById(event.currentTarget.id.slice(0, -1) + 'c').innerHTML += "<div style='position: relative; width: 100%; display: flex; margin-bottom: 35px; border-top: 1px dashed #38444d'>" +
-                                                                                                           "<img style = 'height: 3em; width: 3em; position: relative; left: 5%; top: 5px;' class='centro__user' src = '" + document.getElementById('imgFotoInferior').src + "' alt = 'Foto del usuario' >" +
-                                                                                                           "<asp:TextBox style='position: relative; left: 4.7%; width: 74.8%; height: 50px; top: 15px; border-radius: 0.6em; color: white; border: 1px solid transparent; padding: 1em;' class='pasando_textarea' disabled><span style='font-weight: bold;'>" + document.getElementById('userPlaceholder').innerText.substring(1) + " </span>" + event.currentTarget.value + "</asp:TextBox>" +
-                                                                                                       "</div>";                                                                           
-
-                        document.getElementById(event.currentTarget.id.slice(0, -1)).nextElementSibling.innerText = ' ' + (parseInt(document.getElementById(event.currentTarget.id.slice(0, -1)).nextElementSibling.innerText.trim()) + 1) + ' ';
-                    }
-                };
+                    document.getElementById(event.currentTarget.id.slice(0, -1)).nextElementSibling.innerText = ' ' + (parseInt(document.getElementById(event.currentTarget.id.slice(0, -1)).nextElementSibling.innerText.trim()) + 1) + ' ';
+                }
+            };
            
-
             function Cambia_a_verde(event) {
  
                 if (event.currentTarget.style.fill === 'rgb(42, 239, 108)') {
@@ -1732,6 +1733,8 @@ body {
                     event.currentTarget.style.fill = '#2aef6c';
 
                     document.getElementById(event.currentTarget.id + 'c').style.display = 'block';
+
+                    document.getElementById(event.currentTarget.id + 't').focus();
                 }
             };
 
@@ -1792,8 +1795,6 @@ body {
             // #region Post: Funciones para los posts
 
             document.getElementById('svgUpload').addEventListener('click', function () {
-
-
 
                 if (document.getElementById('ArchivoDelPost') === null) {
 

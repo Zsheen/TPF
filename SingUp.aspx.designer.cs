@@ -132,13 +132,13 @@ namespace IDS348_FinalProject
         protected global::System.Web.UI.WebControls.DropDownList ddlAño;
 
         /// <summary>
-        /// Control lblBiografia.
+        /// Control lblFoto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblBiografia;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblFoto;
 
         /// <summary>
         /// Control fuProfilePhoto.

@@ -1454,6 +1454,11 @@ body {
     border-top: 1px dashed #38444d
 }
 
+.psndtextarea:focus-within, .psndtextarea:focus-visible, .psndtextarea:focus {
+  border-color: #1da1f2;
+  box-shadow: 0 0 5px #1da1f2;
+}
+
 </style>
         <link rel="icon" type="image/x-icon" href="DatosDeLaApp\twitter-logo.png">
     </head>
@@ -1685,7 +1690,7 @@ body {
                     $.ajax({
                         type: "POST",
                         url: "Home1.aspx/AgregarComentario",
-                        data: JSON.stringify({ PostID: event.currentTarget.id.slice(0, -1), Text: event.currentTarget.value }),
+                        data: JSON.stringify({ PostID: event.currentTarget.id.slice(0, -1), Text: encodeURIComponent(event.currentTarget.value) }),
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
@@ -1693,7 +1698,7 @@ body {
                         error: function (error) { return; }
                     });
 
-                    document.getElementById(event.currentTarget.id.slice(0, -1) + 'c').innerHTML += "<div style='position: relative; width: 100%; display: flex; margin-bottom: 35px; border-top: 1px dashed #38444d'>" +
+                    document.getElementById(event.currentTarget.id.slice(0, -1) + 'c').innerHTML += "<div style='position: relative; width: 100%; display: flex; margin-bottom: 35px; border-top: 1px dashed #38444d;'>" +
                         "<img style = 'height: 3em; width: 3em; position: relative; left: 5%; top: 5px;' class='centro__user' src = '" + document.getElementById('imgFotoInferior').src + "' alt = 'Foto del usuario' >" +
                         "<asp:TextBox style='position: relative; left: 4.7%; width: 74.8%; height: 50px; top: 15px; border-radius: 0.6em; color: white; border: 1px solid transparent; padding: 1em;' class='pasando_textarea' disabled><span style='font-weight: bold;'>" + document.getElementById('userPlaceholder').innerText.substring(1) + " </span>" + event.currentTarget.value + "</asp:TextBox>" +
                         "</div>";
@@ -1717,6 +1722,8 @@ body {
                     event.currentTarget.style.fill = '#2aef6c';
 
                     document.getElementById(event.currentTarget.id + 'c').style.display = 'block';
+
+                    document.getElementById(event.currentTarget.id + 't').focus();
                 }
             };
 

@@ -120,7 +120,7 @@
     .names,
     .telefono,
     .birthday,
-    .biografia,
+    .foto,
     .placewherelives,
     .sex{
       background-color: var(--username-password-background-color);
@@ -134,7 +134,7 @@
     .names:focus-within,
     .telefono:focus-within,
     .birthday:focus-within,
-    .biografia:focus-within,
+    .foto:focus-within,
     .placewherelives:focus-within,
     .sex:focus-within{
       color: var(--username-password-focus-color);
@@ -155,7 +155,6 @@
     #txtMail,
     #txtNames,
     #txtTelefono,
-    #txtBiografia,
     #calendarBirthday,
     #ddlPlaceWhereLives,
     #ddlSex
@@ -496,10 +495,10 @@
                         </asp:DropDownList>
                     </div>
                 </div>
-                <div class="biografia" id="divBiografia">
+                <div class="foto" id="divImagen">
                     <label for="fotoperfil" class="noclick">Foto de perfil</label> <br />
                     <div class="input-box input-password">
-                        <label for="fuProfilePhoto" id="lblBiografia" runat="server" class="noclick">Subir archivo</label><asp:FileUpload id="fuProfilePhoto" style="display: none;" onchange="userInputChanged();" runat="server" accept="image/*"/>
+                        <label for="fuProfilePhoto" id="lblFoto" runat="server" class="noclick">Subir archivo</label><asp:FileUpload id="fuProfilePhoto" style="display: none;" onchange="userInputChanged();" runat="server" accept="image/*"/>
                     </div>
                 </div>
                 <div class="placewherelives">
@@ -623,16 +622,16 @@
 
             if ((document.getElementById('fuProfilePhoto').files && document.getElementById('fuProfilePhoto').files[0]))
             {
-                document.getElementById('<%= lblBiografia.ClientID %>').innerText = "Archivo subido";
+                document.getElementById('<%= lblFoto.ClientID %>').innerText = "Archivo subido";
             }
 
             else
             {
-                document.getElementById('<%= lblBiografia.ClientID %>').innerText = "Subir archivo";
+                document.getElementById('<%= lblFoto.ClientID %>').innerText = "Subir archivo";
             }
         });
 
-        document.getElementById('divBiografia').addEventListener("click", function (event) {
+        document.getElementById('divImagen').addEventListener("click", function (event) {
 
             
             document.getElementById('<%= fuProfilePhoto.ClientID %>').click();

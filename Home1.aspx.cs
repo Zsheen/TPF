@@ -32,11 +32,7 @@ namespace IDS348_FinalProject
                 Response.Redirect("Twitter.aspx");
             }
 
-            CentroDTweets.InnerHtml = "";
-
-            PersonasDSugerencias.InnerHtml = "";
-
-            textareaTwitt.Value = "";
+            CentroDTweets.InnerHtml = ""; PersonasDSugerencias.InnerHtml = ""; textareaTwitt.Value = "";
 
             using (SqlConnection connection = new SqlConnection($@"{ConfigurationManager.AppSettings["🌌"]}"))
             {
@@ -153,7 +149,7 @@ namespace IDS348_FinalProject
                                                               <div id='{post.PostID}c' style='width: 100%; position: relative; top: 2%; right: 8%; height: 10%; display: none; align-items: center; margin-bottom: 25px;'>
                                                                   <div style='position: relative; width: 100%; display: flex; margin-bottom: 35px;'>
                                                                       <img style='height: 3em; width: 3em; position: relative; left: 5%' class='centro__user' src='{Convert.ToString(HttpContext.Current.Session["URLProfilePhoto"])}' alt='Foto del usuario'>
-                                                                      <textarea id='{post.PostID}t' onkeydown='AgregarComentario(event)' style='position: relative; left: 7.7%; width: 74.8%; height: 50px; top: 10px; border-radius: 0.6em; color: white; border: 1px solid transparent; padding: 1em;' class='pasando_textarea' placeholder='¿Qué estás pensando?'></textarea>
+                                                                      <textarea id='{post.PostID}t' onkeydown='AgregarComentario(event)' style='position: relative; left: 7.7%; width: 74.8%; height: 50px; top: 10px; border-radius: 0.6em; color: white; border: 1px solid transparent; padding: 1em; resize: none;' class='psndtextarea' placeholder='¿Qué estás pensando?'></textarea>
                                                                   </div>";
 
                     using (SqlCommand command2 = new SqlCommand("ReadComments", connection))
@@ -168,7 +164,7 @@ namespace IDS348_FinalProject
                             {
                                 CentroDTweets.InnerHtml += $@"<div style='position: relative; width: 100%; display: flex; margin-bottom: 35px; border-top: 1px dashed #38444d'>
                                                                   <img style='height: 3em; width: 3em; position: relative; left: 5%; top: 5px;' class='centro__user' src='{$"DatosDeLaApp\\{Convert.ToString(reader2["ProfilePhoto"])}"}' alt='Foto del usuario'>
-                                                                  <asp:TextBox style='position: relative; left: 4.7%; width: 74.8%; height: 50px; top: 15px; border-radius: 0.6em; color: white; border: 1px solid transparent; padding: 1em;' class='pasando_textarea' disabled><span style='font-weight: bold;'>{Convert.ToString(reader2["UserName"]) + "  "}</span>{Convert.ToString(reader2["Comment_Text"])}</aso:TextBox>
+                                                                  <asp:TextBox style='position: relative; left: 4.7%; width: 74.8%; height: 50px; top: 15px; border-radius: 0.6em; color: white; border: 1px solid transparent; padding: 1em;' class='psndtextarea' disabled><span style='font-weight: bold;'>{Convert.ToString(reader2["UserName"]) + "  "}</span>{Convert.ToString(reader2["Comment_Text"])}</aso:TextBox>
                                                               </div>";
                             }
                         }
@@ -315,7 +311,7 @@ namespace IDS348_FinalProject
 
                     command.Parameters.AddWithValue("@PostID", PostID);
                     command.Parameters.AddWithValue("@UserID", Convert.ToInt32(HttpContext.Current.Session["UserID"]));
-                    command.Parameters.AddWithValue("@Text", Text);
+                    command.Parameters.AddWithValue("@Text", HttpUtility.UrlDecode(Text));
 
                     command.ExecuteNonQuery();
                 }
