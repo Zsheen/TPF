@@ -100,10 +100,10 @@ namespace IDS348_FinalProject
                             {
                                 ipMail.Disabled = false;
 
-                                notification.Icon = SystemIcons.Error;
-                                if (ipMail.Value.Contains("@")) { notification.BalloonTipTitle = "Correo inexistente"; notification.BalloonTipText = "La dirección de correo electronico que ingreso no esta registrada en la aplicación"; }
-                                else { notification.BalloonTipTitle = "Usuario inexistente"; notification.BalloonTipText = "El nombre de usuario que ingreso no esta registrado en la aplicación"; }                               
-                                notification.ShowBalloonTip(4000);
+                                if (ipMail.Value.Contains("@")) { HttpContext.Current.Response.Write("<script>alert('La dirección de correo electronico que ingreso no esta registrada en la aplicación');</script>"); }
+
+                                else { HttpContext.Current.Response.Write("<script>alert('El nombre de usuario que ingreso no esta registrado en la aplicación');</script>"); }                               
+
                             }
                         }
                     }
@@ -111,9 +111,9 @@ namespace IDS348_FinalProject
                 }
             }
 
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                HttpContext.Current.Response.Write("<script>alert('" + Convert.ToString(ex.InnerException) + "\n\n" + ex.Message + "');</script>");
             }
         }
     }

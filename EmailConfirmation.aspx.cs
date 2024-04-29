@@ -81,6 +81,11 @@ namespace IDS348_FinalProject
                     }
                 }
             }
+
+            else
+            {
+                HttpContext.Current.Response.Write("<script>alert('Codigo incorrecto');</script>");
+            }
         }
     }
 }

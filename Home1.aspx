@@ -1456,6 +1456,7 @@ body {
 .psndtextarea:focus-within, .psndtextarea:focus-visible, .psndtextarea:focus {
   border-color: #1da1f2;
   box-shadow: 0 0 5px #1da1f2;
+  
 }
 </style>
         <link rel="icon" type="image/x-icon" href="DatosDeLaApp\twitter-logo.png">
@@ -1600,13 +1601,8 @@ body {
                         data: JSON.stringify({ SugerenceID: event.currentTarget.id}),
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
-                        success: function (response) {
-
-                        },
-                        error: function (error) {
-
-                            return;
-                        }
+                        success: function (response) { },
+                        error: function (error) { return; }
                     });
 
                     event.currentTarget.value = "siguiendo";
@@ -1628,13 +1624,8 @@ body {
                         data: JSON.stringify({ SugerenceID: event.currentTarget.id }),
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
-                        success: function (response) {
-
-                        },
-                        error: function (error) {
-
-                            return;
-                        }
+                        success: function (response) { },
+                        error: function (error) { return; }
                     });
 
                     event.currentTarget.value = "seguir";
@@ -1659,12 +1650,8 @@ body {
                         data: JSON.stringify({ SugerenceID: event.currentTarget.id }),
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
-                        success: function (response) {
-                        },
-                        error: function (error) {
-
-                            return;
-                        }
+                        success: function (response) { },
+                        error: function (error) { return; }
                     });
 
                     event.currentTarget.style.color = "#ffffff"; event.currentTarget.value = "seguir";
@@ -1677,12 +1664,8 @@ body {
                         data: JSON.stringify({ SugerenceID: event.currentTarget.id }),
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
-                        success: function (response) {
-                        },
-                        error: function (error) {
-
-                            return;
-                        }
+                        success: function (response) { },
+                        error: function (error) { return; }
                     });
 
                     event.currentTarget.style.color = "#1da1f2"; event.currentTarget.value = "siguiendo";
@@ -1707,7 +1690,7 @@ body {
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) { },
-                        error: function (error) { return; }
+                        error: function (error) { alert("¡Error! Se produjo un error al intentar comentar este post"); return; }
                     });
 
                     document.getElementById(event.currentTarget.id.slice(0, -1) + 'c').innerHTML += "<div style='position: relative; width: 100%; display: flex; margin-bottom: 35px; border-top: 1px dashed #38444d;'>" +
@@ -1861,6 +1844,7 @@ body {
                         videoElement.play();
                     }
                     else {
+                        alert("¡Error! Favor seleccione un archivo multimedia");
                     };
 
                 };

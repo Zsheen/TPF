@@ -101,10 +101,7 @@ namespace IDS348_FinalProject
                         {
                             transaction.Rollback();
 
-                            notification.Icon = SystemIcons.Error;
-                            notification.BalloonTipTitle = Convert.ToString(ex.InnerException);
-                            notification.BalloonTipText = ex.Message;
-                            notification.ShowBalloonTip(4000);
+                            HttpContext.Current.Response.Write("<script>alert('" + Convert.ToString(ex.InnerException) + "\n\n" + ex.Message + "');</script>");
                         }
                     }
                 }
@@ -114,10 +111,7 @@ namespace IDS348_FinalProject
             {
                 txtContraseña.Enabled = txtCContraseña.Enabled = true;
 
-                notification.Icon = SystemIcons.Error;
-                notification.BalloonTipTitle = Convert.ToString(ex.InnerException);
-                notification.BalloonTipText = ex.Message;
-                notification.ShowBalloonTip(4000);
+                HttpContext.Current.Response.Write("<script>alert('" + Convert.ToString(ex.InnerException) + "\n\n" + ex.Message + "');</script>");
             }
         }
     }

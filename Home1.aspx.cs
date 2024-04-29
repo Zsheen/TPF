@@ -165,7 +165,7 @@ namespace IDS348_FinalProject
                                                                       </svg>
                                                                   </li>
                                                               </ul>
-                                                              <div id='{post.PostID}c' style='width: 100%; position: relative; top: 2%; right: 8%; height: 10%; display: none; align-items: center; margin-bottom: 25px;'>
+                                                              <div id='{post.PostID}c' style='width: 100%; position: relative; top: 2%; right: 8%; height: 10%; display: none; align-items: center; margin-bottom: 25px; transition: all 0.8s linear;'>
                                                                   <div style='position: relative; width: 100%; display: flex; margin-bottom: 35px;'>
                                                                       <img style='height: 3em; width: 3em; position: relative; left: 5%' class='centro__user' src='{Convert.ToString(HttpContext.Current.Session["URLProfilePhoto"])}' alt='Foto del usuario'>
                                                                       <textarea id='{post.PostID}t' onkeydown='AgregarComentario(event)' style='position: relative; left: 7.7%; width: 74.8%; height: 50px; top: 10px; border-radius: 0.6em; color: white; border: 1px solid transparent; padding: 1em; resize: none;' class='psndtextarea' placeholder='¿Qué estás pensando?'></textarea>
@@ -450,8 +450,6 @@ namespace IDS348_FinalProject
 
         protected void btnTwittear_Click(object sender, EventArgs e)
         {
-            NotifyIcon notification = new NotifyIcon(); notification.Visible = true;
-
             string NuevaURLParaContenido = string.Empty;
 
             if (fuPost.HasFiles)
@@ -503,10 +501,7 @@ namespace IDS348_FinalProject
                     {
                         transaction.Rollback();
 
-                        notification.Icon = SystemIcons.Error;
-                        notification.BalloonTipTitle = Convert.ToString(ex.InnerException);
-                        notification.BalloonTipText = ex.Message;
-                        notification.ShowBalloonTip(4000);
+                        HttpContext.Current.Response.Write("<script>alert('" + Convert.ToString(ex.InnerException) + "\n\n" + ex.Message + "');</script>");
                     }
                 }
             }

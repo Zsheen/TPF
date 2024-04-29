@@ -1693,15 +1693,14 @@ body {
                         data: JSON.stringify({ PostID: event.currentTarget.id.slice(0, -1), Text: encodeURIComponent(event.currentTarget.value) }),
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
-                        success: function (response) {
-                        },
-                        error: function (error) { return; }
+                        success: function (response) { },
+                        error: function (error) { alert("¡Error! Se produjo un error al intentar comentar este post"); return; }
                     });
 
                     document.getElementById(event.currentTarget.id.slice(0, -1) + 'c').innerHTML += "<div style='position: relative; width: 100%; display: flex; margin-bottom: 35px; border-top: 1px dashed #38444d;'>" +
-                        "<img style = 'height: 3em; width: 3em; position: relative; left: 5%; top: 5px;' class='centro__user' src = '" + document.getElementById('imgFotoInferior').src + "' alt = 'Foto del usuario' >" +
-                        "<asp:TextBox style='position: relative; left: 4.7%; width: 74.8%; height: 50px; top: 15px; border-radius: 0.6em; color: white; border: 1px solid transparent; padding: 1em;' class='pasando_textarea' disabled><span style='font-weight: bold;'>" + document.getElementById('userPlaceholder').innerText.substring(1) + " </span>" + event.currentTarget.value + "</asp:TextBox>" +
-                        "</div>";
+                                                                                                        "<img style = 'height: 3em; width: 3em; position: relative; left: 5%; top: 5px;' class='centro__user' src = '" + document.getElementById('imgFotoInferior').src + "' alt = 'Foto del usuario' >" +
+                                                                                                        "<asp:TextBox style='position: relative; left: 4.7%; width: 74.8%; height: 50px; top: 15px; border-radius: 0.6em; color: white; border: 1px solid transparent; padding: 1em;' class='pasando_textarea' disabled><span style='font-weight: bold;'>" + document.getElementById('userPlaceholder').innerText.substring(1) + " </span>" + event.currentTarget.value + "</asp:TextBox>" +
+                                                                                                    "</div>";
 
                     document.getElementById(event.currentTarget.id.slice(0, -1)).nextElementSibling.innerText = ' ' + (parseInt(document.getElementById(event.currentTarget.id.slice(0, -1)).nextElementSibling.innerText.trim()) + 1) + ' ';
                 }

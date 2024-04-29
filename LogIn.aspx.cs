@@ -106,6 +106,13 @@ namespace IDS348_FinalProject
 
                                     Response.Redirect("EmailConfirmation.aspx");
                                 }
+
+                                else
+                                {
+                                    user.Enabled = password.Enabled = true;
+
+                                    HttpContext.Current.Response.Write("<script>alert('La contraseña qie ingreso es erronea');</script>");
+                                }
                             }
                         }
 
@@ -113,10 +120,7 @@ namespace IDS348_FinalProject
                         {
                             user.Enabled = password.Enabled = true;
 
-                            notification.Icon = SystemIcons.Error;
-                            notification.BalloonTipTitle = "Usuario inexistente";
-                            notification.BalloonTipText = "El nombre de usuario que ingreso no existe";
-                            notification.ShowBalloonTip(4000);
+                            HttpContext.Current.Response.Write("<script>alert('El nombre de usuario que ingreso no existe');</script>");
                         }
                     }
                 }

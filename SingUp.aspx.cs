@@ -126,36 +126,15 @@ namespace IDS348_FinalProject
                         {
                             Transaction.Rollback();
 
-                            if (ex.Message.Contains(txtMail.Text) & ex.Message.Contains("(" + txtUsername.Text + ")"))
-                            {
-                                notification.Icon = SystemIcons.Error;
-                                notification.BalloonTipTitle = "Nombre de usuario y correo en uso";
-                                notification.BalloonTipText = "La dirección de correo electronico y el nombre de usuario que ha ingresado ya se encuentran en uso";
-                                notification.ShowBalloonTip(4000);
-                            }
+                            if (ex.Message.Contains(txtMail.Text) & ex.Message.Contains("(" + txtUsername.Text + ")")) { HttpContext.Current.Response.Write("<script>alert('La dirección de correo electronico y el nombre de usuario que ha ingresado ya se encuentran en uso');</script>"); }
 
-                            else if (ex.Message.Contains("(" + txtUsername.Text + ")"))
-                            {
-                                notification.Icon = SystemIcons.Error;
-                                notification.BalloonTipTitle = "Nombre de usuario en uso";
-                                notification.BalloonTipText = "El nombre de usuario que ha ingresado ya se encuentra en uso";
-                                notification.ShowBalloonTip(4000);
-                            }
+                            else if (ex.Message.Contains("(" + txtUsername.Text + ")")) { HttpContext.Current.Response.Write("<script>alert('El nombre de usuario que ha ingresado ya se encuentra en uso');</script>"); }
 
-                            else if (ex.Message.Contains(txtMail.Text))
-                            {   
-                                notification.Icon = SystemIcons.Error;
-                                notification.BalloonTipTitle = "Correo en uso";
-                                notification.BalloonTipText = "La dirección de correo electronico que ha ingresado ya se encuentra en uso";
-                                notification.ShowBalloonTip(4000);
-                            }
+                            else if (ex.Message.Contains(txtMail.Text)) { HttpContext.Current.Response.Write("<script>alert('La dirección de correo electronico que ha ingresado ya se encuentra en uso');</script>"); }
 
                             else
                             {
-                                notification.Icon = SystemIcons.Error;
-                                notification.BalloonTipTitle = Convert.ToString(ex.InnerException);
-                                notification.BalloonTipText = ex.Message;
-                                notification.ShowBalloonTip(4000);
+                                HttpContext.Current.Response.Write("<script>alert('" + Convert.ToString(ex.InnerException) + "\n\n" + ex.Message + "');</script>");
                             }
                         }
                     }
@@ -164,10 +143,7 @@ namespace IDS348_FinalProject
 
             catch (Exception ex)
             {
-                notification.Icon = SystemIcons.Error;
-                notification.BalloonTipTitle = Convert.ToString(ex.InnerException);
-                notification.BalloonTipText = ex.Message;
-                notification.ShowBalloonTip(4000);
+                HttpContext.Current.Response.Write("<script>alert('" + Convert.ToString(ex.InnerException) + "\n\n" + ex.Message + "');</script>");
             }
 
             txtUsername.Enabled = txtNames.Enabled = txtMail.Enabled = txtPassword.Enabled = txtTelefono.Enabled = ddlDia.Enabled = ddlMes.Enabled = ddlAño.Enabled = fuProfilePhoto.Enabled = ddlPlaceWhereLives.Enabled = ddlSex.Enabled = true;
