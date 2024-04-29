@@ -34,10 +34,6 @@ namespace IDS348_FinalProject
         {
             ipMail.Disabled = true;
 
-            NotifyIcon notification = new NotifyIcon(); notification.Visible = true;
-
-            string Mail = string.Empty;
-
             try
             {
                 using (SqlConnection connection = new SqlConnection($@"{ConfigurationManager.AppSettings["🌌"]}"))
@@ -102,8 +98,9 @@ namespace IDS348_FinalProject
 
                                 if (ipMail.Value.Contains("@")) { HttpContext.Current.Response.Write("<script>alert('La dirección de correo electronico que ingreso no esta registrada en la aplicación');</script>"); }
 
-                                else { HttpContext.Current.Response.Write("<script>alert('El nombre de usuario que ingreso no esta registrado en la aplicación');</script>"); }                               
+                                else { HttpContext.Current.Response.Write("<script>alert('El nombre de usuario que ingreso no esta registrado en la aplicación');</script>"); }
 
+                                HttpContext.Current.Response.Write("<script>window.history.back(); window.location.reload();</script>");
                             }
                         }
                     }
@@ -114,6 +111,8 @@ namespace IDS348_FinalProject
             catch (Exception ex)
             {
                 HttpContext.Current.Response.Write("<script>alert('" + Convert.ToString(ex.InnerException) + "\n\n" + ex.Message + "');</script>");
+
+                HttpContext.Current.Response.Write("<script>window.history.back(); window.location.reload();</script>");
             }
         }
     }

@@ -15,12 +15,12 @@ namespace IDS348_FinalProject
         protected void Page_Load(object sender, EventArgs e)
         {
             Session["Confirmation"] = "False";
+
+            txtUsername.Enabled = txtNames.Enabled = txtMail.Enabled = txtPassword.Enabled = txtTelefono.Enabled = ddlDia.Enabled = ddlMes.Enabled = ddlAño.Enabled = fuProfilePhoto.Enabled = ddlPlaceWhereLives.Enabled = ddlSex.Enabled = true;
         }
 
         protected void btnEntrar_Click(object sender, EventArgs e)
         {
-            NotifyIcon notification = new NotifyIcon(); notification.Visible = true;
-
             txtUsername.Enabled = txtNames.Enabled = txtMail.Enabled = txtPassword.Enabled = txtTelefono.Enabled = ddlDia.Enabled = ddlMes.Enabled = ddlAño.Enabled = fuProfilePhoto.Enabled = ddlPlaceWhereLives.Enabled = ddlSex.Enabled = false;
 
             string NuevaURLParaContenido = "Anonimo.jpg";
@@ -74,6 +74,8 @@ namespace IDS348_FinalProject
 
                                         Session["Confirmation"] = "True";
 
+                                        Session["Password"] = txtPassword.Text;
+
                                         Session["UserName"] = txtUsername.Text;
 
                                         Session["UserID"] = Convert.ToString(reader["UserID"]);
@@ -119,12 +121,16 @@ namespace IDS348_FinalProject
 
                             Session["PaginaAnterior"] = "SingUp.aspx";
 
+                            txtUsername.Enabled = txtNames.Enabled = txtMail.Enabled = txtPassword.Enabled = txtTelefono.Enabled = ddlDia.Enabled = ddlMes.Enabled = ddlAño.Enabled = fuProfilePhoto.Enabled = ddlPlaceWhereLives.Enabled = ddlSex.Enabled = true;
+
                             Response.Redirect("EmailConfirmation.aspx", false);
                         }
 
                         catch (SqlException ex)
                         {
                             Transaction.Rollback();
+
+                            txtUsername.Enabled = txtNames.Enabled = txtMail.Enabled = txtPassword.Enabled = txtTelefono.Enabled = ddlDia.Enabled = ddlMes.Enabled = ddlAño.Enabled = fuProfilePhoto.Enabled = ddlPlaceWhereLives.Enabled = ddlSex.Enabled = true;
 
                             if (ex.Message.Contains(txtMail.Text) & ex.Message.Contains("(" + txtUsername.Text + ")")) { HttpContext.Current.Response.Write("<script>alert('La dirección de correo electronico y el nombre de usuario que ha ingresado ya se encuentran en uso');</script>"); }
 
@@ -136,6 +142,8 @@ namespace IDS348_FinalProject
                             {
                                 HttpContext.Current.Response.Write("<script>alert('" + Convert.ToString(ex.InnerException) + "\n\n" + ex.Message + "');</script>");
                             }
+
+                            HttpContext.Current.Response.Write("<script>window.history.back(); window.location.reload();</script>");
                         }
                     }
                 }
@@ -143,10 +151,12 @@ namespace IDS348_FinalProject
 
             catch (Exception ex)
             {
-                HttpContext.Current.Response.Write("<script>alert('" + Convert.ToString(ex.InnerException) + "\n\n" + ex.Message + "');</script>");
-            }
+                txtUsername.Enabled = txtNames.Enabled = txtMail.Enabled = txtPassword.Enabled = txtTelefono.Enabled = ddlDia.Enabled = ddlMes.Enabled = ddlAño.Enabled = fuProfilePhoto.Enabled = ddlPlaceWhereLives.Enabled = ddlSex.Enabled = true;
 
-            txtUsername.Enabled = txtNames.Enabled = txtMail.Enabled = txtPassword.Enabled = txtTelefono.Enabled = ddlDia.Enabled = ddlMes.Enabled = ddlAño.Enabled = fuProfilePhoto.Enabled = ddlPlaceWhereLives.Enabled = ddlSex.Enabled = true;
+                HttpContext.Current.Response.Write("<script>alert('" + Convert.ToString(ex.InnerException) + "\n\n" + ex.Message + "');</script>");
+
+                HttpContext.Current.Response.Write("<script>window.history.back(); window.location.reload();</script>");
+            }
         }
     }
 }

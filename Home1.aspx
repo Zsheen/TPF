@@ -1462,8 +1462,9 @@ body {
         <link rel="icon" type="image/x-icon" href="DatosDeLaApp\twitter-logo.png">
     </head>
     <body class="home" runat="server">
-      <form id="form1" runat="server">
+      <form id="form1" runat="server" enctype="multipart/form-data">
           <asp:FileUpload id="fuPost"  runat="server" style="display: none;" accept="image/*,video/*" onchange="habilitarTwittear()" />
+          <input type="file" id="fl1"  runat="server" style="display: none;" accept="image/*,video/*" onchange="habilitarTwittear()" />
                   <div class="columna izq">
                       <h1 class="izq__h1">
                           <a class="izq__a  " href="#" title="Twitter">
@@ -1787,6 +1788,8 @@ body {
                 else {
 
                     document.getElementById('ArchivoDelPost').remove();
+
+                    
 
                     document.getElementById('AquiSeCargaraLaFotoDelPost').style.display = 'none';
 

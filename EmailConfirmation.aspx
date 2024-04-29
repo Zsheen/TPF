@@ -336,7 +336,7 @@ width: 75%;
         document.getElementById('txtCódigo').addEventListener("keydown", function (event) {
             var char = event.key;
 
-            if (!(/[0-9]/.test(char))) {
+            if (!(/[0-9]/.test(char)) && event.key !== "Backspace") {
                 event.preventDefault();
             }
         });

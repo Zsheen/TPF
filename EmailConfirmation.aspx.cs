@@ -15,6 +15,8 @@ namespace IDS348_FinalProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            txtCódigo.Enabled = true;
+
             if (!IsPostBack)
             {
                 Response.Cache.SetCacheability(HttpCacheability.NoCache);
@@ -43,6 +45,8 @@ namespace IDS348_FinalProject
 
         protected void btnComprobar_Click(object sender, EventArgs e)
         {
+            txtCódigo.Enabled = false;
+
             if (txtCódigo.Text == Convert.ToString(Session["CodeConfirmation"]))
             {
                 using (SqlConnection connection = new SqlConnection($@"{ConfigurationManager.AppSettings["🌌"]}"))
@@ -53,7 +57,7 @@ namespace IDS348_FinalProject
                     {
                         Session.Remove("CodeConfirmation"); Session.Remove("PaginaAnterior"); Session.Remove("Confirmation");
 
-                        Session["ChangePassword"] = "True";
+                        Session["ChangePassword"] = "True"; txtCódigo.Enabled = true;
 
                         Response.Redirect("NuevaContraseña.aspx");
                     }
@@ -70,13 +74,23 @@ namespace IDS348_FinalProject
 
                             command.ExecuteNonQuery();
 
+                            Application.Lock();
+
                             Session["Confirmation"] = "False";
 
-                            Session.Remove("Email"); Session.Remove("CodeConfirmation"); Session.Remove("PaginaAnterior"); Session.Remove("Confirmation");
+                            HttpCookie cookie = new HttpCookie("Log", $"{Convert.ToString(Session["UserID"])}^{Convert.ToString(Session["UserName"])}^{Convert.ToString(Session["Password"])}");
 
-                            Session["Loged"] = "True";
+                            cookie.Expires = DateTime.Now.AddMonths(2);
+
+                            Response.Cookies.Add(cookie);
+
+                            Session.Remove("Email"); Session.Remove("CodeConfirmation"); Session.Remove("PaginaAnterior"); Session.Remove("Confirmation"); Session.Remove("Password");
+
+                            Session["Loged"] = "True"; txtCódigo.Enabled = true;
 
                             Response.Redirect("Home1.aspx");
+
+                            Application.UnLock();
                         }
                     }
                 }
@@ -84,7 +98,7 @@ namespace IDS348_FinalProject
 
             else
             {
-                HttpContext.Current.Response.Write("<script>alert('Codigo incorrecto');</script>");
+                txtCódigo.Enabled = true; HttpContext.Current.Response.Write("<script>alert('Codigo incorrecto');</script>"); HttpContext.Current.Response.Write("<script>window.history.back(); window.location.reload();</script>");
             }
         }
     }

@@ -21,21 +21,57 @@ namespace IDS348_FinalProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            user.Enabled = password.Enabled = true;
-
-            if (user.Text == string.Empty & password.Text == string.Empty)
+            if (Request.Cookies["Log"] != null)
             {
-                btnEntrar.Enabled = false;
+                using (SqlConnection connection = new SqlConnection($@"{ConfigurationManager.AppSettings["🌌"]}"))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand("ReadUserByParameter", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("@SearchParameter", Request.Cookies["Log"].Value.Split('^')[1]);
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                while (reader.Read())
+                                {
+                                    if (Convert.ToString(reader["Passwords"]) == Request.Cookies["Log"].Value.Split('^')[2])
+                                    {
+                                        Application.Lock();
+
+                                        Session["UserName"] = Convert.ToString(reader["UserName"]); Session["UserID"] = Convert.ToString(reader["UserID"]); Session["Loged"] = "True";
+
+                                        Response.Redirect("Home1.aspx");
+
+                                        Application.UnLock();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
 
-            Session["Confirmation"] = "False";
+            else
+            {
+                user.Enabled = password.Enabled = true;
+
+                if (user.Text == string.Empty & password.Text == string.Empty)
+                {
+                    btnEntrar.Enabled = false;
+                }
+
+                Session["Confirmation"] = "False";
+            }
         }
 
         protected void btnEntrar_Click(object sender, EventArgs e)
         {
             user.Enabled = password.Enabled = false;
-
-            NotifyIcon notification = new NotifyIcon(); notification.Visible = true;
 
             using (SqlConnection connection = new SqlConnection($@"{ConfigurationManager.AppSettings["🌌"]}"))
             {
@@ -60,6 +96,12 @@ namespace IDS348_FinalProject
                                 if (Convert.ToString(reader["Passwords"]) == password.Text && Convert.ToChar(reader["verified"]) == 'V')
                                 {
                                     Application.Lock();
+
+                                    HttpCookie cookie = new HttpCookie("Log", $"{Convert.ToString(reader["UserID"])}^{Convert.ToString(reader["UserName"])}^{Convert.ToString(reader["Passwords"])}");
+
+                                    cookie.Expires = DateTime.Now.AddMonths(2);
+
+                                    Response.Cookies.Add(cookie);
 
                                     Session["Loged"] = "True";
 
@@ -100,6 +142,8 @@ namespace IDS348_FinalProject
 
                                     client.Send(mensaje);
 
+                                    Session["Password"] = Convert.ToString(reader["Passwords"]);
+
                                     Session["Confirmation"] = "True";
 
                                     Session["PaginaAnterior"] = "LogIn.aspx";
@@ -112,6 +156,8 @@ namespace IDS348_FinalProject
                                     user.Enabled = password.Enabled = true;
 
                                     HttpContext.Current.Response.Write("<script>alert('La contraseña qie ingreso es erronea');</script>");
+
+                                    HttpContext.Current.Response.Write("<script>window.history.back(); window.location.reload();</script>");
                                 }
                             }
                         }
@@ -121,6 +167,8 @@ namespace IDS348_FinalProject
                             user.Enabled = password.Enabled = true;
 
                             HttpContext.Current.Response.Write("<script>alert('El nombre de usuario que ingreso no existe');</script>");
+
+                            HttpContext.Current.Response.Write("<script>window.history.back(); window.location.reload();</script>");
                         }
                     }
                 }

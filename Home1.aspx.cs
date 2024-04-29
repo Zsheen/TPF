@@ -12,13 +12,12 @@ using System.Drawing;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Web.UI.WebControls;
+using System.Web.UI;
 
 namespace IDS348_FinalProject
 {
     public partial class Home1 : System.Web.UI.Page
     {
-        public static string RutaDeDatosDeLaApp;
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -36,8 +35,6 @@ namespace IDS348_FinalProject
             }
 
             CentroDTweets.InnerHtml = ""; PersonasDSugerencias.InnerHtml = "";
-
-            RutaDeDatosDeLaApp = MapPath("DatosDeLaApp");
 
             using (SqlConnection connection = new SqlConnection($@"{ConfigurationManager.AppSettings["🌌"]}"))
             {
@@ -450,6 +447,8 @@ namespace IDS348_FinalProject
 
         protected void btnTwittear_Click(object sender, EventArgs e)
         {
+            HttpContext.Current.Response.Write("<script>window.history.back(); window.location.reload();</script>");
+
             string NuevaURLParaContenido = string.Empty;
 
             if (fuPost.HasFiles)
