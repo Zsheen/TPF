@@ -1,58 +1,40 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Data.Entity.Core.Objects;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Net.Mail;
-using System.Net;
-using System.Threading.Tasks;
 using System.Web;
-using System.Web.Services;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Windows.Forms;
-using System.Drawing;
+using System.Net.Http;
+using Newtonsoft.Json;
+using IDS348_FinalProject.Models;
+using System.Text;
 
 namespace IDS348_FinalProject
 {    
     public partial class LogIn : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected async void Page_Load(object sender, EventArgs e)
         {
             if (Request.Cookies["Log"] != null)
             {
-                using (SqlConnection connection = new SqlConnection($@"{ConfigurationManager.AppSettings["🌌"]}"))
+                using (HttpClient client = new HttpClient())
                 {
-                    connection.Open();
+                    HttpResponseMessage response = await client.GetAsync($"http://www.r5cgbuwbvefla53gnxa.somee.com/api/User/Read/{Request.Cookies["Log"].Value.Split('^')[1]}");
 
-                    using (SqlCommand command = new SqlCommand("ReadUserByParameter", connection))
-                    {
-                        command.CommandType = CommandType.StoredProcedure;
+                    response.EnsureSuccessStatusCode();
 
-                        command.Parameters.AddWithValue("@SearchParameter", Request.Cookies["Log"].Value.Split('^')[1]);
+                    string responseBody = await response.Content.ReadAsStringAsync();
 
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            if (reader.HasRows)
-                            {
-                                while (reader.Read())
-                                {
-                                    if (Convert.ToString(reader["Passwords"]) == Request.Cookies["Log"].Value.Split('^')[2])
-                                    {
-                                        Application.Lock();
+                    Session["User"] = JsonConvert.DeserializeObject<User>(responseBody);
+                }
 
-                                        Session["UserName"] = Convert.ToString(reader["UserName"]); Session["UserID"] = Convert.ToString(reader["UserID"]); Session["Loged"] = "True";
+                User Vuser = (User)Session["User"];
 
-                                        Response.Redirect("Home1.aspx");
+                if (Vuser.Passwords == Request.Cookies["Log"].Value.Split('^')[2])
+                {
+                    Application.Lock();
 
-                                        Application.UnLock();
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    Session["Loged"] = "True";
+
+                    Response.Redirect("Home1.aspx", false);
+
+                    Application.UnLock();
                 }
             }
 
@@ -69,110 +51,72 @@ namespace IDS348_FinalProject
             }
         }
 
-        protected void btnEntrar_Click(object sender, EventArgs e)
+        protected async void btnEntrar_Click(object sender, EventArgs e)
         {
             user.Enabled = password.Enabled = false;
 
-            using (SqlConnection connection = new SqlConnection($@"{ConfigurationManager.AppSettings["🌌"]}"))
+            using (HttpClient client = new HttpClient())
             {
-                connection.Open();
+                HttpResponseMessage response = await client.GetAsync($"http://www.r5cgbuwbvefla53gnxa.somee.com/api/User/Read/{user.Text}");
 
-                using (SqlCommand command = new SqlCommand("ReadUserByParameter", connection))
+                response.EnsureSuccessStatusCode();
+
+                string responseBody = await response.Content.ReadAsStringAsync();
+
+                Session["User"] = JsonConvert.DeserializeObject<User>(responseBody);
+
+                User Vuser = (User)Session["User"];
+
+                if (Session["User"] != null)
                 {
-                    command.CommandType = CommandType.StoredProcedure;
-
-                    command.Parameters.AddWithValue("@SearchParameter", user.Text);
-
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    if (Vuser.Passwords == password.Text && Vuser.Verified == "V")
                     {
-                        if (reader.HasRows)
-                        {
-                            while (reader.Read())
-                            {
-                                Session["UserName"] = Convert.ToString(reader["UserName"]);
+                        Application.Lock();
 
-                                Session["UserID"] = Convert.ToString(reader["UserID"]);
+                        HttpCookie cookie = new HttpCookie("Log", responseBody);
 
-                                if (Convert.ToString(reader["Passwords"]) == password.Text && Convert.ToChar(reader["verified"]) == 'V')
-                                {
-                                    Application.Lock();
+                        cookie.Expires = DateTime.Now.AddMonths(2);
 
-                                    HttpCookie cookie = new HttpCookie("Log", $"{Convert.ToString(reader["UserID"])}^{Convert.ToString(reader["UserName"])}^{Convert.ToString(reader["Passwords"])}");
+                        Response.Cookies.Add(cookie);
 
-                                    cookie.Expires = DateTime.Now.AddMonths(2);
+                        Session["Loged"] = "True";
 
-                                    Response.Cookies.Add(cookie);
+                        Response.Redirect("Home1.aspx", true);
 
-                                    Session["Loged"] = "True";
+                        Application.UnLock();
+                    }
 
-                                    Response.Redirect("Home1.aspx");
+                    else if (Vuser.Passwords == password.Text && Vuser.Verified != "V")
+                    {
+                        response = await client.GetAsync($"http://www.r5cgbuwbvefla53gnxa.somee.com/api/User/ResendConfirmationEmail/{Vuser.Email}");
 
-                                    Application.UnLock();
-                                }
+                        response.EnsureSuccessStatusCode();
 
-                                else if (Convert.ToString(reader["Passwords"]) == password.Text && Convert.ToChar(reader["verified"]) == 'F')
-                                {
-                                    Session["Email"] = Convert.ToString(reader["Email"]);
+                        user.Enabled = password.Enabled = true;
 
-                                    MailMessage mensaje = new MailMessage();
+                        HttpContext.Current.Response.Write("<script>alert('El correo electronico de su cuenta no ha sido validado, se ha enviado un correo para validar su cuenta');</script>");
 
-                                    mensaje.From = new MailAddress(ConfigurationManager.AppSettings["Email"], "Twitter", System.Text.Encoding.UTF8); ;
+                        HttpContext.Current.Response.Write("<script>window.location.reload();</script>");
+                    }
 
-                                    mensaje.To.Add(Convert.ToString(reader["Email"]));
+                    else
+                    {
+                        user.Enabled = password.Enabled = true;
 
-                                    mensaje.Subject = "Creación de usuario";
+                        HttpContext.Current.Response.Write("<script>alert('La contraseña que ingreso es erronea');</script>");
 
-                                    Session["CodeConfirmation"] = new Random().Next(1000000).ToString("D6");
-
-                                    string AbrevCorreo = Convert.ToString(reader["Email"]).Substring(0, 2) + "**" + Convert.ToString(reader["Email"]).Split('@')[0][Convert.ToString(reader["Email"]).Split('@')[0].Length - 1] + "@" + Convert.ToString(reader["Email"]).Split('@')[1];
-
-                                    string intro = $"<div class=\"\"><div class=\"aHl\"></div><div id=\":n6\" tabindex=\"-1\"></div><div id=\":mw\" class=\"ii gt\" jslog=\"20277; u014N:xr6bB; 1:WyIjdGhyZWFkLWY6MTc5NzAzNTEwNjcxMTg2OTQ2MCJd; 4:WyIjbXNnLWY6MTc5NzAzNTEwNjcxMTg2OTQ2MCJd\"><div id=\":mv\" class=\"a3s aiL msg9144470731465038267\"><div class=\"adM\"> </div><u></u>\r\n \r\n\r\n\r\n\r\n\r\n<div>\r\n<table dir=\"ltr\">\r\n      <tbody><tr><td id=\"m_9144470731465038267i1\" style=\"padding:0;font-family:'Segoe UI Semibold','Segoe UI Bold','Segoe UI','Helvetica Neue Medium',Arial,sans-serif;font-size:17px;color:#707070\">Cuenta Twitter</td></tr>\r\n      <tr><td id=\"m_9144470731465038267i2\" style=\"padding:0;font-family:'Segoe UI Light','Segoe UI','Helvetica Neue Medium',Arial,sans-serif;font-size:41px;color:#2672ec\">Código de seguridad</td></tr>\r\n      <tr><td id=\"m_9144470731465038267i3\" style=\"padding:0;padding-top:25px;font-family:'Segoe UI',Tahoma,Verdana,Arial,sans-serif;font-size:14px;color:#2a2a2a\">\r\n                \r\n                Usa el siguiente código de seguridad para la cuenta de Twitter <a dir=\"ltr\" id=\"m_9144470731465038267iAccount\" class=\"m_9144470731465038267link\" style=\"color:#2672ec;text-decoration:none\" href=\"{AbrevCorreo}\" target=\"_blank\">{AbrevCorreo}</a>.\r\n            </td></tr>\r\n      <tr><td id=\"m_9144470731465038267i4\" style=\"padding:0;padding-top:25px;font-family:'Segoe UI',Tahoma,Verdana,Arial,sans-serif;font-size:14px;color:#2a2a2a\">\r\n                \r\n                Código de seguridad: <span style=\"font-family:'Segoe UI Bold','Segoe UI Semibold','Segoe UI','Helvetica Neue Medium',Arial,sans-serif;font-size:14px;font-weight:bold;color:#2a2a2a\">{Convert.ToString(Session["CodeConfirmation"])}</span>\r\n            </td></tr>\r\n      <tr><td id=\"m_9144470731465038267i5\" style=\"padding:0;padding-top:25px;font-family:'Segoe UI',Tahoma,Verdana,Arial,sans-serif;font-size:14px;color:#2a2a2a\">\r\n                \r\n                Si no reconoces la cuenta de Twitter <a dir=\"ltr\" id=\"m_9144470731465038267iAccount\" class=\"m_9144470731465038267link\" style=\"color:#2672ec;text-decoration:none\" href=\"mailto:ch**z@gmail.com\" target=\"_blank\">ch**z@gmail.com</a>, puedes <a id=\"m_9144470731465038267iLink2\" class=\"m_9144470731465038267link\" style=\"color:#2672ec;text-decoration:none\" href=\"https://account.live.com/dp?ft=-DhXNVizUZB*fCtOBxmnEIoRwEYHbONGWRCPTnIIzod8GLrdbiKDZHpWb9tfZtpCr7QmOtWXnYxRxzYB51E7ayAFBZ4zHW07rzqw*!IdbII3n9bDGJ2ub9ooSi!N4*!2ysjo4IfPfeSnUQm7xwF9!D54*9WuA9SXWjNIEQrTUgNomN2ltzbhMwJ3cN!UNvVrm9SnmvYa9xdfnl7BfQrX3hgpz2G5NIRXbiYbr2oTaIaoj\" target=\"_blank\" data-saferedirecturl=\"https://www.google.com/url?q=https://account.live.com/dp?ft%3D-DhXNVizUZB*fCtOBxmnEIoRwEYHbONGWRCPTnIIzod8GLrdbiKDZHpWb9tfZtpCr7QmOtWXnYxRxzYB51E7ayAFBZ4zHW07rzqw*!IdbII3n9bDGJ2ub9ooSi!N4*!2ysjo4IfPfeSnUQm7xwF9!D54*9WuA9SXWjNIEQrTUgNomN2ltzbhMwJ3cN!UNvVrm9SnmvYa9xdfnl7BfQrX3hgpz2G5NIRXbiYbr2oTaIaoj&amp;source=gmail&amp;ust=1713879882003000&amp;usg=AOvVaw3vz3XtpXAhoCaQAvlzNclW\">hacer clic aquí</a> para quitar tu dirección de correo electrónico de ella.\r\n            </td></tr>\r\n      <tr><td id=\"m_9144470731465038267i6\" style=\"padding:0;padding-top:25px;font-family:'Segoe UI',Tahoma,Verdana,Arial,sans-serif;font-size:14px;color:#2a2a2a\">Gracias,</td></tr>\r\n      <tr><td id=\"m_9144470731465038267i7\" style=\"padding:0;font-family:'Segoe UI',Tahoma,Verdana,Arial,sans-serif;font-size:14px;color:#2a2a2a\">El equipo de cuentas Twitter</td></tr>\r\n</tbody></table>\r\n</div><div class=\"yj6qo\"></div><div class=\"adL\">\r\n</div></div></div><div class=\"WhmR8e\" data-hash=\"0\"></div></div>";
-
-                                    mensaje.Body = $"<html><body>{intro}</body></html>";
-
-                                    mensaje.IsBodyHtml = true;
-
-                                    mensaje.Priority = MailPriority.High;
-
-                                    SmtpClient client = new SmtpClient("smtp.outlook.com", 587);
-
-                                    client.Credentials = new NetworkCredential(ConfigurationManager.AppSettings["Email"], ConfigurationManager.AppSettings["EmailPassword"]);
-
-                                    client.EnableSsl = true;
-
-                                    client.Send(mensaje);
-
-                                    Session["Password"] = Convert.ToString(reader["Passwords"]);
-
-                                    Session["Confirmation"] = "True";
-
-                                    Session["PaginaAnterior"] = "LogIn.aspx";
-
-                                    Response.Redirect("EmailConfirmation.aspx");
-                                }
-
-                                else
-                                {
-                                    user.Enabled = password.Enabled = true;
-
-                                    HttpContext.Current.Response.Write("<script>alert('La contraseña qie ingreso es erronea');</script>");
-
-                                    HttpContext.Current.Response.Write("<script>window.history.back(); window.location.reload();</script>");
-                                }
-                            }
-                        }
-
-                        else
-                        {
-                            user.Enabled = password.Enabled = true;
-
-                            HttpContext.Current.Response.Write("<script>alert('El nombre de usuario que ingreso no existe');</script>");
-
-                            HttpContext.Current.Response.Write("<script>window.history.back(); window.location.reload();</script>");
-                        }
+                        HttpContext.Current.Response.Write("<script>window.history.back(); window.location.reload();</script>");
                     }
                 }
-            
+
+                else
+                {
+                    user.Enabled = password.Enabled = true;
+
+                    HttpContext.Current.Response.Write("<script>alert('El nombre de usuario o correo que ingreso no existe');</script>");
+
+                    HttpContext.Current.Response.Write("<script>window.history.back(); window.location.reload();</script>");
+                }
             }
         }
     }

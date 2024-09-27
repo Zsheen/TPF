@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Busquedas.aspx.cs" Inherits="IDS348_FinalProject.Busquedas" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Busquedas.aspx.cs" Inherits="IDS348_FinalProject.Busquedas" Async="true" %>
 
 <!DOCTYPE html>
 <html lang="en">

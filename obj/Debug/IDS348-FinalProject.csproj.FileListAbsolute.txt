@@ -1075,3 +1075,5 @@ C:\Users\Chender Marte\Source\Repos\TPF\obj\Debug\IDS348-FinalProject.csproj.Cor
 C:\Users\Chender Marte\Source\Repos\TPF\obj\Debug\IDS348-F.A6B805B3.Up2Date
 C:\Users\Chender Marte\Source\Repos\TPF\obj\Debug\IDS348-FinalProject.dll
 C:\Users\Chender Marte\Source\Repos\TPF\obj\Debug\IDS348-FinalProject.pdb
+C:\Users\Chender Marte\source\repos\TPF\bin\Firebase.Auth.dll
+C:\Users\Chender Marte\source\repos\TPF\bin\Firebase.Storage.dll

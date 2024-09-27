@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Home1.aspx.cs" Inherits="IDS348_FinalProject.Home1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Home1.aspx.cs" Inherits="IDS348_FinalProject.Home1" Async="true" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>

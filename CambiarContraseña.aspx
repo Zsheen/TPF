@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CambiarContraseña.aspx.cs" Inherits="IDS348_FinalProject.CambiarContraseña" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CambiarContraseña.aspx.cs" Inherits="IDS348_FinalProject.CambiarContraseña" Async="true" %>
 
 <!DOCTYPE html>
 

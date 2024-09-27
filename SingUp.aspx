@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SingUp.aspx.cs" Inherits="IDS348_FinalProject.SingUp" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SingUp.aspx.cs" Inherits="IDS348_FinalProject.SingUp" Async="true" %>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>

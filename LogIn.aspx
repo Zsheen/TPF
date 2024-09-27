@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LogIn.aspx.cs" Inherits="IDS348_FinalProject.LogIn" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LogIn.aspx.cs" Inherits="IDS348_FinalProject.LogIn" Async="true" %>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -255,16 +255,16 @@
       <script>
 
           function userInputChanged() {
-              var UserText = document.getElementById('<%= user.ClientID %>').value;
-              var PasswordText = document.getElementById('<%= password.ClientID %>').value;
+              //var UserText = document.getElementById('<//%= user.ClientID %>').value;
+              //var PasswordText = document.getElementById('<//%= password.ClientID %>').value;
 
-              if (UserText.trim() !== '' && PasswordText.trim() !== '') {
+              /*if (UserText.trim() !== '' && PasswordText.trim() !== '') {
                   btnEntrar.disabled = false;
               }
 
               else {
                   btnEntrar.disabled = true;
-              }
+              }*/btnEntrar.disabled = false;
           }
 
           function mostrarProgreso() {
